@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from AutoCoach.GUI import *
-from AutoCoach.QssLoader import *
+from GUI import *
+from QssLoader import *
 import pyqtgraph as pg
 
 class MyWindow(QMainWindow, Ui_MainWindow):
