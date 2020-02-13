@@ -79,3 +79,8 @@ QLabel#TotalScore{
     border-left:2px solid white;
     border-right:2px solid white;
 }
+
+QToolButton#feedback{
+    flat:true;
+    background: transparent;
+}
