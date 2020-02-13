@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>782</width>
-    <height>511</height>
+    <width>698</width>
+    <height>514</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -260,12 +260,18 @@
           <height>350</height>
          </size>
         </property>
-        <layout class="QGridLayout" name="gridLayout_up">
+        <layout class="QGridLayout" name="gridLayout_up" rowstretch="0,0">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <property name="horizontalSpacing">
-          <number>5</number>
+          <number>8</number>
          </property>
          <property name="verticalSpacing">
-          <number>7</number>
+          <number>0</number>
          </property>
          <item row="0" column="4">
           <spacer name="Spacer_2">
@@ -277,7 +283,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>35</width>
+             <width>30</width>
              <height>20</height>
             </size>
            </property>
@@ -323,7 +329,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>35</width>
+             <width>30</width>
              <height>20</height>
             </size>
            </property>
@@ -389,7 +395,7 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>320</width>
+             <width>300</width>
              <height>320</height>
             </size>
            </property>
@@ -443,7 +449,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>782</width>
+     <width>698</width>
      <height>21</height>
     </rect>
    </property>
