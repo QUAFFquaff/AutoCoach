@@ -217,10 +217,10 @@ class Ui_MainWindow(object):
         self.mini.clicked.connect(self.showMinimized)  # minimum window
         self.windowMoved.connect(self.move)  # move window
 
-        img = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('Green-Glow.png'))
+        img = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Green-Glow.png'))
         self.backCircle.addItem(img)
-        img2 = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('Orange-Glow.png'))
-        img3 = QtGui.QIcon('Brake.svg')
+        img2 = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
+        img3 = QtGui.QIcon('icons/events/Brake.svg')
         self.feedback.setIcon(img3)
         self.feedback.setIconSize(QtCore.QSize(120,120))
 
