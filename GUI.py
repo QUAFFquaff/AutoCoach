@@ -132,7 +132,7 @@ class Ui_MainWindow(object):
         self.Menu.addWidget(self.line, 1, 0, 1, 1)
         self.up = QtWidgets.QWidget(self.centralwidget)
         self.up.setMinimumSize(QtCore.QSize(0, 0))
-        self.up.setMaximumSize(QtCore.QSize(16777215, 350))
+        self.up.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.up.setObjectName("up")
         self.gridLayout_up = QtWidgets.QGridLayout(self.up)
         self.gridLayout_up.setContentsMargins(-1, 0, -1, 0)
