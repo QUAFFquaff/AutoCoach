@@ -154,6 +154,7 @@ class Ui_MainWindow(object):
         spacer1 = QtWidgets.QSpacerItem(30, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_up.addItem(spacer1, 0, 2, 1, 1)
         pg.setConfigOption('background', '#FCFCFC')
+
         self.backCircle = PlotWidget(self.up)
         self.backCircle.setMinimumSize(QtCore.QSize(50, 50))
         self.backCircle.setMaximumSize(QtCore.QSize(300, 320))
@@ -163,11 +164,13 @@ class Ui_MainWindow(object):
         self.backCircleLayout = QtWidgets.QGridLayout(self.backCircle)
         self.backCircleLayout.setContentsMargins(60, 50, 60, 50)
         self.backCircleLayout.setObjectName("backCircleLayout")
+
         self.feedback = QtWidgets.QToolButton(self.backCircle)
         self.feedback.setMinimumSize(QtCore.QSize(50, 50))
         self.feedback.setMaximumSize(QtCore.QSize(320, 320))
         self.feedback.setFocusPolicy(QtCore.Qt.TabFocus)
         self.feedback.setObjectName("feedback")
+
         self.backCircleLayout.addWidget(self.feedback, 0, 0, 1, 1)
         self.gridLayout_up.addWidget(self.backCircle, 0, 3, 2, 1)
         self.Brake_bar = QtWidgets.QWidget(self.up)
@@ -182,9 +185,12 @@ class Ui_MainWindow(object):
         self.Swerve_bar.setMaximumSize(QtCore.QSize(70, 200))
         self.Swerve_bar.setObjectName("Swerve_bar")
         self.gridLayout_up.addWidget(self.Swerve_bar, 0, 6, 1, 1)
-        self.Acc_level = QtWidgets.QWidget(self.up)
+
+        self.Acc_level = PlotWidget(self.up)
         self.Acc_level.setMaximumSize(QtCore.QSize(80, 50))
         self.Acc_level.setObjectName("Acc_level")
+        self.feedback.setFocusPolicy(QtCore.Qt.TabFocus)
+
         self.gridLayout_up.addWidget(self.Acc_level, 1, 0, 1, 1)
         self.Brake_level = QtWidgets.QWidget(self.up)
         self.Brake_level.setMaximumSize(QtCore.QSize(80, 50))
@@ -223,6 +229,9 @@ class Ui_MainWindow(object):
         img3 = QtGui.QIcon('icons/events/Brake.svg')
         self.feedback.setIcon(img3)
         self.feedback.setIconSize(QtCore.QSize(120,120))
+
+        acc_level = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/events/Coin - Gold.png'))
+        self.Acc_level.addItem(acc_level)
 
 
         # draw graph of lines
