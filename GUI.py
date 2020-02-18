@@ -223,12 +223,16 @@ class Ui_MainWindow(object):
         self.mini.clicked.connect(self.showMinimized)  # minimum window
         self.windowMoved.connect(self.move)  # move window
 
-        img = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Green-Glow.png'))
-        self.backCircle.addItem(img)
-        img2 = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
-        img3 = QtGui.QIcon('icons/events/Brake.svg')
-        self.feedback.setIcon(img3)
-        self.feedback.setIconSize(QtCore.QSize(120,120))
+        self.greenGlow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Green-Glow.png'))
+        self.orangeGlow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
+        self.yellowGlow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Yellow-Glow.png'))
+
+        self.brakeIcon = QtGui.QIcon('icons/events/Brake.svg')
+        self.accIcon = QtGui.QIcon('icons/events/Accelerate.svg')
+        self.turnIcon = QtGui.QIcon('icons/events/Turn.svg')
+        self.swerveIcon = QtGui.QIcon('icons/events/Swerve.svg')
+        # self.feedback.setIcon(img3)
+        # self.feedback.setIconSize(QtCore.QSize(120,120))
 
         acc_level = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/events/Coin - Gold.png'))
         self.Acc_level.addItem(acc_level)
@@ -270,6 +274,33 @@ class Ui_MainWindow(object):
     # set Total score for trip
     def setTotalScore(self, score):
         self.TotalScore.setText(str(score)+' points')
+
+    def setFeedBack(self, level, type):
+        if level == 0:
+            self.backCircle.clear()
+            self.backCircle.addItem(self.greenGlow)
+        elif level == 1:
+            self.backCircle.clear()
+            self.backCircle.addItem(self.yellowGlow)
+        elif level ==2:
+            self.backCircle.clear()
+            self.backCircle.addItem(self.orangeGlow)
+
+        if type == 'acc':
+            self.feedback.setIcon(self.accIcon)
+            self.feedback.setIconSize(QtCore.QSize(150, 150))
+        elif type == 'brake':
+            self.feedback.setIcon(self.brakeIcon)
+            self.feedback.setIconSize(QtCore.QSize(150, 150))
+        elif type == 'turn':
+            self.feedback.setIcon(self.turnIcon)
+            self.feedback.setIconSize(QtCore.QSize(150, 150))
+        elif type == 'swerve':
+            self.feedback.setIcon(self.swerveIcon)
+            self.feedback.setIconSize(QtCore.QSize(150, 150))
+
+
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
