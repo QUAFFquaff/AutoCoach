@@ -189,7 +189,9 @@ class Ui_MainWindow(object):
         self.Acc_level = PlotWidget(self.up)
         self.Acc_level.setMaximumSize(QtCore.QSize(80, 50))
         self.Acc_level.setObjectName("Acc_level")
-        self.feedback.setFocusPolicy(QtCore.Qt.TabFocus)
+        self.Acc_level.setFocusPolicy(QtCore.Qt.TabFocus)
+        self.Acc_level.getPlotItem().hideAxis('bottom')
+        self.Acc_level.getPlotItem().hideAxis('left')
 
         self.gridLayout_up.addWidget(self.Acc_level, 1, 0, 1, 1)
         self.Brake_level = QtWidgets.QWidget(self.up)
@@ -230,9 +232,15 @@ class Ui_MainWindow(object):
         self.feedback.setIcon(img3)
         self.feedback.setIconSize(QtCore.QSize(120,120))
 
-        acc_level = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/events/Coin - Gold.png'))
-        self.Acc_level.addItem(acc_level)
+        # acc_level = QtGui.QPixmap('icons/events/Coin - Gold.png')
+        # acc_level.size(50,50)
+        # l1 = QtWidgets.QLabel(self.Acc_level)
+        # l1.setPixmap(acc_level)
 
+        acc_level = QtGui.QPixmap('icons/events/Coin - Gold.png')
+        # acc_level.size(50,50)
+        l1 = QtWidgets.QLabel(self.Acc_level)
+        l1.setPixmap(acc_level)
 
         # draw graph of lines
 
