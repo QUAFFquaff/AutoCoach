@@ -104,7 +104,7 @@ class Ui_MainWindow(object):
         self.CurrentScore.setMinimumSize(QtCore.QSize(20, 60))
         self.CurrentScore.setMaximumSize(QtCore.QSize(300, 120))
         font = QtGui.QFont()
-        font.setFamily("JetBrains Mono")
+        font.setFamily("Brush Script Std")
         font.setPointSize(50)
         font.setBold(True)
         font.setWeight(75)
@@ -177,9 +177,11 @@ class Ui_MainWindow(object):
         self.Brake_bar.setMaximumSize(QtCore.QSize(70, 200))
         self.Brake_bar.setObjectName("Brake_bar")
         self.gridLayout_up.addWidget(self.Brake_bar, 0, 1, 1, 1)
+
         self.Swerve_level = QtWidgets.QWidget(self.up)
         self.Swerve_level.setMaximumSize(QtCore.QSize(80, 50))
         self.Swerve_level.setObjectName("Swerve_level")
+
         self.gridLayout_up.addWidget(self.Swerve_level, 1, 6, 1, 1)
         self.Swerve_bar = QtWidgets.QWidget(self.up)
         self.Swerve_bar.setMaximumSize(QtCore.QSize(70, 200))
@@ -195,7 +197,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_up.addWidget(self.Acc_level, 1, 0, 1, 1)
         self.Brake_level = QtWidgets.QWidget(self.up)
-        self.Brake_level.setMaximumSize(QtCore.QSize(80, 50))
+        self.Brake_level.setMaximumSize(QtCore.QSize(50, 50))
         self.Brake_level.setObjectName("Brake_level")
         self.gridLayout_up.addWidget(self.Brake_level, 1, 1, 1, 1)
         spacer2 = QtWidgets.QSpacerItem(30, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
@@ -236,15 +238,28 @@ class Ui_MainWindow(object):
         # self.feedback.setIcon(img3)
         # self.feedback.setIconSize(QtCore.QSize(120,120))
 
-        # acc_level = QtGui.QPixmap('icons/events/Coin - Gold.png')
-        # acc_level.size(50,50)
-        # l1 = QtWidgets.QLabel(self.Acc_level)
-        # l1.setPixmap(acc_level)
 
-        acc_level = QtGui.QPixmap('icons/events/Coin - Gold.png')
-        # acc_level.size(50,50)
-        l1 = QtWidgets.QLabel(self.Acc_level)
-        l1.setPixmap(acc_level)
+        gold_coin = QtGui.QPixmap('icons/events/Coin - Gold.png')
+        grey_coin = QtGui.QPixmap('icons/events/Coin - Grey.png')
+        acc_pic_coin = QtWidgets.QLabel(self.Acc_level)
+        acc_pic_coin.setPixmap(gold_coin)
+        acc_pic_coin.setScaledContents(True)
+        acc_pic_coin.setMaximumSize(QtCore.QSize(50, 50))
+
+        brake_pic_coin = QtWidgets.QLabel(self.Brake_level)
+        brake_pic_coin.setPixmap(grey_coin)
+        brake_pic_coin.setScaledContents(True)
+        brake_pic_coin.setMaximumSize(QtCore.QSize(50, 50))
+
+        turn_pic_coin = QtWidgets.QLabel(self.Turn_level)
+        turn_pic_coin.setPixmap(grey_coin)
+        turn_pic_coin.setScaledContents(True)
+        turn_pic_coin.setMaximumSize(QtCore.QSize(50, 50))
+
+        swerve_pic_coin = QtWidgets.QLabel(self.Swerve_level)
+        swerve_pic_coin.setPixmap(gold_coin)
+        swerve_pic_coin.setScaledContents(True)
+        swerve_pic_coin.setMaximumSize(QtCore.QSize(50, 50))
 
         # draw graph of lines
 
