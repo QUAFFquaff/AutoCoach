@@ -185,10 +185,11 @@
            </property>
            <property name="font">
             <font>
-             <family>JetBrains Mono</family>
+             <family>Brush Script Std</family>
              <pointsize>50</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -215,6 +216,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Book Antiqua</family>
              <pointsize>15</pointsize>
              <kerning>true</kerning>
             </font>
@@ -450,7 +452,7 @@
      <x>0</x>
      <y>0</y>
      <width>698</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
