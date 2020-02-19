@@ -15,14 +15,16 @@ def getSerial():
 
 
 class detectProcess(multiprocessing.Process):
-    def __init__(self):
+    def __init__(self,args=()):
         multiprocessing.Process.__init__(self)
+        self.myWin = args
         print('init')
 
     def run(self):
         print('run')
         while True:
             print('running')
+
 
 
 
@@ -47,7 +49,7 @@ def run():
     timer.timeout.connect(myWin.update2)
     timer.start(50)
 
-    eventDetectP = detectProcess()
+    eventDetectP = detectProcess(args=(myWin,))
     eventDetectP.daemon = True
     eventDetectP.start()
 
