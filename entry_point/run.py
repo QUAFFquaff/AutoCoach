@@ -17,7 +17,6 @@ def getSerial():
 class detectProcess(multiprocessing.Process):
     def __init__(self,args=()):
         multiprocessing.Process.__init__(self)
-        self.myWin = args
         print('init')
 
     def run(self):
