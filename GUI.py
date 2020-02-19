@@ -78,7 +78,8 @@ class Ui_MainWindow(object):
         self.Menu = QtWidgets.QGridLayout()
         self.Menu.setObjectName("Menu")
         self.down = QtWidgets.QWidget(self.centralwidget)
-        self.down.setMaximumSize(QtCore.QSize(16777215, 120))
+        self.down.setMinimumSize(QtCore.QSize(0, 130))
+        self.down.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.down.setObjectName("down")
         self.gridLayout_down = QtWidgets.QGridLayout(self.down)
         self.gridLayout_down.setHorizontalSpacing(5)
@@ -136,22 +137,43 @@ class Ui_MainWindow(object):
         self.up.setObjectName("up")
         self.gridLayout_up = QtWidgets.QGridLayout(self.up)
         self.gridLayout_up.setContentsMargins(-1, 0, -1, 0)
-        self.gridLayout_up.setHorizontalSpacing(8)
+        self.gridLayout_up.setHorizontalSpacing(0)
         self.gridLayout_up.setVerticalSpacing(0)
+        self.gridLayout_up.setSpacing(0)
         self.gridLayout_up.setObjectName("gridLayout_up")
+
         self.Turn_bar = QtWidgets.QWidget(self.up)
-        self.Turn_bar.setMaximumSize(QtCore.QSize(70, 200))
+        self.Turn_bar.setMaximumSize(QtCore.QSize(80, 220))
         self.Turn_bar.setObjectName("Turn_bar")
         self.gridLayout_up.addWidget(self.Turn_bar, 0, 5, 1, 1)
+
         self.Turn_level = QtWidgets.QWidget(self.up)
-        self.Turn_level.setMaximumSize(QtCore.QSize(80, 50))
+        self.Turn_level.setMaximumSize(QtCore.QSize(80, 35))
         self.Turn_level.setObjectName("Turn_level")
         self.gridLayout_up.addWidget(self.Turn_level, 1, 5, 1, 1)
+
         self.Acc_bar = QtWidgets.QWidget(self.up)
-        self.Acc_bar.setMaximumSize(QtCore.QSize(70, 200))
+        self.Acc_bar.setMaximumSize(QtCore.QSize(80, 220))
         self.Acc_bar.setObjectName("Acc_bar")
+        self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.Acc_bar)
+        self.verticalLayout_acc.setContentsMargins(15, 0, 15, 0)
+        self.verticalLayout_acc.setSpacing(0)
+        self.verticalLayout_acc.setObjectName("verticalLayout_acc")
+        self.acc_bar1 = QtWidgets.QLabel(self.Acc_bar)
+        self.acc_bar1.setText("")
+        self.acc_bar1.setObjectName("acc_bar1")
+        self.verticalLayout_acc.addWidget(self.acc_bar1)
+        self.acc_bar2 = QtWidgets.QLabel(self.Acc_bar)
+        self.acc_bar2.setText("")
+        self.acc_bar2.setObjectName("acc_bar2")
+        self.verticalLayout_acc.addWidget(self.acc_bar2)
+        self.acc_bar3 = QtWidgets.QLabel(self.Acc_bar)
+        self.acc_bar3.setText("")
+        self.acc_bar3.setObjectName("acc_bar3")
+        self.verticalLayout_acc.addWidget(self.acc_bar3)
         self.gridLayout_up.addWidget(self.Acc_bar, 0, 0, 1, 1)
-        spacer1 = QtWidgets.QSpacerItem(30, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+
+        spacer1 = QtWidgets.QSpacerItem(15, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_up.addItem(spacer1, 0, 2, 1, 1)
         pg.setConfigOption('background', '#FCFCFC')
 
@@ -166,30 +188,33 @@ class Ui_MainWindow(object):
         self.backCircleLayout.setObjectName("backCircleLayout")
 
         self.feedback = QtWidgets.QToolButton(self.backCircle)
+        self.feedback.setEnabled(False)
         self.feedback.setMinimumSize(QtCore.QSize(50, 50))
         self.feedback.setMaximumSize(QtCore.QSize(320, 320))
         self.feedback.setFocusPolicy(QtCore.Qt.TabFocus)
+        self.feedback.setText("")
         self.feedback.setObjectName("feedback")
+
 
         self.backCircleLayout.addWidget(self.feedback, 0, 0, 1, 1)
         self.gridLayout_up.addWidget(self.backCircle, 0, 3, 2, 1)
         self.Brake_bar = QtWidgets.QWidget(self.up)
-        self.Brake_bar.setMaximumSize(QtCore.QSize(70, 200))
+        self.Brake_bar.setMaximumSize(QtCore.QSize(80, 220))
         self.Brake_bar.setObjectName("Brake_bar")
         self.gridLayout_up.addWidget(self.Brake_bar, 0, 1, 1, 1)
 
         self.Swerve_level = QtWidgets.QWidget(self.up)
-        self.Swerve_level.setMaximumSize(QtCore.QSize(80, 50))
+        self.Swerve_level.setMaximumSize(QtCore.QSize(80, 35))
         self.Swerve_level.setObjectName("Swerve_level")
 
         self.gridLayout_up.addWidget(self.Swerve_level, 1, 6, 1, 1)
         self.Swerve_bar = QtWidgets.QWidget(self.up)
-        self.Swerve_bar.setMaximumSize(QtCore.QSize(70, 200))
+        self.Swerve_bar.setMaximumSize(QtCore.QSize(80, 220))
         self.Swerve_bar.setObjectName("Swerve_bar")
         self.gridLayout_up.addWidget(self.Swerve_bar, 0, 6, 1, 1)
 
         self.Acc_level = PlotWidget(self.up)
-        self.Acc_level.setMaximumSize(QtCore.QSize(80, 50))
+        self.Acc_level.setMaximumSize(QtCore.QSize(80, 35))
         self.Acc_level.setObjectName("Acc_level")
         self.Acc_level.setFocusPolicy(QtCore.Qt.TabFocus)
         self.Acc_level.getPlotItem().hideAxis('bottom')
@@ -197,10 +222,10 @@ class Ui_MainWindow(object):
 
         self.gridLayout_up.addWidget(self.Acc_level, 1, 0, 1, 1)
         self.Brake_level = QtWidgets.QWidget(self.up)
-        self.Brake_level.setMaximumSize(QtCore.QSize(50, 50))
+        self.Brake_level.setMaximumSize(QtCore.QSize(80, 35))
         self.Brake_level.setObjectName("Brake_level")
         self.gridLayout_up.addWidget(self.Brake_level, 1, 1, 1, 1)
-        spacer2 = QtWidgets.QSpacerItem(30, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        spacer2 = QtWidgets.QSpacerItem(15, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_up.addItem(spacer2, 0, 4, 1, 1)
         self.Menu.addWidget(self.up, 0, 0, 1, 1)
         self.verticalLayout.addLayout(self.Menu)
@@ -213,6 +238,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        # these are three control buttons
         self.exit.setFixedSize(15, 15)
         self.visit.setFixedSize(15, 15)
         self.mini.setFixedSize(15, 15)
@@ -220,6 +246,7 @@ class Ui_MainWindow(object):
         # self.visit.setStyleSheet('''QPushButton{background:#F7D674;border-radius:5px;}QPushButton:hover{background:yellow;}''')
         # self.mini.setStyleSheet('''QPushButton{background:#6DDF6D;border-radius:5px;}QPushButton:hover{background:green;}''')
 
+        # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
         self.setWindowOpacity(0.98)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
@@ -239,27 +266,50 @@ class Ui_MainWindow(object):
         # self.feedback.setIconSize(QtCore.QSize(120,120))
 
 
-        gold_coin = QtGui.QPixmap('icons/events/Coin - Gold.png')
-        grey_coin = QtGui.QPixmap('icons/events/Coin - Grey.png')
+        gold_coin = QtGui.QPixmap('icons/events/3greyCoin.png')
+        grey_coin = QtGui.QPixmap('icons/events/2goldCoin.png')
         acc_pic_coin = QtWidgets.QLabel(self.Acc_level)
+        acc_pic_coin.setMargin(5)
         acc_pic_coin.setPixmap(gold_coin)
         acc_pic_coin.setScaledContents(True)
-        acc_pic_coin.setMaximumSize(QtCore.QSize(50, 50))
+        acc_pic_coin.setMaximumSize(QtCore.QSize(80, 35))
 
         brake_pic_coin = QtWidgets.QLabel(self.Brake_level)
+        brake_pic_coin.setMargin(5)
         brake_pic_coin.setPixmap(grey_coin)
         brake_pic_coin.setScaledContents(True)
-        brake_pic_coin.setMaximumSize(QtCore.QSize(50, 50))
+        brake_pic_coin.setMaximumSize(QtCore.QSize(80, 35))
 
         turn_pic_coin = QtWidgets.QLabel(self.Turn_level)
+        turn_pic_coin.setMargin(5)
         turn_pic_coin.setPixmap(grey_coin)
         turn_pic_coin.setScaledContents(True)
-        turn_pic_coin.setMaximumSize(QtCore.QSize(50, 50))
+        turn_pic_coin.setMaximumSize(QtCore.QSize(80, 35))
 
         swerve_pic_coin = QtWidgets.QLabel(self.Swerve_level)
+        swerve_pic_coin.setMargin(5)
         swerve_pic_coin.setPixmap(gold_coin)
         swerve_pic_coin.setScaledContents(True)
-        swerve_pic_coin.setMaximumSize(QtCore.QSize(50, 50))
+        swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 35))
+
+        self.grey_bar = QtGui.QPixmap('icons/bars/2grey.png')
+        self.top_bar = QtGui.QPixmap('icons/bars/top_blue.png')
+        self.medium_bar = QtGui.QPixmap('icons/bars/medium_blue.png')
+        self.bottom_bar = QtGui.QPixmap('icons/bars/bottom_blue.png')
+        acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
+        acc_bar_top.setPixmap(self.top_bar)
+        acc_bar_top.setScaledContents(True)
+        acc_bar_top.setMaximumSize(QtCore.QSize(50, 67))
+
+        acc_bar_medium = QtWidgets.QLabel(self.acc_bar2)
+        acc_bar_medium.setPixmap(self.medium_bar)
+        acc_bar_medium.setScaledContents(True)
+        acc_bar_medium.setMaximumSize(QtCore.QSize(50, 67))
+
+        acc_bar_bottom = QtWidgets.QLabel(self.acc_bar3)
+        acc_bar_bottom.setPixmap(self.bottom_bar)
+        acc_bar_bottom.setScaledContents(True)
+        acc_bar_bottom.setMaximumSize(QtCore.QSize(50, 67))
 
         # draw graph of lines
 

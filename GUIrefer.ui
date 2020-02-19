@@ -126,12 +126,21 @@
     </item>
     <item>
      <layout class="QGridLayout" name="Menu">
+      <property name="verticalSpacing">
+       <number>6</number>
+      </property>
       <item row="4" column="0">
        <widget class="QWidget" name="down" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>130</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>120</height>
+          <height>16777215</height>
          </size>
         </property>
         <layout class="QGridLayout" name="gridLayout_down">
@@ -259,7 +268,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>350</height>
+          <height>16777215</height>
          </size>
         </property>
         <layout class="QGridLayout" name="gridLayout_up" rowstretch="0,0">
@@ -269,10 +278,7 @@
          <property name="bottomMargin">
           <number>0</number>
          </property>
-         <property name="horizontalSpacing">
-          <number>8</number>
-         </property>
-         <property name="verticalSpacing">
+         <property name="spacing">
           <number>0</number>
          </property>
          <item row="0" column="4">
@@ -285,7 +291,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>30</width>
+             <width>15</width>
              <height>20</height>
             </size>
            </property>
@@ -296,7 +302,7 @@
            <property name="maximumSize">
             <size>
              <width>80</width>
-             <height>50</height>
+             <height>35</height>
             </size>
            </property>
           </widget>
@@ -306,7 +312,7 @@
            <property name="maximumSize">
             <size>
              <width>80</width>
-             <height>50</height>
+             <height>35</height>
             </size>
            </property>
           </widget>
@@ -315,8 +321,8 @@
           <widget class="QWidget" name="Turn_bar" native="true">
            <property name="maximumSize">
             <size>
-             <width>70</width>
-             <height>200</height>
+             <width>80</width>
+             <height>220</height>
             </size>
            </property>
           </widget>
@@ -331,7 +337,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>30</width>
+             <width>15</width>
              <height>20</height>
             </size>
            </property>
@@ -342,7 +348,7 @@
            <property name="maximumSize">
             <size>
              <width>80</width>
-             <height>50</height>
+             <height>35</height>
             </size>
            </property>
           </widget>
@@ -351,8 +357,8 @@
           <widget class="QWidget" name="Swerve_bar" native="true">
            <property name="maximumSize">
             <size>
-             <width>70</width>
-             <height>200</height>
+             <width>80</width>
+             <height>220</height>
             </size>
            </property>
           </widget>
@@ -361,8 +367,8 @@
           <widget class="QWidget" name="Brake_bar" native="true">
            <property name="maximumSize">
             <size>
-             <width>70</width>
-             <height>200</height>
+             <width>80</width>
+             <height>220</height>
             </size>
            </property>
           </widget>
@@ -372,7 +378,7 @@
            <property name="maximumSize">
             <size>
              <width>80</width>
-             <height>50</height>
+             <height>35</height>
             </size>
            </property>
           </widget>
@@ -381,10 +387,48 @@
           <widget class="QWidget" name="Acc_bar" native="true">
            <property name="maximumSize">
             <size>
-             <width>70</width>
-             <height>200</height>
+             <width>80</width>
+             <height>220</height>
             </size>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_acc">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>15</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>15</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="acc_bar1">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="acc_bar2">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="acc_bar3">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item row="0" column="3" rowspan="2">
@@ -397,7 +441,7 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>300</width>
+             <width>320</width>
              <height>320</height>
             </size>
            </property>
@@ -416,6 +460,9 @@
             </property>
             <item row="0" column="0">
              <widget class="QToolButton" name="feedback">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>50</width>
@@ -432,7 +479,7 @@
                <enum>Qt::TabFocus</enum>
               </property>
               <property name="text">
-               <string>...</string>
+               <string/>
               </property>
              </widget>
             </item>
