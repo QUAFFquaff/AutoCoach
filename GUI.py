@@ -287,45 +287,49 @@ class Ui_MainWindow(object):
         self.windowMoved.connect(self.move)  # move window
 
 
-        acc_pic_coin = QtWidgets.QLabel(self.Acc_level)
-        acc_pic_coin.setMargin(5)
-        acc_pic_coin.setPixmap(self._gold_coin)
-        acc_pic_coin.setScaledContents(True)
-        acc_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+        self.acc_pic_coin = QtWidgets.QLabel(self.Acc_level)
+        self.acc_pic_coin.setMargin(5)
+        self.acc_pic_coin.setPixmap(self._gold_coin)
+        self.acc_pic_coin.setScaledContents(True)
+        self.acc_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        brake_pic_coin = QtWidgets.QLabel(self.Brake_level)
-        brake_pic_coin.setMargin(5)
-        brake_pic_coin.setPixmap(self._grey_coin)
-        brake_pic_coin.setScaledContents(True)
-        brake_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
-
-        turn_pic_coin = QtWidgets.QLabel(self.Turn_level)
-        turn_pic_coin.setMargin(5)
-        turn_pic_coin.setPixmap(self._grey_coin)
-        turn_pic_coin.setScaledContents(True)
-        turn_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
-
-        swerve_pic_coin = QtWidgets.QLabel(self.Swerve_level)
-        swerve_pic_coin.setMargin(5)
-        swerve_pic_coin.setPixmap(self._gold_coin)
-        swerve_pic_coin.setScaledContents(True)
-        swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+        self.brake_pic_coin = QtWidgets.QLabel(self.Brake_level)
+        self.brake_pic_coin.setMargin(5)
+        self.brake_pic_coin.setPixmap(self._grey_coin)
+        self.brake_pic_coin.setScaledContents(True)
+        self.brake_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
 
-        acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
-        acc_bar_top.setPixmap(self.top_bar)
-        acc_bar_top.setScaledContents(True)
-        acc_bar_top.setMaximumSize(QtCore.QSize(50, 67))
+        self.turn_pic_coin = QtWidgets.QLabel(self.Turn_level)
+        self.turn_pic_coin.setMargin(5)
+        self.turn_pic_coin.setPixmap(self._grey_coin)
+        self.turn_pic_coin.setScaledContents(True)
+        self.turn_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        acc_bar_medium = QtWidgets.QLabel(self.acc_bar2)
-        acc_bar_medium.setPixmap(self.medium_bar)
-        acc_bar_medium.setScaledContents(True)
-        acc_bar_medium.setMaximumSize(QtCore.QSize(50, 67))
 
-        acc_bar_bottom = QtWidgets.QLabel(self.acc_bar3)
-        acc_bar_bottom.setPixmap(self.bottom_bar)
-        acc_bar_bottom.setScaledContents(True)
-        acc_bar_bottom.setMaximumSize(QtCore.QSize(50, 67))
+        self.swerve_pic_coin = QtWidgets.QLabel(self.Swerve_level)
+        self.swerve_pic_coin.setMargin(5)
+        self.swerve_pic_coin.setPixmap(self._gold_coin)
+        self.swerve_pic_coin.setScaledContents(True)
+        self.swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+
+        self.acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
+        self.acc_bar_top.setPixmap(self.top_bar)
+        self.acc_bar_top.setScaledContents(True)
+        self.acc_bar_top.setMaximumSize(QtCore.QSize(50, 67))
+
+
+        self.acc_bar_medium = QtWidgets.QLabel(self.acc_bar2)
+        self.acc_bar_medium.setPixmap(self.medium_bar)
+        self.acc_bar_medium.setScaledContents(True)
+        self.acc_bar_medium.setMaximumSize(QtCore.QSize(50, 67))
+
+
+        self.acc_bar_bottom = QtWidgets.QLabel(self.acc_bar3)
+        self.acc_bar_bottom.setPixmap(self.bottom_bar)
+        self.acc_bar_bottom.setScaledContents(True)
+        self.acc_bar_bottom.setMaximumSize(QtCore.QSize(50, 67))
+
 
         # draw graph of lines--should be deleted later
 
@@ -389,7 +393,36 @@ class Ui_MainWindow(object):
             self.feedback.setIconSize(QtCore.QSize(150, 150))
 
     def change_acc_icon(self, level:int):
+        if level == 0:
+            self.acc_pic_coin.setPixmap(self._coin_gold0)
+        if level == 1:
+            self.acc_pic_coin.setPixmap(self._coin_gold1)
+        if level == 2:
+            self.acc_pic_coin.setPixmap(self._coin_gold2)
 
+    def change_brake_icon(self, level:int):
+        if level == 0:
+            self.brake_pic_coin.setPixmap(self._coin_gold0)
+        if level == 1:
+            self.brake_pic_coin.setPixmap(self._coin_gold1)
+        if level == 2:
+            self.brake_pic_coin.setPixmap(self._coin_gold2)
+
+    def change_turn_icon(self, level:int):
+        if level == 0:
+            self.turn_pic_coin.setPixmap(self._coin_gold0)
+        if level == 1:
+            self.turn_pic_coin.setPixmap(self._coin_gold1)
+        if level == 2:
+            self.turn_pic_coin.setPixmap(self._coin_gold2)
+
+    def change_swerve_icon(self, level:int):
+        if level == 0:
+            self.swerve_pic_coin.setPixmap(self._coin_gold0)
+        if level == 1:
+            self.swerve_pic_coin.setPixmap(self._coin_gold1)
+        if level == 2:
+            self.swerve_pic_coin.setPixmap(self._coin_gold2)
 
 
     def retranslateUi(self, MainWindow):
