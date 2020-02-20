@@ -388,6 +388,7 @@ class Ui_MainWindow(object):
             self.feedback.setIcon(self.swerve_icon)
             self.feedback.setIconSize(QtCore.QSize(150, 150))
 
+    def change_acc_icon(self, level:int):
 
 
 
