@@ -396,36 +396,47 @@ class Ui_MainWindow(object):
             self.feedback.setIcon(self.swerve_icon)
             self.feedback.setIconSize(QtCore.QSize(150, 150))
 
+
+    def change_icons(self,level:int, type:str):
+        if type == 'acc':
+            self.change_acc_icon(level)
+        elif type == 'brake':
+            self.change_brake_icon(level)
+        elif type == 'turn':
+            self.change_turn_icon(level)
+        elif type == 'swerve':
+            self.change_swerve_icon(level)
+
     def change_acc_icon(self, level:int):
         if level == 0:
             self.acc_pic_coin.setPixmap(self._coin_gold0)
-        if level == 1:
+        elif level == 1:
             self.acc_pic_coin.setPixmap(self._coin_gold1)
-        if level == 2:
+        elif level == 2:
             self.acc_pic_coin.setPixmap(self._coin_gold2)
 
     def change_brake_icon(self, level:int):
         if level == 0:
             self.brake_pic_coin.setPixmap(self._coin_gold0)
-        if level == 1:
+        elif level == 1:
             self.brake_pic_coin.setPixmap(self._coin_gold1)
-        if level == 2:
+        elif level == 2:
             self.brake_pic_coin.setPixmap(self._coin_gold2)
 
     def change_turn_icon(self, level:int):
         if level == 0:
             self.turn_pic_coin.setPixmap(self._coin_gold0)
-        if level == 1:
+        elif level == 1:
             self.turn_pic_coin.setPixmap(self._coin_gold1)
-        if level == 2:
+        elif level == 2:
             self.turn_pic_coin.setPixmap(self._coin_gold2)
 
     def change_swerve_icon(self, level:int):
         if level == 0:
             self.swerve_pic_coin.setPixmap(self._coin_gold0)
-        if level == 1:
+        elif level == 1:
             self.swerve_pic_coin.setPixmap(self._coin_gold1)
-        if level == 2:
+        elif level == 2:
             self.swerve_pic_coin.setPixmap(self._coin_gold2)
 
 
