@@ -31,6 +31,16 @@ QPushButton#mini:hover{
     background:green;
 }
 
+QPushButton#next_page{
+    background:#82CAF2;
+    color:white;
+    border-radius:5px;
+}
+
+QPushButton#next_page:hover{
+    background:#6CA8C9;
+}
+
 /*style for menubar*/
 QWidget#bar{
     color:#A7BDBA;
@@ -84,3 +94,5 @@ QToolButton#feedback{
     flat:true;
     background: transparent;
 }
+
+

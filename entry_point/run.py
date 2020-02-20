@@ -1,4 +1,7 @@
 import sys
+import os
+from PyQt5.QtCore import pyqtSignal
+from GUINext import Ui_Dialog
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from GUI import *
 from QssLoader import *
@@ -26,8 +29,6 @@ class detectProcess(multiprocessing.Process):
             print('running')
 
 
-
-
 class MyWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MyWindow, self).__init__(parent)
@@ -37,13 +38,44 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         qssStyle = QssLoader.loadQss(styleFile)
         self.setStyleSheet(qssStyle)
 
+        # initial class for next page
+        self.nextWin = NextWindow()
+
+        # bind show function to button
+        self.next_page.clicked.connect(self.showNext)
+        self.nextWin.backSignal.connect(self.showMain)
+
+    def showMain(self):
+        self.setVisible(True)
+
+    def showNext(self):
+        self.setVisible(False)
+        self.nextWin.setVisible(True)
+
+
+class NextWindow(QMainWindow, Ui_Dialog):
+    backSignal = pyqtSignal()
+
+    def __init__(self):
+        super(NextWindow, self).__init__()
+        self.setupUi(self)
+
+        # bind back button
+        self.backBtn.clicked.connect(self.backMain)
+
+    def backMain(self):
+        self.backSignal.emit()
+        self.setVisible(False)
+
 
 
 def run():
     app = QApplication(sys.argv)
     myWin = MyWindow()
-
     myWin.show()
+
+
+
 
     timer = pg.QtCore.QTimer()
     timer.timeout.connect(myWin.update2)
