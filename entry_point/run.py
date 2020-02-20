@@ -46,7 +46,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
         # bind show function to button
         self.next_page.clicked.connect(self.showNext)
-        self.TotalScore.clicked.connect(self.showNext)
+        self.total_score.clicked.connect(self.showNext)
         self.nextWin.backSignal.connect(self.showMain)
 
     def showMain(self):
