@@ -13,7 +13,32 @@ from pyqtgraph import PlotWidget
 import pyqtgraph as pg
 
 class Ui_MainWindow(object):
+    def __init__(self):
 
+        self._coin_gold0 = QtGui.QPixmap('icons/events/coin_gold0.png')
+        self._coin_gold1 = QtGui.QPixmap('icons/events/coin_gold1.png')
+        self._coin_gold2 = QtGui.QPixmap('icons/events/coin_gold2.png')
+        self._gold_coin = QtGui.QPixmap('icons/events/coin_gold0.png')
+        self._grey_coin = QtGui.QPixmap('icons/events/coin_gold1.png')
+
+
+
+        self.grey_bar = QtGui.QPixmap('icons/bars/grey_bar.png')
+        self.top_bar = QtGui.QPixmap('icons/bars/top_bar.png')
+        self.medium_bar = QtGui.QPixmap('icons/bars/medium_bar.png')
+        self.bottom_bar = QtGui.QPixmap('icons/bars/bottom_bar.png')
+
+
+
+        self.green_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Green-Glow.png'))
+        self.orange_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
+        self.yellow_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Yellow-Glow.png'))
+
+        self.brake_icon = QtGui.QIcon('icons/events/Brake.svg')
+        self.acc_icon = QtGui.QIcon('icons/events/Accelerate.svg')
+        self.turn_icon = QtGui.QIcon('icons/events/Turn.svg')
+        self.swerve_icon = QtGui.QIcon('icons/events/Swerve.svg')
+        pass
     windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
 
     def update2(self):
@@ -261,46 +286,32 @@ class Ui_MainWindow(object):
         self.mini.clicked.connect(self.showMinimized)  # minimum window
         self.windowMoved.connect(self.move)  # move window
 
-        self.green_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Green-Glow.png'))
-        self.orange_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
-        self.yellow_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Yellow-Glow.png'))
-
-        self.brake_icon = QtGui.QIcon('icons/events/Brake.svg')
-        self.acc_icon = QtGui.QIcon('icons/events/Accelerate.svg')
-        self.turn_icon = QtGui.QIcon('icons/events/Turn.svg')
-        self.swerve_icon = QtGui.QIcon('icons/events/Swerve.svg')
-
-        gold_coin = QtGui.QPixmap('icons/events/coin_gold0.png')
-        grey_coin = QtGui.QPixmap('icons/events/coin_gold1.png')
 
         acc_pic_coin = QtWidgets.QLabel(self.Acc_level)
         acc_pic_coin.setMargin(5)
-        acc_pic_coin.setPixmap(gold_coin)
+        acc_pic_coin.setPixmap(self._gold_coin)
         acc_pic_coin.setScaledContents(True)
         acc_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
         brake_pic_coin = QtWidgets.QLabel(self.Brake_level)
         brake_pic_coin.setMargin(5)
-        brake_pic_coin.setPixmap(grey_coin)
+        brake_pic_coin.setPixmap(self._grey_coin)
         brake_pic_coin.setScaledContents(True)
         brake_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
         turn_pic_coin = QtWidgets.QLabel(self.Turn_level)
         turn_pic_coin.setMargin(5)
-        turn_pic_coin.setPixmap(grey_coin)
+        turn_pic_coin.setPixmap(self._grey_coin)
         turn_pic_coin.setScaledContents(True)
         turn_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
         swerve_pic_coin = QtWidgets.QLabel(self.Swerve_level)
         swerve_pic_coin.setMargin(5)
-        swerve_pic_coin.setPixmap(gold_coin)
+        swerve_pic_coin.setPixmap(self._gold_coin)
         swerve_pic_coin.setScaledContents(True)
         swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        self.grey_bar = QtGui.QPixmap('icons/bars/grey_bar.png')
-        self.top_bar = QtGui.QPixmap('icons/bars/top_bar.png')
-        self.medium_bar = QtGui.QPixmap('icons/bars/medium_bar.png')
-        self.bottom_bar = QtGui.QPixmap('icons/bars/bottom_bar.png')
+
         acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
         acc_bar_top.setPixmap(self.top_bar)
         acc_bar_top.setScaledContents(True)
