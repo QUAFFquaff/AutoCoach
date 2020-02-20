@@ -378,8 +378,6 @@ class Ui_MainWindow(object):
             self.feedback.setIconSize(QtCore.QSize(150, 150))
 
 
-
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
