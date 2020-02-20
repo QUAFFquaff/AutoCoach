@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
 from pyqtgraph import PlotWidget
 import pyqtgraph as pg
+from PyQt5.QtCore import QThread
 
 class Ui_MainWindow(object):
     def __init__(self):
@@ -368,7 +369,7 @@ class Ui_MainWindow(object):
     def setTotalScore(self, score):
         self.TotalScore.setText(str(score)+' points')
 
-    def setFeedBack(self, level, type):
+    def setFeedBack(self, level: int, type):
         if level == 0:
             self.backCircle.clear()
             self.backCircle.addItem(self.green_glow)
@@ -392,7 +393,7 @@ class Ui_MainWindow(object):
             self.feedback.setIcon(self.swerve_icon)
             self.feedback.setIconSize(QtCore.QSize(150, 150))
 
-    def change_acc_icon(self, level:int):
+    def change_acc_icon(self, level: int):
         if level == 0:
             self.acc_pic_coin.setPixmap(self._coin_gold0)
         if level == 1:
@@ -400,7 +401,7 @@ class Ui_MainWindow(object):
         if level == 2:
             self.acc_pic_coin.setPixmap(self._coin_gold2)
 
-    def change_brake_icon(self, level:int):
+    def change_brake_icon(self, level: int):
         if level == 0:
             self.brake_pic_coin.setPixmap(self._coin_gold0)
         if level == 1:
@@ -408,7 +409,7 @@ class Ui_MainWindow(object):
         if level == 2:
             self.brake_pic_coin.setPixmap(self._coin_gold2)
 
-    def change_turn_icon(self, level:int):
+    def change_turn_icon(self, level: int):
         if level == 0:
             self.turn_pic_coin.setPixmap(self._coin_gold0)
         if level == 1:
@@ -416,7 +417,7 @@ class Ui_MainWindow(object):
         if level == 2:
             self.turn_pic_coin.setPixmap(self._coin_gold2)
 
-    def change_swerve_icon(self, level:int):
+    def change_swerve_icon(self, level: int):
         if level == 0:
             self.swerve_pic_coin.setPixmap(self._coin_gold0)
         if level == 1:
@@ -431,4 +432,5 @@ class Ui_MainWindow(object):
         self.CurrentScore.setText(_translate("MainWindow", "86"))
         self.TotalScore.setText(_translate("MainWindow", "1240 points"))
         self.next_page.setText(_translate("MainWindow", "Next Page>>"))
+
 
