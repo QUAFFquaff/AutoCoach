@@ -11,9 +11,35 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
 from pyqtgraph import PlotWidget
 import pyqtgraph as pg
+from PyQt5.QtCore import QThread
 
 class Ui_MainWindow(object):
+    def __init__(self):
 
+        self._coin_gold0 = QtGui.QPixmap('icons/events/coin_gold0.png')
+        self._coin_gold1 = QtGui.QPixmap('icons/events/coin_gold1.png')
+        self._coin_gold2 = QtGui.QPixmap('icons/events/coin_gold2.png')
+        self._gold_coin = QtGui.QPixmap('icons/events/coin_gold0.png')
+        self._grey_coin = QtGui.QPixmap('icons/events/coin_gold1.png')
+
+
+
+        self.grey_bar = QtGui.QPixmap('icons/bars/grey_bar.png')
+        self.top_bar = QtGui.QPixmap('icons/bars/top_bar.png')
+        self.medium_bar = QtGui.QPixmap('icons/bars/medium_bar.png')
+        self.bottom_bar = QtGui.QPixmap('icons/bars/bottom_bar.png')
+
+
+
+        self.green_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Green-Glow.png'))
+        self.orange_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
+        self.yellow_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Yellow-Glow.png'))
+
+        self.brake_icon = QtGui.QIcon('icons/events/Brake.svg')
+        self.acc_icon = QtGui.QIcon('icons/events/Accelerate.svg')
+        self.turn_icon = QtGui.QIcon('icons/events/Turn.svg')
+        self.swerve_icon = QtGui.QIcon('icons/events/Swerve.svg')
+        pass
     windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
 
     def update2(self):
@@ -90,7 +116,7 @@ class Ui_MainWindow(object):
         self.gridLayout_down = QtWidgets.QGridLayout(self.down)
         self.gridLayout_down.setHorizontalSpacing(5)
         self.gridLayout_down.setObjectName("gridLayout_down")
-        pg.setConfigOption('background', '#17191A')
+        # pg.setConfigOption('background', '#17191A')
         self.widget = PlotWidget(self.down)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -102,34 +128,42 @@ class Ui_MainWindow(object):
         self.widget.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.widget.setObjectName("widget")
         self.gridLayout_down.addWidget(self.widget, 0, 0, 1, 1)
-        self.CurrentScore = QtWidgets.QLabel(self.down)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.CurrentScore.sizePolicy().hasHeightForWidth())
-        self.CurrentScore.setSizePolicy(sizePolicy)
-        self.CurrentScore.setMinimumSize(QtCore.QSize(20, 60))
-        self.CurrentScore.setMaximumSize(QtCore.QSize(300, 120))
+
+        self.current_score = QtWidgets.QLabel(self.down)
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.current_score.sizePolicy().hasHeightForWidth())
+        self.current_score.setSizePolicy(sizePolicy)
+        self.current_score.setMinimumSize(QtCore.QSize(20, 60))
+        self.current_score.setMaximumSize(QtCore.QSize(300, 120))
         font = QtGui.QFont()
         font.setFamily("Brush Script Std")
         font.setPointSize(50)
         font.setBold(True)
         font.setWeight(75)
-        self.CurrentScore.setFont(font)
-        self.CurrentScore.setAlignment(QtCore.Qt.AlignCenter)
-        self.CurrentScore.setObjectName("CurrentScore")
-        self.gridLayout_down.addWidget(self.CurrentScore, 0, 1, 1, 1)
-        self.TotalScore = QtWidgets.QLabel(self.down)
-        self.TotalScore.setMinimumSize(QtCore.QSize(0, 0))
-        self.TotalScore.setMaximumSize(QtCore.QSize(250, 120))
+        self.current_score.setFont(font)
+        self.current_score.setAlignment(QtCore.Qt.AlignCenter)
+        self.current_score.setObjectName("CurrentScore")
+        self.gridLayout_down.addWidget(self.current_score, 0, 1, 1, 1)
+
+
+        self.total_score = QtWidgets.QPushButton()
+        self.total_score.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.total_score.setMinimumSize(QtCore.QSize(0, 0))
+        self.total_score.setMaximumSize(QtCore.QSize(250, 120))
+        self.total_score.setFlat(True)
         font = QtGui.QFont()
         font.setPointSize(15)
         font.setKerning(True)
-        self.TotalScore.setFont(font)
-        self.TotalScore.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.TotalScore.setAlignment(QtCore.Qt.AlignCenter)
-        self.TotalScore.setObjectName("TotalScore")
-        self.gridLayout_down.addWidget(self.TotalScore, 0, 2, 1, 1)
+        font.setBold(True)
+        font.setFamily("Brush Script Std")
+        self.total_score.setStyleSheet('QPushButton {background-color: #17191A; color: white;}')
+        self.total_score.setFont(font)
+        self.total_score.setLayoutDirection(QtCore.Qt.RightToLeft)
+        # self.TotalScore.setAlignment(QtCore.Qt.AlignCenter)
+        self.total_score.setObjectName("TotalScore")
+        self.gridLayout_down.addWidget(self.total_score, 0, 2, 1, 1)
         self.Menu.addWidget(self.down, 4, 0, 1, 1)
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setFrameShadow(QtWidgets.QFrame.Plain)
@@ -148,36 +182,36 @@ class Ui_MainWindow(object):
         self.gridLayout_up.setSpacing(0)
         self.gridLayout_up.setObjectName("gridLayout_up")
 
-        self.Turn_bar = QtWidgets.QWidget(self.up)
-        self.Turn_bar.setMaximumSize(QtCore.QSize(80, 220))
-        self.Turn_bar.setObjectName("Turn_bar")
-        self.gridLayout_up.addWidget(self.Turn_bar, 0, 5, 1, 1)
+        self.turn_bar = QtWidgets.QWidget(self.up)
+        self.turn_bar.setMaximumSize(QtCore.QSize(80, 220))
+        self.turn_bar.setObjectName("Turn_bar")
+        self.gridLayout_up.addWidget(self.turn_bar, 0, 5, 1, 1)
 
-        self.Turn_level = QtWidgets.QWidget(self.up)
-        self.Turn_level.setMaximumSize(QtCore.QSize(80, 35))
-        self.Turn_level.setObjectName("Turn_level")
-        self.gridLayout_up.addWidget(self.Turn_level, 1, 5, 1, 1)
+        self.turn_level = QtWidgets.QWidget(self.up)
+        self.turn_level.setMaximumSize(QtCore.QSize(80, 35))
+        self.turn_level.setObjectName("Turn_level")
+        self.gridLayout_up.addWidget(self.turn_level, 1, 5, 1, 1)
 
-        self.Acc_bar = QtWidgets.QWidget(self.up)
-        self.Acc_bar.setMaximumSize(QtCore.QSize(80, 220))
-        self.Acc_bar.setObjectName("Acc_bar")
-        self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.Acc_bar)
+        self.acc_bar = QtWidgets.QWidget(self.up)
+        self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
+        self.acc_bar.setObjectName("Acc_bar")
+        self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.acc_bar)
         self.verticalLayout_acc.setContentsMargins(15, 0, 15, 0)
         self.verticalLayout_acc.setSpacing(0)
         self.verticalLayout_acc.setObjectName("verticalLayout_acc")
-        self.acc_bar1 = QtWidgets.QLabel(self.Acc_bar)
+        self.acc_bar1 = QtWidgets.QLabel(self.acc_bar)
         self.acc_bar1.setText("")
         self.acc_bar1.setObjectName("acc_bar1")
         self.verticalLayout_acc.addWidget(self.acc_bar1)
-        self.acc_bar2 = QtWidgets.QLabel(self.Acc_bar)
+        self.acc_bar2 = QtWidgets.QLabel(self.acc_bar)
         self.acc_bar2.setText("")
         self.acc_bar2.setObjectName("acc_bar2")
         self.verticalLayout_acc.addWidget(self.acc_bar2)
-        self.acc_bar3 = QtWidgets.QLabel(self.Acc_bar)
+        self.acc_bar3 = QtWidgets.QLabel(self.acc_bar)
         self.acc_bar3.setText("")
         self.acc_bar3.setObjectName("acc_bar3")
         self.verticalLayout_acc.addWidget(self.acc_bar3)
-        self.gridLayout_up.addWidget(self.Acc_bar, 0, 0, 1, 1)
+        self.gridLayout_up.addWidget(self.acc_bar, 0, 0, 1, 1)
 
         spacer1 = QtWidgets.QSpacerItem(15, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_up.addItem(spacer1, 0, 2, 1, 1)
@@ -219,18 +253,18 @@ class Ui_MainWindow(object):
         self.Swerve_bar.setObjectName("Swerve_bar")
         self.gridLayout_up.addWidget(self.Swerve_bar, 0, 6, 1, 1)
 
-        self.Acc_level = PlotWidget(self.up)
-        self.Acc_level.setMaximumSize(QtCore.QSize(80, 35))
-        self.Acc_level.setObjectName("Acc_level")
-        self.Acc_level.setFocusPolicy(QtCore.Qt.TabFocus)
-        self.Acc_level.getPlotItem().hideAxis('bottom')
-        self.Acc_level.getPlotItem().hideAxis('left')
+        self.acc_level = PlotWidget(self.up)
+        self.acc_level.setMaximumSize(QtCore.QSize(80, 35))
+        self.acc_level.setObjectName("Acc_level")
+        self.acc_level.setFocusPolicy(QtCore.Qt.TabFocus)
+        self.acc_level.getPlotItem().hideAxis('bottom')
+        self.acc_level.getPlotItem().hideAxis('left')
 
-        self.gridLayout_up.addWidget(self.Acc_level, 1, 0, 1, 1)
-        self.Brake_level = QtWidgets.QWidget(self.up)
-        self.Brake_level.setMaximumSize(QtCore.QSize(80, 35))
-        self.Brake_level.setObjectName("Brake_level")
-        self.gridLayout_up.addWidget(self.Brake_level, 1, 1, 1, 1)
+        self.gridLayout_up.addWidget(self.acc_level, 1, 0, 1, 1)
+        self.brake_level = QtWidgets.QWidget(self.up)
+        self.brake_level.setMaximumSize(QtCore.QSize(80, 35))
+        self.brake_level.setObjectName("Brake_level")
+        self.gridLayout_up.addWidget(self.brake_level, 1, 1, 1, 1)
         spacer2 = QtWidgets.QSpacerItem(15, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_up.addItem(spacer2, 0, 4, 1, 1)
         self.Menu.addWidget(self.up, 0, 0, 1, 1)
@@ -261,60 +295,50 @@ class Ui_MainWindow(object):
         self.mini.clicked.connect(self.showMinimized)  # minimum window
         self.windowMoved.connect(self.move)  # move window
 
-        self.green_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Green-Glow.png'))
-        self.orange_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
-        self.yellow_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Yellow-Glow.png'))
 
-        self.brake_icon = QtGui.QIcon('icons/events/Brake.svg')
-        self.acc_icon = QtGui.QIcon('icons/events/Accelerate.svg')
-        self.turn_icon = QtGui.QIcon('icons/events/Turn.svg')
-        self.swerve_icon = QtGui.QIcon('icons/events/Swerve.svg')
+        self.acc_pic_coin = QtWidgets.QLabel(self.acc_level)
+        self.acc_pic_coin.setMargin(5)
+        self.acc_pic_coin.setPixmap(self._gold_coin)
+        self.acc_pic_coin.setScaledContents(True)
+        self.acc_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        gold_coin = QtGui.QPixmap('icons/events/coin_gold0.png')
-        grey_coin = QtGui.QPixmap('icons/events/coin_gold1.png')
+        self.brake_pic_coin = QtWidgets.QLabel(self.brake_level)
+        self.brake_pic_coin.setMargin(5)
+        self.brake_pic_coin.setPixmap(self._grey_coin)
+        self.brake_pic_coin.setScaledContents(True)
+        self.brake_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        acc_pic_coin = QtWidgets.QLabel(self.Acc_level)
-        acc_pic_coin.setMargin(5)
-        acc_pic_coin.setPixmap(gold_coin)
-        acc_pic_coin.setScaledContents(True)
-        acc_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        brake_pic_coin = QtWidgets.QLabel(self.Brake_level)
-        brake_pic_coin.setMargin(5)
-        brake_pic_coin.setPixmap(grey_coin)
-        brake_pic_coin.setScaledContents(True)
-        brake_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+        self.turn_pic_coin = QtWidgets.QLabel(self.turn_level)
+        self.turn_pic_coin.setMargin(5)
+        self.turn_pic_coin.setPixmap(self._grey_coin)
+        self.turn_pic_coin.setScaledContents(True)
+        self.turn_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        turn_pic_coin = QtWidgets.QLabel(self.Turn_level)
-        turn_pic_coin.setMargin(5)
-        turn_pic_coin.setPixmap(grey_coin)
-        turn_pic_coin.setScaledContents(True)
-        turn_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        swerve_pic_coin = QtWidgets.QLabel(self.Swerve_level)
-        swerve_pic_coin.setMargin(5)
-        swerve_pic_coin.setPixmap(gold_coin)
-        swerve_pic_coin.setScaledContents(True)
-        swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+        self.swerve_pic_coin = QtWidgets.QLabel(self.Swerve_level)
+        self.swerve_pic_coin.setMargin(5)
+        self.swerve_pic_coin.setPixmap(self._gold_coin)
+        self.swerve_pic_coin.setScaledContents(True)
+        self.swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        self.grey_bar = QtGui.QPixmap('icons/bars/grey_bar.png')
-        self.top_bar = QtGui.QPixmap('icons/bars/top_bar.png')
-        self.medium_bar = QtGui.QPixmap('icons/bars/medium_bar.png')
-        self.bottom_bar = QtGui.QPixmap('icons/bars/bottom_bar.png')
-        acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
-        acc_bar_top.setPixmap(self.top_bar)
-        acc_bar_top.setScaledContents(True)
-        acc_bar_top.setMaximumSize(QtCore.QSize(50, 67))
+        self.acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
+        self.acc_bar_top.setPixmap(self.top_bar)
+        self.acc_bar_top.setScaledContents(True)
+        self.acc_bar_top.setMaximumSize(QtCore.QSize(50, 67))
 
-        acc_bar_medium = QtWidgets.QLabel(self.acc_bar2)
-        acc_bar_medium.setPixmap(self.medium_bar)
-        acc_bar_medium.setScaledContents(True)
-        acc_bar_medium.setMaximumSize(QtCore.QSize(50, 67))
 
-        acc_bar_bottom = QtWidgets.QLabel(self.acc_bar3)
-        acc_bar_bottom.setPixmap(self.bottom_bar)
-        acc_bar_bottom.setScaledContents(True)
-        acc_bar_bottom.setMaximumSize(QtCore.QSize(50, 67))
+        self.acc_bar_medium = QtWidgets.QLabel(self.acc_bar2)
+        self.acc_bar_medium.setPixmap(self.medium_bar)
+        self.acc_bar_medium.setScaledContents(True)
+        self.acc_bar_medium.setMaximumSize(QtCore.QSize(50, 67))
+
+
+        self.acc_bar_bottom = QtWidgets.QLabel(self.acc_bar3)
+        self.acc_bar_bottom.setPixmap(self.bottom_bar)
+        self.acc_bar_bottom.setScaledContents(True)
+        self.acc_bar_bottom.setMaximumSize(QtCore.QSize(50, 67))
+
 
         # draw graph of lines--should be deleted later
 
@@ -347,13 +371,13 @@ class Ui_MainWindow(object):
 
     # set current score and update
     def setCurrentScore(self, score):
-        self.CurrentScore.setText(str(score))
+        self.current_score.setText(str(score))
 
     # set Total score for trip
     def setTotalScore(self, score):
-        self.TotalScore.setText(str(score)+' points')
+        self.total_score.setText(str(score) + ' points')
 
-    def setFeedBack(self, level, type):
+    def setFeedBack(self, level: int, type: str):
         if level == 0:
             self.backCircle.clear()
             self.backCircle.addItem(self.green_glow)
@@ -378,10 +402,57 @@ class Ui_MainWindow(object):
             self.feedback.setIconSize(QtCore.QSize(150, 150))
 
 
+
+
+    def change_icons(self,level:int, type: str):
+        if type == 'acc':
+            self.change_acc_icon(level)
+        elif type == 'brake':
+            self.change_brake_icon(level)
+        elif type == 'turn':
+            self.change_turn_icon(level)
+        elif type == 'swerve':
+            self.change_swerve_icon(level)
+
+    def change_acc_icon(self, level: int):
+        if level == 0:
+            self.acc_pic_coin.setPixmap(self._coin_gold0)
+        elif level == 1:
+            self.acc_pic_coin.setPixmap(self._coin_gold1)
+        elif level == 2:
+            self.acc_pic_coin.setPixmap(self._coin_gold2)
+
+    def change_brake_icon(self, level: int):
+        if level == 0:
+            self.brake_pic_coin.setPixmap(self._coin_gold0)
+        elif level == 1:
+            self.brake_pic_coin.setPixmap(self._coin_gold1)
+        elif level == 2:
+            self.brake_pic_coin.setPixmap(self._coin_gold2)
+
+    def change_turn_icon(self, level: int):
+        if level == 0:
+            self.turn_pic_coin.setPixmap(self._coin_gold0)
+        elif level == 1:
+            self.turn_pic_coin.setPixmap(self._coin_gold1)
+        elif level == 2:
+            self.turn_pic_coin.setPixmap(self._coin_gold2)
+
+    def change_swerve_icon(self, level: int):
+        if level == 0:
+            self.swerve_pic_coin.setPixmap(self._coin_gold0)
+        elif level == 1:
+            self.swerve_pic_coin.setPixmap(self._coin_gold1)
+        elif level == 2:
+            self.swerve_pic_coin.setPixmap(self._coin_gold2)
+
+
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.CurrentScore.setText(_translate("MainWindow", "86"))
-        self.TotalScore.setText(_translate("MainWindow", "1240 points"))
+        self.current_score.setText(_translate("MainWindow", "86"))
+        self.total_score.setText(_translate("MainWindow", "1240 points"))
         self.next_page.setText(_translate("MainWindow", "Next Page>>"))
+
 
