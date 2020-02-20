@@ -60,6 +60,10 @@ class NextWindow(QMainWindow, Ui_Dialog):
         super(NextWindow, self).__init__()
         self.setupUi(self)
 
+        styleFile = '././QSS/style_next.qss'
+        qssStyle = QssLoader.loadQss(styleFile)
+        self.setStyleSheet(qssStyle)
+
         # bind back button
         self.backBtn.clicked.connect(self.backMain)
 

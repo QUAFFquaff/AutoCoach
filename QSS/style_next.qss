@@ -1,0 +1,28 @@
+/*style for up area*/
+
+QWidget#canvas{
+
+    background:#FCFCFC;
+    border-top:1px solid darkGray;
+    border-left:1px solid darkGray;
+    border-right:1px solid darkGray;
+    border-bottom:0px solid;
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+}
+
+/*style for down area*/
+QWidget#down{
+    border-bottom:1px solid darkGray;
+    border-left:1px solid darkGray;
+    border-right:1px solid darkGray;
+    background:#FCFCFC;
+    border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
+}
+
+#backBtn{
+    background:#82CAF2;
+    color:white;
+    border-radius:5px;
+}
