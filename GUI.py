@@ -127,10 +127,11 @@ class Ui_MainWindow(object):
         self.widget.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.widget.setObjectName("widget")
         self.gridLayout_down.addWidget(self.widget, 0, 0, 1, 1)
+
         self.CurrentScore = QtWidgets.QLabel(self.down)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.CurrentScore.sizePolicy().hasHeightForWidth())
         self.CurrentScore.setSizePolicy(sizePolicy)
         self.CurrentScore.setMinimumSize(QtCore.QSize(20, 60))
@@ -144,7 +145,10 @@ class Ui_MainWindow(object):
         self.CurrentScore.setAlignment(QtCore.Qt.AlignCenter)
         self.CurrentScore.setObjectName("CurrentScore")
         self.gridLayout_down.addWidget(self.CurrentScore, 0, 1, 1, 1)
-        self.TotalScore = QtWidgets.QLabel(self.down)
+
+
+        self.TotalScore = QtWidgets.QToolButton()
+
         self.TotalScore.setMinimumSize(QtCore.QSize(0, 0))
         self.TotalScore.setMaximumSize(QtCore.QSize(250, 120))
         font = QtGui.QFont()
@@ -152,7 +156,7 @@ class Ui_MainWindow(object):
         font.setKerning(True)
         self.TotalScore.setFont(font)
         self.TotalScore.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.TotalScore.setAlignment(QtCore.Qt.AlignCenter)
+        # self.TotalScore.setAlignment(QtCore.Qt.AlignCenter)
         self.TotalScore.setObjectName("TotalScore")
         self.gridLayout_down.addWidget(self.TotalScore, 0, 2, 1, 1)
         self.Menu.addWidget(self.down, 4, 0, 1, 1)
