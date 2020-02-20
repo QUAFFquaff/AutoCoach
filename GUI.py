@@ -9,6 +9,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
+from pyqtgraph import PlotWidget
+import pyqtgraph as pg
 
 class Ui_MainWindow(object):
 
@@ -254,20 +256,18 @@ class Ui_MainWindow(object):
         self.mini.clicked.connect(self.showMinimized)  # minimum window
         self.windowMoved.connect(self.move)  # move window
 
-        self.greenGlow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Green-Glow.png'))
-        self.orangeGlow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
-        self.yellowGlow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Yellow-Glow.png'))
+        self.green_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Green-Glow.png'))
+        self.orange_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
+        self.yellow_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Yellow-Glow.png'))
 
-        self.brakeIcon = QtGui.QIcon('icons/events/Brake.svg')
-        self.accIcon = QtGui.QIcon('icons/events/Accelerate.svg')
-        self.turnIcon = QtGui.QIcon('icons/events/Turn.svg')
-        self.swerveIcon = QtGui.QIcon('icons/events/Swerve.svg')
-        # self.feedback.setIcon(img3)
-        # self.feedback.setIconSize(QtCore.QSize(120,120))
-
+        self.brake_icon = QtGui.QIcon('icons/events/Brake.svg')
+        self.acc_icon = QtGui.QIcon('icons/events/Accelerate.svg')
+        self.turn_icon = QtGui.QIcon('icons/events/Turn.svg')
+        self.swerve_icon = QtGui.QIcon('icons/events/Swerve.svg')
 
         gold_coin = QtGui.QPixmap('icons/events/coin_gold0.png')
         grey_coin = QtGui.QPixmap('icons/events/coin_gold1.png')
+
         acc_pic_coin = QtWidgets.QLabel(self.Acc_level)
         acc_pic_coin.setMargin(5)
         acc_pic_coin.setPixmap(gold_coin)
@@ -311,7 +311,7 @@ class Ui_MainWindow(object):
         acc_bar_bottom.setScaledContents(True)
         acc_bar_bottom.setMaximumSize(QtCore.QSize(50, 67))
 
-        # draw graph of lines
+        # draw graph of lines--should be deleted later
 
         self.widget.setDownsampling(mode='peak')
         self.widget.setClipToView(True)
@@ -351,25 +351,25 @@ class Ui_MainWindow(object):
     def setFeedBack(self, level, type):
         if level == 0:
             self.backCircle.clear()
-            self.backCircle.addItem(self.greenGlow)
+            self.backCircle.addItem(self.green_glow)
         elif level == 1:
             self.backCircle.clear()
-            self.backCircle.addItem(self.yellowGlow)
+            self.backCircle.addItem(self.yellow_glow)
         elif level == 2:
             self.backCircle.clear()
-            self.backCircle.addItem(self.orangeGlow)
+            self.backCircle.addItem(self.orange_glow)
 
         if type == 'acc':
-            self.feedback.setIcon(self.accIcon)
+            self.feedback.setIcon(self.acc_icon)
             self.feedback.setIconSize(QtCore.QSize(150, 150))
         elif type == 'brake':
-            self.feedback.setIcon(self.brakeIcon)
+            self.feedback.setIcon(self.brake_icon)
             self.feedback.setIconSize(QtCore.QSize(150, 150))
         elif type == 'turn':
-            self.feedback.setIcon(self.turnIcon)
+            self.feedback.setIcon(self.turn_icon)
             self.feedback.setIconSize(QtCore.QSize(150, 150))
         elif type == 'swerve':
-            self.feedback.setIcon(self.swerveIcon)
+            self.feedback.setIcon(self.swerve_icon)
             self.feedback.setIconSize(QtCore.QSize(150, 150))
 
 
@@ -381,5 +381,4 @@ class Ui_MainWindow(object):
         self.CurrentScore.setText(_translate("MainWindow", "86"))
         self.TotalScore.setText(_translate("MainWindow", "1240 points"))
         self.feedback.setText(_translate("MainWindow", "..."))
-from pyqtgraph import PlotWidget
-import pyqtgraph as pg
+
