@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, QObject
 from GUINext import Ui_Dialog
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from GUI import *
@@ -10,6 +10,7 @@ import serial
 import time
 import multiprocessing
 
+
 def getSerial():
     ser = serial.Serial(port='/dev/rfcomm0', baudrate=57600, timeout=0.5)
     if not ser.is_open:
@@ -18,14 +19,16 @@ def getSerial():
 
 
 class detectProcess(multiprocessing.Process):
-    def __init__(self,args=()):
+    update_score = pyqtSignal([int])
+    def __init__(self):
         multiprocessing.Process.__init__(self)
         print('init')
 
     def run(self):
-        print('run')
+        i=0
         while True:
-
+            time.sleep(2)
+            i = i+1
             print('running')
 
 
@@ -85,10 +88,11 @@ def run():
     timer.timeout.connect(myWin.update2)
     timer.start(50)
 
-    eventDetectP = detectProcess(args=(myWin,))
+    eventDetectP = detectProcess()
     eventDetectP.daemon = True
     eventDetectP.start()
 
+    myWin.setCurrentScore(45)
     myWin.setFeedBack(1,'acc')
     # myWin.setFeedBack(0,'acc')
     # myWin.setFeedBack(0,'brake')
