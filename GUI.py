@@ -147,13 +147,17 @@ class Ui_MainWindow(object):
         self.gridLayout_down.addWidget(self.CurrentScore, 0, 1, 1, 1)
 
 
-        self.TotalScore = QtWidgets.QToolButton()
-
+        self.TotalScore = QtWidgets.QPushButton()
+        self.TotalScore.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.TotalScore.setMinimumSize(QtCore.QSize(0, 0))
         self.TotalScore.setMaximumSize(QtCore.QSize(250, 120))
+        self.TotalScore.setFlat(True)
         font = QtGui.QFont()
         font.setPointSize(15)
         font.setKerning(True)
+        font.setBold(True)
+        font.setFamily("Brush Script Std")
+        self.TotalScore.setStyleSheet('QPushButton {background-color: #17191A; color: white;}')
         self.TotalScore.setFont(font)
         self.TotalScore.setLayoutDirection(QtCore.Qt.RightToLeft)
         # self.TotalScore.setAlignment(QtCore.Qt.AlignCenter)
