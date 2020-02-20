@@ -129,5 +129,11 @@ def run():
     myWin.setFeedBack(1,'acc')
 
 
+    myWin.setBar('safe','acc')
+    myWin.setBar('mediumrisk','brake')
+    myWin.setBar('highrisk','turn')
+    myWin.setBar('safe','swerve')
+
+
     sys.exit(app.exec_())
 
