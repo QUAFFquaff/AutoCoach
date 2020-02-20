@@ -22,6 +22,7 @@ class detectProcess(multiprocessing.Process):
     def run(self):
         print('run')
         while True:
+            
             print('running')
 
 

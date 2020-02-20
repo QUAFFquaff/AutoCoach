@@ -355,7 +355,7 @@ class Ui_MainWindow(object):
         elif level == 1:
             self.backCircle.clear()
             self.backCircle.addItem(self.yellowGlow)
-        elif level ==2:
+        elif level == 2:
             self.backCircle.clear()
             self.backCircle.addItem(self.orangeGlow)
 

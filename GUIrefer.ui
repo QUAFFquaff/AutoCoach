@@ -147,14 +147,8 @@
          <property name="horizontalSpacing">
           <number>5</number>
          </property>
-         <item row="0" column="0">
-          <widget class="PlotWidget" name="widget" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
+         <item row="0" column="2">
+          <widget class="QLabel" name="TotalScore">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -163,12 +157,25 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>300</width>
+             <width>250</width>
              <height>120</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>Book Antiqua</family>
+             <pointsize>15</pointsize>
+             <kerning>true</kerning>
+            </font>
+           </property>
            <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>1240 points</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -209,8 +216,14 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="TotalScore">
+         <item row="0" column="0">
+          <widget class="PlotWidget" name="widget" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -219,25 +232,12 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>250</width>
+             <width>300</width>
              <height>120</height>
             </size>
            </property>
-           <property name="font">
-            <font>
-             <family>Book Antiqua</family>
-             <pointsize>15</pointsize>
-             <kerning>true</kerning>
-            </font>
-           </property>
            <property name="layoutDirection">
-            <enum>Qt::RightToLeft</enum>
-           </property>
-           <property name="text">
-            <string>1240 points</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <enum>Qt::LeftToRight</enum>
            </property>
           </widget>
          </item>
