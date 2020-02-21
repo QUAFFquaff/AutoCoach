@@ -49,7 +49,7 @@
             <property name="minimumSize">
              <size>
               <width>300</width>
-              <height>0</height>
+              <height>200</height>
              </size>
             </property>
            </widget>
@@ -71,7 +71,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="widget" native="true"/>
+        <widget class="PlotWidget" name="plot_widget" native="true"/>
        </item>
       </layout>
      </widget>
@@ -132,6 +132,14 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PlotWidget</class>
+   <extends>QWidget</extends>
+   <header>pyqtgraph</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

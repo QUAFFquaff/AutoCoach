@@ -12,6 +12,9 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtChart import *
+from pyqtgraph import PlotWidget
+
+import pyqtgraph as pg
 
 class Ui_Dialog(object):
     windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
@@ -37,15 +40,15 @@ class Ui_Dialog(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.graph_widget)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.pie_widget = QtWidgets.QWidget(self.graph_widget)
-        self.pie_widget.setMinimumSize(QtCore.QSize(300, 0))
+        self.pie_widget.setMinimumSize(QtCore.QSize(300, 200))
         self.pie_widget.setObjectName("pie_widget")
         self.horizontalLayout_2.addWidget(self.pie_widget)
         spacerItem = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.verticalLayout.addWidget(self.graph_widget)
-        self.widget = QtWidgets.QWidget(self.canvas)
-        self.widget.setObjectName("widget")
-        self.verticalLayout.addWidget(self.widget)
+        self.plot_widget = PlotWidget(self.canvas)
+        self.plot_widget.setObjectName("plot_widget")
+        self.verticalLayout.addWidget(self.plot_widget)
         self.verticalLayout_2.addWidget(self.canvas)
         self.down = QtWidgets.QWidget(self.back)
         self.down.setMinimumSize(QtCore.QSize(0, 50))
@@ -76,7 +79,7 @@ class Ui_Dialog(object):
         # self.pie_widget.setMinimumSize(QtCore.QSize(0, 50))
         # self.pie_widget.setMaximumSize(QtCore.QSize(16777215, 50))
         self.pie_widget.setObjectName("pie_widget")
-        self.pie_widget.setStyleSheet("#pie_widget{background-color: yellow}")
+        # self.pie_widget.setStyleSheet("#pie_widget{background-color: yellow}")
         # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
         self.setWindowOpacity(0.98)
@@ -113,6 +116,28 @@ class Ui_Dialog(object):
         self.charview.setRenderHint(QPainter.Antialiasing)  # 设置抗锯齿
         self.charview.show()  # 将CharView窗口显示出来
 
+
+
+        # self.plot_widget = PlotWidget(self.canvas)
+        self.plot_widget.setObjectName("plot_widget")
+        hour = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        score1 = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
+        score2 = [50,35,44,22,38,32,27,38,32,44]
+
+
+        self.plot_widget.setXRange(0, 10, padding=0)
+        self.plot_widget.setYRange(20, 55, padding=0)
+
+        self.plot_widget.plot(hour, score1, 'r')
+        self.plot_widget.plot(hour, score2, 'b')
+        pen = pg.mkPen(color=(255, 0, 0))
+        pen2 = pg.mkPen(color=(0, 255, 0))
+        self.plot_widget.plot(hour, score1, name="Sensor 1",  pen=pen)
+        self.plot_widget.plot(hour, score2, name="Sensor 2",  pen=pen2)
+
+    def plot(self, x, y, plotname, color):
+        pen = pg.mkPen(color=color)
+        self.graphWidget.plot(x, y, name=plotname, pen=pen, symbol='+', symbolSize=30, symbolBrush=(color))
 
     def mousePressEvent(self,event):
         if event.button() == QtCore.Qt.LeftButton:
