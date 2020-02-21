@@ -42,15 +42,28 @@
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QLabel" name="background_label">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QWidget" name="graph_widget" native="true">
+         <widget class="QWidget" name="pie_widget" native="true">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>50</y>
+            <width>251</width>
+            <height>171</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QWidget" name="long_widget" native="true">
+          <property name="geometry">
+           <rect>
+            <x>269</x>
+            <y>229</y>
+            <width>401</width>
+            <height>101</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>

@@ -297,156 +297,6 @@
          <property name="spacing">
           <number>0</number>
          </property>
-         <item row="0" column="4">
-          <spacer name="Spacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>15</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="1">
-          <widget class="QWidget" name="Brake_level" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>35</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QWidget" name="Acc_level" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>35</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="5">
-          <widget class="QWidget" name="Turn_bar" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>220</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <spacer name="Spacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>15</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="5">
-          <widget class="QWidget" name="Turn_level" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>35</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="6">
-          <widget class="QWidget" name="Swerve_bar" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>220</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QWidget" name="Brake_bar" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>220</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="6">
-          <widget class="QWidget" name="Swerve_level" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>35</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QWidget" name="Acc_bar" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>220</height>
-            </size>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_acc">
-            <property name="spacing">
-             <number>0</number>
-            </property>
-            <property name="leftMargin">
-             <number>15</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>15</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="acc_bar1">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="acc_bar2">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="acc_bar3">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
          <item row="0" column="3" rowspan="2">
           <widget class="QWidget" name="backCircle" native="true">
            <property name="minimumSize">
@@ -502,6 +352,273 @@
            </layout>
           </widget>
          </item>
+         <item row="0" column="1">
+          <widget class="QWidget" name="brake_bar" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>220</height>
+            </size>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_break">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>15</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>15</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="brake_bar1">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="margin">
+               <number>7</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="brake_bar2">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="brake_bar3">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QWidget" name="Acc_level" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>35</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="6">
+          <widget class="QWidget" name="Swerve_level" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>35</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QWidget" name="acc_bar" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>220</height>
+            </size>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_acc">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>15</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>15</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="acc_bar1">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="acc_bar2">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="acc_bar3">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QWidget" name="Turn_level" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>35</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QWidget" name="turn_bar" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>220</height>
+            </size>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_turn">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>15</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>15</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="turn_bar1">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="turn_bar2">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="turn_bar3">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <spacer name="Spacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>15</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="2">
+          <spacer name="Spacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>15</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="1">
+          <widget class="QWidget" name="Brake_level" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>35</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="6">
+          <widget class="QWidget" name="swerve_bar" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>220</height>
+            </size>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_swerve">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>15</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>15</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="swerve_bar1">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="swerve_bar2">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="swerve_bar3">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -515,7 +632,7 @@
      <x>0</x>
      <y>0</y>
      <width>750</width>
-     <height>26</height>
+     <height>18</height>
     </rect>
    </property>
   </widget>
