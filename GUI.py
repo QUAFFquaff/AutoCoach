@@ -185,6 +185,22 @@ class Ui_MainWindow(object):
         self.turn_bar = QtWidgets.QWidget(self.up)
         self.turn_bar.setMaximumSize(QtCore.QSize(80, 220))
         self.turn_bar.setObjectName("Turn_bar")
+        self.verticalLayout_turn = QtWidgets.QVBoxLayout(self.turn_bar)
+        self.verticalLayout_turn.setContentsMargins(15, 0, 15, 0)
+        self.verticalLayout_turn.setSpacing(0)
+        self.verticalLayout_turn.setObjectName("verticalLayout_turn")
+        self.turn_bar1 = QtWidgets.QLabel(self.turn_bar)
+        self.turn_bar1.setText("")
+        self.turn_bar1.setObjectName("turn_bar1")
+        self.verticalLayout_turn.addWidget(self.turn_bar1)
+        self.turn_bar2 = QtWidgets.QLabel(self.turn_bar)
+        self.turn_bar2.setText("")
+        self.turn_bar2.setObjectName("turn_bar2")
+        self.verticalLayout_turn.addWidget(self.turn_bar2)
+        self.turn_bar3 = QtWidgets.QLabel(self.turn_bar)
+        self.turn_bar3.setText("")
+        self.turn_bar3.setObjectName("turn_bar3")
+        self.verticalLayout_turn.addWidget(self.turn_bar3)
         self.gridLayout_up.addWidget(self.turn_bar, 0, 5, 1, 1)
 
         self.turn_level = QtWidgets.QWidget(self.up)
@@ -238,10 +254,26 @@ class Ui_MainWindow(object):
 
         self.backCircleLayout.addWidget(self.feedback, 0, 0, 1, 1)
         self.gridLayout_up.addWidget(self.backCircle, 0, 3, 2, 1)
-        self.Brake_bar = QtWidgets.QWidget(self.up)
-        self.Brake_bar.setMaximumSize(QtCore.QSize(80, 220))
-        self.Brake_bar.setObjectName("Brake_bar")
-        self.gridLayout_up.addWidget(self.Brake_bar, 0, 1, 1, 1)
+        self.brake_bar = QtWidgets.QWidget(self.up)
+        self.brake_bar.setMaximumSize(QtCore.QSize(80, 220))
+        self.brake_bar.setObjectName("Brake_bar")
+        self.verticalLayout_brake = QtWidgets.QVBoxLayout(self.brake_bar)
+        self.verticalLayout_brake.setContentsMargins(15, 0, 15, 0)
+        self.verticalLayout_brake.setSpacing(0)
+        self.verticalLayout_brake.setObjectName("verticalLayout_brake")
+        self.brake_bar1 = QtWidgets.QLabel(self.brake_bar)
+        self.brake_bar1.setText("")
+        self.brake_bar1.setObjectName("brake_bar1")
+        self.verticalLayout_brake.addWidget(self.brake_bar1)
+        self.brake_bar2 = QtWidgets.QLabel(self.brake_bar)
+        self.brake_bar2.setText("")
+        self.brake_bar2.setObjectName("brake_bar2")
+        self.verticalLayout_brake.addWidget(self.brake_bar2)
+        self.brake_bar3 = QtWidgets.QLabel(self.brake_bar)
+        self.brake_bar3.setText("")
+        self.brake_bar3.setObjectName("brake_bar3")
+        self.verticalLayout_brake.addWidget(self.brake_bar3)
+        self.gridLayout_up.addWidget(self.brake_bar, 0, 1, 1, 1)
 
         self.Swerve_level = QtWidgets.QWidget(self.up)
         self.Swerve_level.setMaximumSize(QtCore.QSize(80, 35))
@@ -251,7 +283,26 @@ class Ui_MainWindow(object):
         self.Swerve_bar = QtWidgets.QWidget(self.up)
         self.Swerve_bar.setMaximumSize(QtCore.QSize(80, 220))
         self.Swerve_bar.setObjectName("Swerve_bar")
+        self.verticalLayout_swerve = QtWidgets.QVBoxLayout(self.Swerve_bar)
+        self.verticalLayout_swerve.setContentsMargins(15, 0, 15, 0)
+        self.verticalLayout_swerve.setSpacing(0)
+        self.verticalLayout_swerve.setObjectName("verticalLayout_swerve")
+        self.swerve_bar1 = QtWidgets.QLabel(self.Swerve_bar)
+        self.swerve_bar1.setText("")
+        self.swerve_bar1.setObjectName("swerve_bar1")
+        self.verticalLayout_swerve.addWidget(self.swerve_bar1)
+        self.swerve_bar2 = QtWidgets.QLabel(self.Swerve_bar)
+        self.swerve_bar2.setText("")
+        self.swerve_bar2.setObjectName("swerve_bar2")
+        self.verticalLayout_swerve.addWidget(self.swerve_bar2)
+        self.swerve_bar3 = QtWidgets.QLabel(self.Swerve_bar)
+        self.swerve_bar3.setText("")
+        self.swerve_bar3.setObjectName("swerve_bar3")
+        self.verticalLayout_swerve.addWidget(self.swerve_bar3)
         self.gridLayout_up.addWidget(self.Swerve_bar, 0, 6, 1, 1)
+
+
+
 
         self.acc_level = PlotWidget(self.up)
         self.acc_level.setMaximumSize(QtCore.QSize(80, 35))
@@ -322,22 +373,22 @@ class Ui_MainWindow(object):
         self.swerve_pic_coin.setScaledContents(True)
         self.swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        self.acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
-        self.acc_bar_top.setPixmap(self.top_bar)
-        self.acc_bar_top.setScaledContents(True)
-        self.acc_bar_top.setMaximumSize(QtCore.QSize(50, 67))
-
-
-        self.acc_bar_medium = QtWidgets.QLabel(self.acc_bar2)
-        self.acc_bar_medium.setPixmap(self.medium_bar)
-        self.acc_bar_medium.setScaledContents(True)
-        self.acc_bar_medium.setMaximumSize(QtCore.QSize(50, 67))
-
-
-        self.acc_bar_bottom = QtWidgets.QLabel(self.acc_bar3)
-        self.acc_bar_bottom.setPixmap(self.bottom_bar)
-        self.acc_bar_bottom.setScaledContents(True)
-        self.acc_bar_bottom.setMaximumSize(QtCore.QSize(50, 67))
+        # # self.acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
+        # self.acc_bar1.setPixmap(self.acc_bar1)
+        # self.acc_bar1.setScaledContents(True)
+        # self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
+        #
+        #
+        # self.acc_bar2 = QtWidgets.QLabel(self.acc_bar2)
+        # self.acc_bar2.setPixmap(self.acc_bar2)
+        # self.acc_bar2.setScaledContents(True)
+        # self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
+        #
+        #
+        # self.acc_bar3 = QtWidgets.QLabel(self.acc_bar3)
+        # self.acc_bar3.setPixmap(self.acc_bar3)
+        # self.acc_bar3.setScaledContents(True)
+        # self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
 
 
         # draw graph of lines--should be deleted later
@@ -445,8 +496,102 @@ class Ui_MainWindow(object):
             self.swerve_pic_coin.setPixmap(self._coin_gold1)
         elif level == 2:
             self.swerve_pic_coin.setPixmap(self._coin_gold2)
+    def setBar(self,level:str,type:str):
+        if type == 'acc':
+            self.change_acc_bar(level)
+        elif type == 'brake':
+            self.change_brake_bar(level)
+        elif type == 'turn':
+            self.change_turn_bar(level)
+        elif type == 'swerve':
+            self.change_swerve_bar(level)
+          
+    def change_acc_bar(self,level):
+        if level=='safe':
+            self.acc_bar1.setPixmap(self.grey_bar)
+            self.acc_bar2.setPixmap(self.grey_bar)
+            self.acc_bar3.setPixmap(self.bottom_bar)
+        elif level=='mediumrisk':
+            self.acc_bar1.setPixmap(self.grey_bar)
+            self.acc_bar2.setPixmap(self.medium_bar)
+            self.acc_bar3.setPixmap(self.bottom_bar)
+        elif level=='highrisk':
+            self.acc_bar1.setPixmap(self.top_bar)
+            self.acc_bar2.setPixmap(self.medium_bar)
+            self.acc_bar3.setPixmap(self.bottom_bar)
+        self.acc_bar1.setScaledContents(True)
+        self.acc_bar2.setScaledContents(True)
+        self.acc_bar3.setScaledContents(True)
+        self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
+        self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
+        self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
 
 
+    def change_turn_bar(self,level):
+        if level == 'safe':
+            self.turn_bar1.setPixmap(self.grey_bar)
+            self.turn_bar2.setPixmap(self.grey_bar)
+            self.turn_bar3.setPixmap(self.bottom_bar)
+        elif level == 'mediumrisk':
+            self.turn_bar1.setPixmap(self.grey_bar)
+            self.turn_bar2.setPixmap(self.medium_bar)
+            self.turn_bar3.setPixmap(self.bottom_bar)
+        elif level == 'highrisk':
+            self.turn_bar1.setPixmap(self.top_bar)
+            self.turn_bar2.setPixmap(self.medium_bar)
+            self.turn_bar3.setPixmap(self.bottom_bar)
+        self.turn_bar1.setScaledContents(True)
+        self.turn_bar2.setScaledContents(True)
+        self.turn_bar3.setScaledContents(True)
+        self.turn_bar1.setMaximumSize(QtCore.QSize(50, 67))
+        self.turn_bar2.setMaximumSize(QtCore.QSize(50, 67))
+        self.turn_bar3.setMaximumSize(QtCore.QSize(50, 67))
+
+    def change_swerve_bar(self,level):
+        if level == 'safe':
+            self.swerve_bar1.setPixmap(self.grey_bar)
+            self.swerve_bar2.setPixmap(self.grey_bar)
+            self.swerve_bar3.setPixmap(self.bottom_bar)
+        elif level == 'mediumrisk':
+            self.swerve_bar1.setPixmap(self.grey_bar)
+            self.swerve_bar2.setPixmap(self.medium_bar)
+            self.swerve_bar3.setPixmap(self.bottom_bar)
+        elif level == 'highrisk':
+            self.swerve_bar1.setPixmap(self.top_bar)
+            self.swerve_bar2.setPixmap(self.medium_bar)
+            self.swerve_bar3.setPixmap(self.bottom_bar)
+        self.swerve_bar1.setScaledContents(True)
+        self.swerve_bar2.setScaledContents(True)
+        self.swerve_bar3.setScaledContents(True)
+        self.swerve_bar1.setMaximumSize(QtCore.QSize(50, 67))
+        self.swerve_bar2.setMaximumSize(QtCore.QSize(50, 67))
+        self.swerve_bar3.setMaximumSize(QtCore.QSize(50, 67))
+
+    def change_brake_bar(self,level,):
+        if level == 'safe':
+            self.brake_bar1.setPixmap(self.grey_bar)
+            self.brake_bar2.setPixmap(self.grey_bar)
+            self.brake_bar3.setPixmap(self.bottom_bar)
+        elif level == 'mediumrisk':
+            self.brake_bar1.setPixmap(self.grey_bar)
+            self.brake_bar2.setPixmap(self.medium_bar)
+            self.brake_bar3.setPixmap(self.bottom_bar)
+        elif level == 'highrisk':
+            self.brake_bar1.setPixmap(self.top_bar)
+            self.brake_bar2.setPixmap(self.medium_bar)
+            self.brake_bar3.setPixmap(self.bottom_bar)
+        self.brake_bar1.setScaledContents(True)
+        self.brake_bar2.setScaledContents(True)
+        self.brake_bar3.setScaledContents(True)
+        self.brake_bar1.setMaximumSize(QtCore.QSize(50, 67))
+        self.brake_bar2.setMaximumSize(QtCore.QSize(50, 67))
+        self.brake_bar3.setMaximumSize(QtCore.QSize(50, 67))
+
+
+
+
+
+    
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
