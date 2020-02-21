@@ -123,6 +123,12 @@ class Ui_Dialog(object):
         hour = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         score1 = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
         score2 = [50,35,44,22,38,32,27,38,32,44]
+        hour1 = [1, 2, 3, 4, 5]
+        score21 = [50, 35, 44, 22, 38]
+        hour2 = [5, 6, 7]
+        score22 = [38,41,27]
+        hour3 = [7, 8, 9, 10]
+        score23 = [27,38,32,44]
 
 
         self.plot_widget.setXRange(0, 10, padding=0)
@@ -132,8 +138,11 @@ class Ui_Dialog(object):
         self.plot_widget.plot(hour, score2, 'b')
         pen = pg.mkPen(color=(255, 0, 0))
         pen2 = pg.mkPen(color=(0, 255, 0))
-        self.plot_widget.plot(hour, score1, name="Sensor 1",  pen=pen)
-        self.plot_widget.plot(hour, score2, name="Sensor 2",  pen=pen2)
+        # self.plot_widget.plot(hour, score1, name="Sensor 1",  pen=pen)
+        # self.plot_widget.plot(hour, score2, name="Sensor 2",  pen=pen2)
+        self.plot_widget.plot(hour1, score21, name="Sensor 1",  pen=pen)
+        self.plot_widget.plot(hour3, score23, name="Sensor 1",  pen=pen)
+        self.plot_widget.plot(hour2, score22, name="Sensor 2",  pen=pen2)
 
     def plot(self, x, y, plotname, color):
         pen = pg.mkPen(color=color)

@@ -18,5 +18,33 @@ add control function for coins.
 add init function change format
 
 ---------
+###meeting recorder
+
+>score: current or history?
+
+>formula to change the score
+
+>total points: will change or not?? then how often?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
