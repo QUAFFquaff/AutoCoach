@@ -33,14 +33,17 @@ class Ui_Dialog(object):
         self.gridLayout = QtWidgets.QGridLayout(self.canvas)
         self.gridLayout.setObjectName("gridLayout")
         self.verticalLayout_2.addWidget(self.canvas)
+
         self.down = QtWidgets.QWidget(self.back)
         self.down.setMinimumSize(QtCore.QSize(0, 50))
         self.down.setMaximumSize(QtCore.QSize(16777215, 50))
         self.down.setObjectName("down")
+
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.down)
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
+
         self.backBtn = QtWidgets.QPushButton(self.down)
         self.backBtn.setMaximumSize(QtCore.QSize(60, 16777215))
         self.backBtn.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -51,13 +54,6 @@ class Ui_Dialog(object):
         self.verticalLayout_2.addWidget(self.down)
 
         self.graph_widget = QtWidgets.QWidget(self.canvas)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.graph_widget.sizePolicy().hasHeightForWidth())
-        self.graph_widget.setSizePolicy(sizePolicy)
-        # self.graph_widget.setMinimumSize(QtCore.QSize(0, 50))
-        # self.graph_widget.setMaximumSize(QtCore.QSize(16777215, 50))
         self.graph_widget.setObjectName("graph_widget")
         self.graph_widget.setStyleSheet("#graph_widget{background-color: green}")
 
