@@ -65,9 +65,9 @@ class Ui_Dialog(object):
         # self.pie_widget.setSizePolicy(sizePolicy)
         # self.pie_widget.setMinimumSize(QtCore.QSize(0, 50))
         # self.pie_widget.setMaximumSize(QtCore.QSize(16777215, 50))
-        # self.pie_widget.setStyleSheet("#pie_widget{background-color: yellow}")
-        # # self.pie_widget.setMaximumSize(QtCore.QSize(16777215, 50))
         # self.pie_widget.setObjectName("pie_widget")
+        # self.pie_widget.setStyleSheet("#pie_widget{background-color: yellow}")
+        # self.pie_widget.setMaximumSize(QtCore.QSize(16777215, 50))
         # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
         self.setWindowOpacity(0.98)
