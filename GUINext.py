@@ -56,9 +56,9 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.graph_widget.sizePolicy().hasHeightForWidth())
         self.graph_widget.setSizePolicy(sizePolicy)
-        self.graph_widget.setMinimumSize(QtCore.QSize(0, 50))
-        self.graph_widget.setMaximumSize(QtCore.QSize(16777215, 50))
-        self.graph_widget.setObjectName("pie_widget")
+        # self.graph_widget.setMinimumSize(QtCore.QSize(0, 50))
+        # self.graph_widget.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.graph_widget.setObjectName("graph_widget")
         self.graph_widget.setStyleSheet("#graph_widget{background-color: green}")
 
         # self.pie_widget =  QtWidgets.QWidget(self.graph_widget)
