@@ -214,10 +214,12 @@ class ListenerThread(QThread):
         self.eventQueue = args[0]
 
     def run(self):
+        i = 0
         while True:
             time.sleep(1)
             print(self.eventQueue.qsize())
-
+            self.eventQueue.put(i)
+            i +=1
             if not self.eventQueue.empty():
                 score = self.eventQueue.get()
 
