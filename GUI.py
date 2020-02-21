@@ -404,7 +404,7 @@ class Ui_MainWindow(object):
 
 
 
-    def change_icons(self,level:int, type: str):
+    def change_icons(self,level:int, type:str):
         if type == 'acc':
             self.change_acc_icon(level)
         elif type == 'brake':

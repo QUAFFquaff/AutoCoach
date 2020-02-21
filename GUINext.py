@@ -8,7 +8,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtChart import *
 
 class Ui_Dialog(object):
     windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
@@ -47,6 +50,11 @@ class Ui_Dialog(object):
         self.horizontalLayout.addWidget(self.backBtn)
         self.verticalLayout_2.addWidget(self.down)
 
+        self.pie_widget =  QtWidgets.QWidget(self.back)
+        self.down.setMinimumSize(QtCore.QSize(0, 50))
+        self.down.setMaximumSize(QtCore.QSize(16777215, 50))
+        # self.pie_widget.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.pie_widget.setObjectName("pie_widget")
         # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
         self.setWindowOpacity(0.98)
@@ -59,6 +67,30 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+        self.pieseries = QPieSeries(self.pie_widget)  # define PieSeries
+        self.pieseries.append("Jane", 1)  # insert
+        self.pieseries.append("Joe", 2)
+        self.pieseries.append("Andy", 3)
+        self.pieseries.append("Barbara", 4)
+        self.pieseries.append("Axel", 5)
+
+        self.slice = self.pieseries.slices()[0]  # select one split
+        self.slice.setExploded()  # set as exploded
+        self.slice.setLabelVisible()  # Lable
+        self.slice.setPen(QPen(Qt.darkGreen, 1))  # set pen
+        self.slice.setBrush(Qt.green)
+
+        self.chart = QChart()  # 定义QChart
+        self.chart.addSeries(self.pieseries)  # 将 pieseries添加到chart里
+        self.chart.setTitle("Simple piechart example")  # 设置char的标题
+        self.chart.legend().hide()  # 将char的legend设置为隐藏
+
+        self.charview = QChartView(self.chart, self.pie_widget)  # 定义charView窗口，添加chart元素，设置主窗口为父窗体，既将chartView嵌入到父窗体
+        self.charview.setGeometry(0, 0, 50, 50)  # 设置charview在父窗口的大小、位置
+        self.charview.setRenderHint(QPainter.Antialiasing)  # 设置抗锯齿
+        self.charview.show()  # 将CharView窗口显示出来
+
 
     def mousePressEvent(self,event):
         if event.button() == QtCore.Qt.LeftButton:
