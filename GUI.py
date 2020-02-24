@@ -117,17 +117,17 @@ class Ui_MainWindow(object):
         self.gridLayout_down.setHorizontalSpacing(5)
         self.gridLayout_down.setObjectName("gridLayout_down")
         # pg.setConfigOption('background', '#17191A')
-        self.widget = PlotWidget(self.down)
+        self.flowing_scores = PlotWidget(self.down)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
-        self.widget.setSizePolicy(sizePolicy)
-        self.widget.setMinimumSize(QtCore.QSize(0, 0))
-        self.widget.setMaximumSize(QtCore.QSize(300, 120))
-        self.widget.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.widget.setObjectName("widget")
-        self.gridLayout_down.addWidget(self.widget, 0, 0, 1, 1)
+        sizePolicy.setHeightForWidth(self.flowing_scores.sizePolicy().hasHeightForWidth())
+        self.flowing_scores.setSizePolicy(sizePolicy)
+        self.flowing_scores.setMinimumSize(QtCore.QSize(0, 0))
+        self.flowing_scores.setMaximumSize(QtCore.QSize(300, 120))
+        self.flowing_scores.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.flowing_scores.setObjectName("widget")
+        self.gridLayout_down.addWidget(self.flowing_scores, 0, 0, 1, 1)
 
         self.current_score = QtWidgets.QLabel(self.down)
         # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
@@ -373,31 +373,13 @@ class Ui_MainWindow(object):
         self.swerve_pic_coin.setScaledContents(True)
         self.swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        # # self.acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
-        # self.acc_bar1.setPixmap(self.acc_bar1)
-        # self.acc_bar1.setScaledContents(True)
-        # self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
-        #
-        #
-        # self.acc_bar2 = QtWidgets.QLabel(self.acc_bar2)
-        # self.acc_bar2.setPixmap(self.acc_bar2)
-        # self.acc_bar2.setScaledContents(True)
-        # self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
-        #
-        #
-        # self.acc_bar3 = QtWidgets.QLabel(self.acc_bar3)
-        # self.acc_bar3.setPixmap(self.acc_bar3)
-        # self.acc_bar3.setScaledContents(True)
-        # self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
 
-
-        # draw graph of lines--should be deleted later
-
-        self.widget.setDownsampling(mode='peak')
-        self.widget.setClipToView(True)
-        self.widget.setXRange(0, 100)
-        self.widget.setLimits(xMax=0)
-        self.pen1 = self.widget.plot()
+        # draw graph of lines
+        self.flowing_scores.setDownsampling(mode='peak')
+        self.flowing_scores.setClipToView(True)
+        self.flowing_scores.setXRange(0, 100)
+        self.flowing_scores.setLimits(xMax=0)
+        self.pen1 = self.flowing_scores.plot()
         self.pen1.setPen(pg.mkPen('y', width=3))
         self.data3 = np.empty(10)
         self.ptr3 = 0
