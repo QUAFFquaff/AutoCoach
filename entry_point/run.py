@@ -14,9 +14,21 @@ from scipy import signal
 
 
 
-# initial queue for standard deviation calculation
-std_x_queue = queue.Queue(maxsize=19)
-std_y_queue = queue.Queue(maxsize=19)
+
+
+class Event(object):
+    def __init__(self, start_time, type):
+        self.start = start_time
+        self.type = type
+        self.vect = []
+        self.end = 0
+
+    def set_endtime(self, end_time):
+        self.end = end_time
+
+    def add_value(self, data):
+        self.vect.append(data)
+        return self.vect
 
 
 
@@ -36,6 +48,10 @@ class detectProcess(multiprocessing.Process):
         self.sampling_rate = 0
         self.std_window = 0
 
+        # initial queue for standard deviation calculation
+        self.std_x_queue = queue.Queue(maxsize=19)
+        self.std_y_queue = queue.Queue(maxsize=19)
+
     def run(self):
 
         # initial obd connection
@@ -45,8 +61,8 @@ class detectProcess(multiprocessing.Process):
         #initial sampling rate
         self.sampling_rate = self.getSamplingRate(obd_data)
         self.std_window = int(self.sampling_rate + 0.5)
-        std_x_queue = queue.Queue(maxsize=(2 * self.std_window - 1))
-        std_y_queue = queue.Queue(maxsize=(2 * self.std_window - 1))
+        self.std_x_queue = queue.Queue(maxsize=(2 * self.std_window - 1))
+        self.std_y_queue = queue.Queue(maxsize=(2 * self.std_window - 1))
         print('samplingrate--' + str(self.sampling_rate))
         print('std_window:', str(self.std_window))
 
@@ -82,9 +98,11 @@ class detectProcess(multiprocessing.Process):
                     acc_z_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'z'))
 
                     # detect event
-                    event_x = self.detect_x_event([timestamp, self.speed.value, acc_y_filtered[-4], acc_x_filtered[-4], acc_z_filtered[-4], gyo_x, gyo_y, gyo_y])
-                    event_y = self.detect_x_event([timestamp, self.speed.value, acc_y_filtered[-4], acc_x_filtered[-4], acc_z_filtered[-4], gyo_x, gyo_y, gyo_y])
+                    event_x = self.detect_x_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
+                    event_y = self.detect_x_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
 
+                    if not event_x is None:
+                        pass  #  to-do
 
 
             time.sleep(1)
@@ -158,8 +176,22 @@ class detectProcess(multiprocessing.Process):
     def detect_x_event(self, data):
         faultNum = int(2 * self.sampling_rate / 5)
         min_event_length = int(self.sampling_rate * 1.2)
+        std_x_array = []
+        raw_x_array = []
 
-        std_x_queue.put(data)
+        self.std_x_queue.put(data)
+
+        if self.std_x_queue.full():
+            std_container = []
+            for i in range(self.std_x_queue.qsize()):
+                temp = self.std_x_queue.get()
+                std_container.append(temp[9])
+                if i >=self.std_window - 1:
+                    std_x_array.append(np.std(std_container[i-self.std_window+1:i+1], ddof=1))
+                    raw_x_array.append(temp[0:8])
+                self.std_x_queue.put(temp)
+            self.std_x_queue.get()  #delete current node
+            start_index = std_x_array.index(min(std_x_array))
 
 
 
