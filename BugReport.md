@@ -27,8 +27,25 @@ add init function change format
 >total points: will change or not?? then how often?
 
 
+##color and the shape for bars
+
+backgroud-->light gray
+
+black bars into gray
 
 
+how much time to show:
+
+how long to keep
+
+
+## for chart
+
+time zone?
+
+stock market tools
+
+ 
 
 
 
