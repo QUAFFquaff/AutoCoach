@@ -106,15 +106,15 @@ class Ui_Dialog(object):
         self.slice.setPen(QPen(Qt.darkGreen, 1))  # set pen
         self.slice.setBrush(Qt.green)
 
-        self.chart = QChart()  # 定义QChart
-        self.chart.addSeries(self.pieseries)  # 将 pieseries添加到chart里
-        self.chart.setTitle("Simple piechart example")  # 设置char的标题
-        self.chart.legend().hide()  # 将char的legend设置为隐藏
+        self.chart = QChart()
+        self.chart.addSeries(self.pieseries)
+        self.chart.setTitle("Simple piechart example")
+        self.chart.legend().hide()
 
-        self.charview = QChartView(self.chart, self.pie_widget)  # 定义charView窗口，添加chart元素，设置主窗口为父窗体，既将chartView嵌入到父窗体
-        self.charview.setGeometry(0, 0, 300, 200)  # 设置charview在父窗口的大小、位置
-        self.charview.setRenderHint(QPainter.Antialiasing)  # 设置抗锯齿
-        self.charview.show()  # 将CharView窗口显示出来
+        self.charview = QChartView(self.chart, self.pie_widget)  # define charView，add chart item，set parent window
+        self.charview.setGeometry(0, 0, 300, 200)
+        self.charview.setRenderHint(QPainter.Antialiasing)
+        self.charview.show()
 
 
 
