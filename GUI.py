@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
         pass
     windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
 
-    def update2(self):
+    def update_flowing_score(self):
         data3 = self.data3
         ptr3 = self.ptr3
         data3[ptr3] = np.random.normal()
@@ -52,11 +52,11 @@ class Ui_MainWindow(object):
             tmp = data3
             data3 = np.empty(data3.shape[0] * 2)
             data3[:tmp.shape[0]] = tmp
-        self.pen1.setData(data3[:ptr3])
-        self.data3 = data3
+        self.pen_y.setData(data3[:ptr3])
+        # self.data3 = data3
         if(ptr3>100):
-            self.pen1.setPen(pg.mkPen('r', width=3))
-        self.pen1.setPos(-ptr3, 0)
+            self.pen_y.setPen(pg.mkPen('r', width=3))
+        self.pen_y.setPos(-ptr3, 0)
         self.ptr3 = ptr3
 
     def setupUi(self, MainWindow):
@@ -379,8 +379,8 @@ class Ui_MainWindow(object):
         self.flowing_scores.setClipToView(True)
         self.flowing_scores.setXRange(0, 100)
         self.flowing_scores.setLimits(xMax=0)
-        self.pen1 = self.flowing_scores.plot()
-        self.pen1.setPen(pg.mkPen('y', width=3))
+        self.pen_y = self.flowing_scores.plot()
+        self.pen_y.setPen(pg.mkPen('y', width=3))
         self.data3 = np.empty(10)
         self.ptr3 = 0
 
@@ -435,8 +435,6 @@ class Ui_MainWindow(object):
             self.feedback.setIconSize(QtCore.QSize(150, 150))
 
 
-
-
     def change_icons(self,level:int, type:str):
         if type == 'acc':
             self.change_acc_icon(level)
@@ -478,6 +476,7 @@ class Ui_MainWindow(object):
             self.swerve_pic_coin.setPixmap(self._coin_gold1)
         elif level == 2:
             self.swerve_pic_coin.setPixmap(self._coin_gold2)
+
     def setBar(self,level:str,type:str):
         if type == 'acc':
             self.change_acc_bar(level)
@@ -507,7 +506,6 @@ class Ui_MainWindow(object):
         self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
         self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
         self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
-
 
     def change_turn_bar(self,level):
         if level == 'safe':
@@ -570,10 +568,6 @@ class Ui_MainWindow(object):
         self.brake_bar3.setMaximumSize(QtCore.QSize(50, 67))
 
 
-
-
-
-    
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
