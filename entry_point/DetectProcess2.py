@@ -21,7 +21,7 @@ from multiprocessing import *
 
 
 class DetectProcess2(multiprocessing.Process):
-    def __init__(self, eventQueue: multiprocessing.Queue, lock: Lock,speed: Value, svm_flag: Value):
+    def __init__(self, eventQueue: multiprocessing.Queue, lock: Lock,speed: Value, svm_flag: Value, LDA_flag: Value):
         multiprocessing.Process.__init__(self)
         print('init')
         self.eventQueue = eventQueue

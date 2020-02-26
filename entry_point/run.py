@@ -2,6 +2,8 @@ from ctypes import c_bool
 from entry_point.DetectProcess2 import *
 from entry_point.DetectProcess import *
 from entry_point.Event import *
+from entry_point.Listener import ListenerThread
+import joblib
 
 
 
@@ -51,27 +53,6 @@ class NextWindow(QMainWindow, Ui_Dialog):
         self.setVisible(False)
 
 
-class ListenerThread(QThread):
-    back_signal = pyqtSignal(int)
-    def __init__(self, parent=None, args=()):
-        super(ListenerThread, self).__init__(parent)
-        self.eventQueue = args[0]
-        self.processLock = args[1]
-        self.SVM_flag = args[2]
-
-    def run(self):
-        i = 0
-        while True:
-            print(self.SVM_flag.value)
-
-            i +=1
-            if not self.eventQueue.empty():
-                score = self.eventQueue.get()
-
-                self.back_signal.emit(score)
-
-
-
 
 
 def run():
@@ -92,13 +73,13 @@ def run():
     # timer.timeout.connect(myWin.update_flowing_score)
     # timer.start(50)
 
-    eventDetectP = DetectProcess2(eventQueue, processLock, speed, SVM_flag)
+    eventDetectP = DetectProcess2(eventQueue, processLock, speed, SVM_flag, LDA_flag)
     eventDetectP.daemon = True
     eventDetectP.start()
 
-    listener = ListenerThread(args=(eventQueue, processLock, SVM_flag))
-    listener.back_signal.connect(myWin.setCurrentScore)
-    listener.start()
+    # listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    # listener.back_signal.connect(myWin.setCurrentScore)
+    # listener.start()
 
     myWin.setCurrentScore(45)
     myWin.setFeedBack(1,'acc')

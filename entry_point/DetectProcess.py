@@ -17,7 +17,7 @@ from entry_point.Event import *
 
 # process for event detection
 class DetectProcess(multiprocessing.Process):
-    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value):
+    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_flag: Value):
         multiprocessing.Process.__init__(self, args=())
         print('init')
         self.eventQueue = eventQueue
@@ -94,15 +94,22 @@ class DetectProcess(multiprocessing.Process):
 
                     # detect event
                     event_x = self.detect_x_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
-                    event_y = self.detect_x_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
+                    event_y = self.detect_y_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
 
-                    if not event_x is None:
+                    if event_x is not None:
                         event_x.filter(b, a)
                         self.processLock.acquire()  # get the lock
                         self.eventQueue.put(event_x)
                         self.SVM_flag.value -= 1
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
+                    if event_y is not None:
+                        event_y.filter(b, a)
+                        self.processLock.acquire()  # get the lock
+                        self.eventQueue.put(event_y)
+                        self.SVM_flag.value -= 1
+                        self.processLock.release()  # release the process lock
+                        print("put turn into svm")
 
                     lowpass_queue.get()
             else:
