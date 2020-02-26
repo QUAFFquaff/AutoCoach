@@ -53,9 +53,11 @@ class Ui_MainWindow(object):
             data3 = np.empty(data3.shape[0] * 2)
             data3[:tmp.shape[0]] = tmp
         self.pen_y.setData(data3[:ptr3])
-        # self.data3 = data3
-        if(ptr3>100):
+        self.data3 = data3
+        if(data3[ptr3]>100):
             self.pen_y.setPen(pg.mkPen('r', width=3))
+        if(data3[ptr3]<100):
+            self.pen_y.setPen(pg.mkPen('y', width=3))
         self.pen_y.setPos(-ptr3, 0)
         self.ptr3 = ptr3
 
@@ -433,6 +435,8 @@ class Ui_MainWindow(object):
         elif type == 'swerve':
             self.feedback.setIcon(self.swerve_icon)
             self.feedback.setIconSize(QtCore.QSize(150, 150))
+
+
 
 
     def change_icons(self,level:int, type:str):
