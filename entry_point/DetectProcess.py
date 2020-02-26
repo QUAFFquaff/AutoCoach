@@ -12,6 +12,7 @@ import multiprocessing
 import queue
 from scipy import signal
 from multiprocessing import *
+from entry_point.Event import *
 
 
 # process for event detection
@@ -41,6 +42,13 @@ class DetectProcess(multiprocessing.Process):
         self.acc_fault = 0  # fault left for acc
         self.brake_fault = 0  # fault left for brake
 
+        self.turn_threshold_num = 0
+        self.y_positive = True
+        self.y_negative = True
+        self.turn_event = Event(0, 2)
+        self.swerve_event = Event(0, 3)
+        self.turn_fault = 0
+
 
     def run(self):
 
@@ -58,7 +66,7 @@ class DetectProcess(multiprocessing.Process):
 
         lowpass_queue = queue.Queue()
         cutoff = 2 * (1 / self.sampling_rate)  # cutoff frequency of low pass filter
-        b, a = signal.butter(3, cutoff, 'low') # parameter for lowpass
+        b, a = signal.butter(3, cutoff, 'low')  # parameter for lowpass
 
         while True:
             row = obd_data + self.bt_serial.readline()
@@ -247,4 +255,88 @@ class DetectProcess(multiprocessing.Process):
                 self.acc_event.add_value(data[0:8])
             if brake_flag:
                 self.brake_event.add_value(data[0:8])
+
+    def detect_y_event(self, data) -> Event:
+        std_y_array = []
+        raw_y_array = []
+        flag = False
+        min_length = int(self.sampling_rate * 1.5)
+        max_length = int(self.sampling_rate * 14)
+        fault_num = int(5 * self.sampling_rate / 10)
+        self.std_y_queue.put(data)
+
+        if self.std_y_queue.full():
+            std_container = []
+            for i in range(self.std_y_queue.qsize()):
+                temp = self.std_y_queue.get()
+                std_container.append(temp[8])
+                if i >= self.std_window - 1:
+                    std_y_array.append(np.std(std_container[i - self.std_window + 1:i + 1], ddof=1))
+                    raw_y_array.append(temp[0:8])
+                self.std_y_queue.put(temp)
+            self.std_y_queue.get()  # delete current node
+            start_index = std_y_array.index(min(std_y_array))
+
+            std_y = std_y_array[-1]
+            acc_y = data[8]
+            timestamp = data[0]
+
+            if self.y_positive:
+                if acc_y > 0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
+                    self.turn_threshold_num += 1
+                    self.turn_event = Event(raw_y_array[start_index][0], 2)
+                    for i in range(start_index, len(std_y_array)):
+                        self.turn_event.add_value(raw_y_array[i])
+                    #  acquire process lock to add SVM_flag
+                    self.change_event_num(1)  # add 1 current event num
+                elif acc_y > 0.08 and self.turn_threshold_num > 0:
+                    self.turn_threshold_num += 1
+                    self.turn_fault = fault_num
+                    flag = True
+                elif acc_y <=0.08 and self.turn_fault > 0 and self.turn_threshold_num > 0:
+                    self.turn_fault -= 1
+                    self.turn_threshold_num += 1
+                    flag = True
+                elif (acc_y <= 0.08 or std_y < 0.015) and self.turn_threshold_num > 0:
+                    self.turn_threshold_num = 0
+                    self.turn_fault = 0
+                    self.y_negative = True
+                    if min_length < self.turn_threshold_num < max_length:
+                        self.turn_event.set_endtime(timestamp)
+                        self.turn_event.add_value(data[0:8])
+                        return self.turn_event
+                    else:
+                        self.change_event_num(-1)
+
+            if self.y_negative:
+                if acc_y < -0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
+                    self.turn_threshold_num += 1
+                    self.turn_event = Event(raw_y_array[start_index][0], 3)
+                    for i in range(start_index, len(std_y_array)):
+                        self.turn_event.add_value(raw_y_array[i])
+                    #  acquire process lock to add SVM_flag
+                    self.change_event_num(1)  # add 1 current event num
+                elif acc_y < -0.08 and self.turn_threshold_num > 0:
+                    self.turn_threshold_num += 1
+                    self.turn_fault = fault_num
+                    flag = True
+                elif acc_y >= -0.08 and self.turn_fault > 0 and self.turn_threshold_num > 0:
+                    self.turn_fault -= 1
+                    self.turn_threshold_num += 1
+                    flag = True
+                elif (acc_y >= -0.08 or std_y < 0.015) and self.turn_threshold_num > 0:
+                    self.turn_threshold_num = 0
+                    self.turn_fault = 0
+                    self.y_positive = True
+                    if min_length < self.turn_threshold_num < max_length:
+                        self.turn_event.set_endtime(timestamp)
+                        self.turn_event.add_value(data[0:8])
+                        return self.turn_event
+                    else:
+                        self.change_event_num(-1)
+
+            if flag:
+                self.turn_event.add_value(data[0:8])
+
+
 

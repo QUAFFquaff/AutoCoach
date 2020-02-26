@@ -1,5 +1,7 @@
 from ctypes import c_bool
 from entry_point.DetectProcess2 import *
+from entry_point.DetectProcess import *
+from entry_point.Event import *
 
 
 
