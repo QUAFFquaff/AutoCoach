@@ -55,6 +55,14 @@ class ListenerThread(QThread):
         type = ""
         if label<3:
             type = "acc"
+        elif 2<label<6:
+            type = "brake"
+        elif 5<label<9:
+            type = "turn"
+        elif 8<label<12:
+            type = "swerve"
+
+        return (label % 3), type
 
     def get_event_label(self, event, score):
         result = [0]
