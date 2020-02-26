@@ -1,13 +1,16 @@
-from entry_point.DetectProcess2 import *
-from entry_point.DetectProcess import *
-from entry_point.Event import *
+# from entry_point.DetectProcess2 import *
+# from entry_point.DetectProcess import *
+import multiprocessing
+from multiprocessing import *
+from entry_point.Event import Event
 import joblib
 import numpy as np
+from PyQt5.QtCore import pyqtSignal, QThread
 
 
 
 class ListenerThread(QThread):
-    back_signal = pyqtSignal(int)
+    bar_signal = pyqtSignal([int, str])
     def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_flag: Value):
         QThread.__init__(self)
         self.eventQueue = eventQueue
@@ -37,6 +40,8 @@ class ListenerThread(QThread):
                         score = np.array(score[0])
 
                         event_label = self.get_event_label(event_list[i], score)
+                        level, type = self.get_level_type(event_label[0])
+                        self.bar_signal[int, str].emit(level, type)
 
             # print(self.SVM_flag.value)
             #
@@ -45,6 +50,11 @@ class ListenerThread(QThread):
             #     score = self.eventQueue.get()
             #
             #     self.back_signal.emit(score)
+
+    def get_level_type(self, label):
+        type = ""
+        if label<3:
+            type = "acc"
 
     def get_event_label(self, event, score):
         result = [0]
@@ -93,10 +103,10 @@ class ListenerThread(QThread):
         return event_list
 
     def nomalization(self, vect):
-        max = [0.7614, 0.6011, 0.2729, 0.2104, 11.510, 4.6303, 0.2529, 0.2861, 13.922, 1.6740, 31.65, 0.51791,
-               0.54475, 0.1544, 0.0674, 75.0, 94.7125, 29.1634, 17.16]
-        min = [0.06909, 0.0079, 0.0206, 0.0020, 0.3709, 0.7642, -0.356, -0.277, -16.325, -2.0252, 2.27, -0.0867,
-               -0.0405, -0.748, -0.589, -90.0, 2.67796, 0.40508, 1.848]
+        max = [0.54477258, 0.50700942, 0.18789488, 0.15918743, 0.24768464, 0.23842632, 28.50689189, 74.8, 0.49226227, 0.15066697, 0.51110881, 70.,
+               123.13157895, 0.4805202, 0.33492619, 16.691, 1.]
+        min = [2.35382837e-02, 3.20113117e-02, 9.27135340e-03, 1.15892844e-02, -3.15876755e-01, -2.84492464e-01, -2.16178814e+01, 3.39000000e+00, -1.93298970e-01, -5.84772122e-01, 3.08761631e-02, -7.20000000e+01,
+               2.14285714e-01, -5.22672514e-01, -2.49833594e-01, 8.72000000e-01, 0.]
         for i in range(len(vect)):
             vect[i] = (vect[i] - min[i]) / (max[i] - min[i])
         return vect

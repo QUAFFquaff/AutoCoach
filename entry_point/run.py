@@ -1,9 +1,15 @@
 from ctypes import c_bool
-from entry_point.DetectProcess2 import *
-from entry_point.DetectProcess import *
-from entry_point.Event import *
+from entry_point.DetectProcess2 import DetectProcess2
+from entry_point.DetectProcess import DetectProcess
+from entry_point.Event import Event
 from entry_point.Listener import ListenerThread
-import joblib
+import sys
+from PyQt5.QtCore import pyqtSignal
+from GUINext import Ui_Dialog
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from GUI import *
+from QssLoader import *
+import pyqtgraph as pg
 
 
 
@@ -78,7 +84,7 @@ def run():
     eventDetectP.start()
 
     # listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
-    # listener.back_signal.connect(myWin.setCurrentScore)
+    # listener.bar_signal.connect(myWin.setBar)
     # listener.start()
 
     myWin.setCurrentScore(45)
