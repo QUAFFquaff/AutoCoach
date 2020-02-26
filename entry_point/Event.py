@@ -15,6 +15,7 @@ class Event(object):
         self.vect = []
         self.end = 0
 
+
     def set_endtime(self, end_time: int):
         self.end = end_time
 
@@ -32,3 +33,19 @@ class Event(object):
             self.vect[i][2] = y[i]
             self.vect[i][3] = x[i]
             self.vect[i][4] = z[i]
+
+    def get_starttime(self):
+        return self.start
+
+    def get_endtime(self):
+        return self.end
+
+    def get_duration(self):
+        return self.end - self.start
+
+    def get_type(self):
+        return self.type
+
+    def get_value(self):
+        return self.vect
+
