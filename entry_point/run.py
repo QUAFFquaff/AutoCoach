@@ -89,7 +89,7 @@ def run():
 
 
     timer = pg.QtCore.QTimer()
-    timer.timeout.connect(myWin.update2)
+    timer.timeout.connect(myWin.update_flowing_score)
     timer.start(50)
 
     eventDetectP = DetectProcess2(eventQueue, processLock, speed, SVM_flag)
