@@ -9,21 +9,22 @@ from GUI import *
 import serial
 import time
 import multiprocessing
-import queue
+from queue import Queue
 from scipy import signal
 from multiprocessing import *
-from entry_point.Event import *
+from entry_point.Event import Event
 
 
 # process for event detection
 class DetectProcess(multiprocessing.Process):
     def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_flag: Value):
-        multiprocessing.Process.__init__(self, args=())
-        print('init')
+        multiprocessing.Process.__init__(self)
+        print('init event detection')
         self.eventQueue = eventQueue
         self.processLock = processLock
         self.speed = speed
         self.SVM_flag = SVM_flag
+        self.LDA_flag = LDA_flag
         # oriantation matrix
         self.matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
                   [-0.993610238, 0.079, -0.079680179],
@@ -33,8 +34,8 @@ class DetectProcess(multiprocessing.Process):
         self.std_window = 0
 
         # initial queue for standard deviation calculation
-        self.std_x_queue = queue.Queue(maxsize=19)
-        self.std_y_queue = queue.Queue(maxsize=19)
+        self.std_x_queue = Queue(maxsize=19)
+        self.std_y_queue = Queue(maxsize=19)
         self.acc_threshold_num = 0
         self.brake_threshold_num = 0
         self.acc_event = Event(0, 0)  # acc event object
@@ -48,7 +49,6 @@ class DetectProcess(multiprocessing.Process):
         self.turn_event = Event(0, 2)
         self.swerve_event = Event(0, 3)
         self.turn_fault = 0
-
 
     def run(self):
 

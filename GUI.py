@@ -481,7 +481,7 @@ class Ui_MainWindow(object):
         elif level == 2:
             self.swerve_pic_coin.setPixmap(self._coin_gold2)
 
-    def setBar(self, level: int, type: str):
+    def setBar(self,level:str,type:str):
         if type == 'acc':
             self.change_acc_bar(level)
         elif type == 'brake':
@@ -491,16 +491,16 @@ class Ui_MainWindow(object):
         elif type == 'swerve':
             self.change_swerve_bar(level)
           
-    def change_acc_bar(self, level):
-        if level==0:
+    def change_acc_bar(self,level):
+        if level=='safe':
             self.acc_bar1.setPixmap(self.grey_bar)
             self.acc_bar2.setPixmap(self.grey_bar)
             self.acc_bar3.setPixmap(self.bottom_bar)
-        elif level==1:
+        elif level=='mediumrisk':
             self.acc_bar1.setPixmap(self.grey_bar)
             self.acc_bar2.setPixmap(self.medium_bar)
             self.acc_bar3.setPixmap(self.bottom_bar)
-        elif level==2:
+        elif level=='highrisk':
             self.acc_bar1.setPixmap(self.top_bar)
             self.acc_bar2.setPixmap(self.medium_bar)
             self.acc_bar3.setPixmap(self.bottom_bar)
@@ -511,16 +511,16 @@ class Ui_MainWindow(object):
         self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
         self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
 
-    def change_turn_bar(self, level):
-        if level == 0:
+    def change_turn_bar(self,level):
+        if level == 'safe':
             self.turn_bar1.setPixmap(self.grey_bar)
             self.turn_bar2.setPixmap(self.grey_bar)
             self.turn_bar3.setPixmap(self.bottom_bar)
-        elif level == 1:
+        elif level == 'mediumrisk':
             self.turn_bar1.setPixmap(self.grey_bar)
             self.turn_bar2.setPixmap(self.medium_bar)
             self.turn_bar3.setPixmap(self.bottom_bar)
-        elif level == 2:
+        elif level == 'highrisk':
             self.turn_bar1.setPixmap(self.top_bar)
             self.turn_bar2.setPixmap(self.medium_bar)
             self.turn_bar3.setPixmap(self.bottom_bar)
@@ -531,16 +531,16 @@ class Ui_MainWindow(object):
         self.turn_bar2.setMaximumSize(QtCore.QSize(50, 67))
         self.turn_bar3.setMaximumSize(QtCore.QSize(50, 67))
 
-    def change_swerve_bar(self, level):
-        if level == 0:
+    def change_swerve_bar(self,level):
+        if level == 'safe':
             self.swerve_bar1.setPixmap(self.grey_bar)
             self.swerve_bar2.setPixmap(self.grey_bar)
             self.swerve_bar3.setPixmap(self.bottom_bar)
-        elif level == 1:
+        elif level == 'mediumrisk':
             self.swerve_bar1.setPixmap(self.grey_bar)
             self.swerve_bar2.setPixmap(self.medium_bar)
             self.swerve_bar3.setPixmap(self.bottom_bar)
-        elif level == 2:
+        elif level == 'highrisk':
             self.swerve_bar1.setPixmap(self.top_bar)
             self.swerve_bar2.setPixmap(self.medium_bar)
             self.swerve_bar3.setPixmap(self.bottom_bar)
@@ -551,16 +551,16 @@ class Ui_MainWindow(object):
         self.swerve_bar2.setMaximumSize(QtCore.QSize(50, 67))
         self.swerve_bar3.setMaximumSize(QtCore.QSize(50, 67))
 
-    def change_brake_bar(self, level):
-        if level == 0:
+    def change_brake_bar(self,level,):
+        if level == 'safe':
             self.brake_bar1.setPixmap(self.grey_bar)
             self.brake_bar2.setPixmap(self.grey_bar)
             self.brake_bar3.setPixmap(self.bottom_bar)
-        elif level == 1:
+        elif level == 'mediumrisk':
             self.brake_bar1.setPixmap(self.grey_bar)
             self.brake_bar2.setPixmap(self.medium_bar)
             self.brake_bar3.setPixmap(self.bottom_bar)
-        elif level == 2:
+        elif level == 'highrisk':
             self.brake_bar1.setPixmap(self.top_bar)
             self.brake_bar2.setPixmap(self.medium_bar)
             self.brake_bar3.setPixmap(self.bottom_bar)
