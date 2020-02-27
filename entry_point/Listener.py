@@ -49,6 +49,9 @@ class ListenerThread(QThread):
                         level, type = self.get_level_type(event_label[0])
                         self.bar_signal[int, str].emit(level, type)
 
+                        # emit pattern score to ui
+                        self.bar_signal[int].emit(score)
+
 
     def get_level_type(self, label):
         type = ""
