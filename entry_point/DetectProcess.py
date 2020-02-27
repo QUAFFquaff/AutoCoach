@@ -59,12 +59,12 @@ class DetectProcess(multiprocessing.Process):
         #initial sampling rate
         self.sampling_rate = self.getSamplingRate(obd_data)
         self.std_window = int(self.sampling_rate + 0.5)
-        self.std_x_queue = queue.Queue(maxsize=(2 * self.std_window - 1))
-        self.std_y_queue = queue.Queue(maxsize=(2 * self.std_window - 1))
+        self.std_x_queue = Queue(maxsize=(2 * self.std_window - 1))
+        self.std_y_queue = Queue(maxsize=(2 * self.std_window - 1))
         print('samplingrate--' + str(self.sampling_rate))
         print('std_window:', str(self.std_window))
 
-        lowpass_queue = queue.Queue()
+        lowpass_queue = Queue()
         cutoff = 2 * (1 / self.sampling_rate)  # cutoff frequency of low pass filter
         b, a = signal.butter(3, cutoff, 'low')  # parameter for lowpass
 
