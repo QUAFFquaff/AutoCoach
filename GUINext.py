@@ -93,28 +93,28 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        self.pieseries = QPieSeries(self.pie_widget)  # define PieSeries
-        self.pieseries.append("Jane", 1)  # insert
-        self.pieseries.append("Joe", 2)
-        self.pieseries.append("Andy", 3)
-        self.pieseries.append("Barbara", 4)
-        self.pieseries.append("Axel", 5)
-
-        self.slice = self.pieseries.slices()[0]  # select one split
-        self.slice.setExploded()  # set as exploded
-        self.slice.setLabelVisible()  # Lable
-        self.slice.setPen(QPen(Qt.darkGreen, 1))  # set pen
-        self.slice.setBrush(Qt.green)
-
-        self.chart = QChart()
-        self.chart.addSeries(self.pieseries)
-        self.chart.setTitle("Simple piechart example")
-        self.chart.legend().hide()
-
-        self.charview = QChartView(self.chart, self.pie_widget)  # define charView，add chart item，set parent window
-        self.charview.setGeometry(0, 0, 300, 200)
-        self.charview.setRenderHint(QPainter.Antialiasing)
-        self.charview.show()
+        # self.pieseries = QPieSeries(self.pie_widget)  # define PieSeries
+        # self.pieseries.append("Jane", 1)  # insert
+        # self.pieseries.append("Joe", 2)
+        # self.pieseries.append("Andy", 3)
+        # self.pieseries.append("Barbara", 4)
+        # self.pieseries.append("Axel", 5)
+        #
+        # self.slice = self.pieseries.slices()[0]  # select one split
+        # self.slice.setExploded()  # set as exploded
+        # self.slice.setLabelVisible()  # Lable
+        # self.slice.setPen(QPen(Qt.darkGreen, 1))  # set pen
+        # self.slice.setBrush(Qt.green)
+        #
+        # self.chart = QChart()
+        # self.chart.addSeries(self.pieseries)
+        # self.chart.setTitle("Simple piechart example")
+        # self.chart.legend().hide()
+        #
+        # self.charview = QChartView(self.chart, self.pie_widget)  # define charView，add chart item，set parent window
+        # self.charview.setGeometry(0, 0, 300, 200)
+        # self.charview.setRenderHint(QPainter.Antialiasing)
+        # self.charview.show()
 
 
 

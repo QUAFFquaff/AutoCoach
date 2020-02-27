@@ -7,6 +7,7 @@ import joblib
 import numpy as np
 from PyQt5.QtCore import pyqtSignal, QThread
 
+from entry_point.LDA_scoreing import LDAForEvent
 
 
 class ListenerThread(QThread):
@@ -16,6 +17,7 @@ class ListenerThread(QThread):
         self.eventQueue = eventQueue
         self.processLock = processLock
         self.SVM_flag = SVM_flag
+        self.ldamodel = LDAForEvent()
 
     def run(self):
         svm = joblib.load('svm.pkl')
@@ -118,3 +120,8 @@ class ListenerThread(QThread):
         for i in range(len(vect)):
             vect[i] = (vect[i] - min[i]) / (max[i] - min[i])
         return vect
+
+    def score_pattern(self,pattern):
+
+        result = self.ldamodel.LDATest(pattern)
+        print(self.ldamodel.score_pattern(result))
