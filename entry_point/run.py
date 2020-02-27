@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 from ctypes import c_bool
 
 
-import multiprocessing
-=======
->>>>>>> 41fda5d4bf62ad27bd15912625ef54de80d2ab6b
 from entry_point.DetectProcess2 import DetectProcess2
 from entry_point.DetectProcess import DetectProcess
 from entry_point.Event import Event

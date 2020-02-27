@@ -32,8 +32,8 @@ import time
 class LDAForEvent:
     def __init__(self):
 
-        self.ldamodel = LdaModel.load("fixed_time_window_lda.model")
-        self.dictionary = Dictionary.load("lda_dictionary.model")
+        self.ldamodel = LdaModel.load("model/fixed_time_window_lda.model")
+        self.dictionary = Dictionary.load("model/lda_dictionary.model")
     height_weight = 8  # the weight of height in Manhattan distance
     delete_weight = 10  # the weight of delete a character when matching
     add_weight = 10  # the weight of add a character when matching

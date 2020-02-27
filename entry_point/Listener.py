@@ -49,13 +49,6 @@ class ListenerThread(QThread):
                         level, type = self.get_level_type(event_label[0])
                         self.bar_signal[int, str].emit(level, type)
 
-            # print(self.SVM_flag.value)
-            #
-            # i +=1
-            # if not self.eventQueue.empty():
-            #     score = self.eventQueue.get()
-            #
-            #     self.back_signal.emit(score)
 
     def get_level_type(self, label):
         type = ""
