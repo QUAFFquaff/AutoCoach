@@ -3,10 +3,9 @@
 import multiprocessing
 from multiprocessing import *
 from entry_point.Event import Event
-import joblib
 import numpy as np
 from PyQt5.QtCore import pyqtSignal, QThread
-
+import joblib
 
 
 class ListenerThread(QThread):
@@ -17,9 +16,13 @@ class ListenerThread(QThread):
         self.processLock = processLock
         self.SVM_flag = SVM_flag
 
+
+
     def run(self):
         svm = joblib.load('svm.pkl')
+
         while True:
+
             if (not self.eventQueue.empty()) and self.SVM_flag.value == 0:
                 event_list = []
                 while(not self.eventQueue.empty()):

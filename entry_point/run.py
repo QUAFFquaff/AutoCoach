@@ -1,4 +1,3 @@
-from ctypes import c_bool
 from entry_point.DetectProcess2 import DetectProcess2
 from entry_point.DetectProcess import DetectProcess
 from entry_point.Event import Event
@@ -10,6 +9,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from GUI import *
 from QssLoader import *
 import pyqtgraph as pg
+import multiprocessing
+from ctypes import c_bool
 
 
 
@@ -60,13 +61,14 @@ class NextWindow(QMainWindow, Ui_Dialog):
 
 
 
-
 def run():
+
     eventQueue = multiprocessing.Queue()
     processLock = multiprocessing.Lock()
     speed = multiprocessing.Value("i", 0)
     SVM_flag = multiprocessing.Value("i", 0)
     LDA_flag = multiprocessing.Value(c_bool, True)
+
 
     app = QApplication(sys.argv)
     myWin = MyWindow()
@@ -79,13 +81,13 @@ def run():
     # timer.timeout.connect(myWin.update_flowing_score)
     # timer.start(50)
 
-    eventDetectP = DetectProcess2(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
     eventDetectP.daemon = True
     eventDetectP.start()
 
-    # listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
-    # listener.bar_signal.connect(myWin.setBar)
-    # listener.start()
+    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    listener.bar_signal.connect(myWin.setBar)
+    listener.start()
 
     myWin.setCurrentScore(45)
     myWin.setFeedBack(1,'acc')
