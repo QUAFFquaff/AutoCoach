@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
 
 
 
-        self.grey_bar = QtGui.QPixmap('icons/bars/grey_bar.png')
+        self.grey_bar = QtGui.QPixmap('icons/bars/lightgrey_bar.png')
         self.top_bar = QtGui.QPixmap('icons/bars/top_bar.png')
         self.medium_bar = QtGui.QPixmap('icons/bars/medium_bar.png')
         self.bottom_bar = QtGui.QPixmap('icons/bars/bottom_bar.png')
@@ -497,6 +497,7 @@ class Ui_MainWindow(object):
         elif level == 2:
             self.swerve_pic_coin.setPixmap(self._coin_gold2)
     def setBar(self,level:str,type:str):
+
         if type == 'acc':
             self.change_acc_bar(level)
         elif type == 'brake':
@@ -505,7 +506,43 @@ class Ui_MainWindow(object):
             self.change_turn_bar(level)
         elif type == 'swerve':
             self.change_swerve_bar(level)
-          
+    def initalface(self):
+        self.acc_bar1.setPixmap(self.grey_bar)
+        self.acc_bar2.setPixmap(self.grey_bar)
+        self.acc_bar3.setPixmap(self.grey_bar)
+        self.acc_bar1.setScaledContents(True)
+        self.acc_bar2.setScaledContents(True)
+        self.acc_bar3.setScaledContents(True)
+        self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
+        self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
+        self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
+        self.turn_bar1.setPixmap(self.grey_bar)
+        self.turn_bar2.setPixmap(self.grey_bar)
+        self.turn_bar3.setPixmap(self.grey_bar)
+        self.turn_bar1.setScaledContents(True)
+        self.turn_bar2.setScaledContents(True)
+        self.turn_bar3.setScaledContents(True)
+        self.turn_bar1.setMaximumSize(QtCore.QSize(50, 67))
+        self.turn_bar2.setMaximumSize(QtCore.QSize(50, 67))
+        self.turn_bar3.setMaximumSize(QtCore.QSize(50, 67))
+        self.swerve_bar1.setPixmap(self.grey_bar)
+        self.swerve_bar2.setPixmap(self.grey_bar)
+        self.swerve_bar3.setPixmap(self.grey_bar)
+        self.swerve_bar1.setScaledContents(True)
+        self.swerve_bar2.setScaledContents(True)
+        self.swerve_bar3.setScaledContents(True)
+        self.swerve_bar1.setMaximumSize(QtCore.QSize(50, 67))
+        self.swerve_bar2.setMaximumSize(QtCore.QSize(50, 67))
+        self.swerve_bar3.setMaximumSize(QtCore.QSize(50, 67))
+        self.brake_bar1.setPixmap(self.grey_bar)
+        self.brake_bar2.setPixmap(self.grey_bar)
+        self.brake_bar3.setPixmap(self.grey_bar)
+        self.brake_bar1.setScaledContents(True)
+        self.brake_bar2.setScaledContents(True)
+        self.brake_bar3.setScaledContents(True)
+        self.brake_bar1.setMaximumSize(QtCore.QSize(50, 67))
+        self.brake_bar2.setMaximumSize(QtCore.QSize(50, 67))
+        self.brake_bar3.setMaximumSize(QtCore.QSize(50, 67))
     def change_acc_bar(self,level):
         if level=='safe':
             self.acc_bar1.setPixmap(self.grey_bar)
@@ -519,12 +556,15 @@ class Ui_MainWindow(object):
             self.acc_bar1.setPixmap(self.top_bar)
             self.acc_bar2.setPixmap(self.medium_bar)
             self.acc_bar3.setPixmap(self.bottom_bar)
+
         self.acc_bar1.setScaledContents(True)
         self.acc_bar2.setScaledContents(True)
         self.acc_bar3.setScaledContents(True)
         self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
         self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
         self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
+
+
 
 
     def change_turn_bar(self,level):

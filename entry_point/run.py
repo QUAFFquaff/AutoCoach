@@ -128,11 +128,11 @@ def run():
     myWin.setCurrentScore(45)
     myWin.setFeedBack(1,'acc')
 
-
+    myWin.initalface()
     myWin.setBar('safe','acc')
-    myWin.setBar('mediumrisk','brake')
-    myWin.setBar('highrisk','turn')
-    myWin.setBar('safe','swerve')
+    myWin.setBar('safe','brake')
+    myWin.setBar('mediumrisk','turn')
+    #myWin.setBar('safe','swerve')
 
 
     sys.exit(app.exec_())
