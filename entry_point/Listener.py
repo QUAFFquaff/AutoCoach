@@ -17,7 +17,7 @@ class ListenerThread(QThread):
         self.eventQueue = eventQueue
         self.processLock = processLock
         self.SVM_flag = SVM_flag
-        self.ldamodel = LDAForEvent()
+        self.ldamodel = LDAForEvent("entry_point/model")
 
 
 
@@ -48,6 +48,9 @@ class ListenerThread(QThread):
                         event_label = self.get_event_label(event_list[i], score)
                         level, type = self.get_level_type(event_label[0])
                         self.bar_signal[int, str].emit(level, type)
+
+                        # emit pattern score to ui
+                        self.bar_signal[int].emit(score)
 
 
     def get_level_type(self, label):

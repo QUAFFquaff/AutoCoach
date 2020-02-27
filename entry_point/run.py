@@ -72,7 +72,6 @@ def run():
     SVM_flag = multiprocessing.Value("i", 0)
     LDA_flag = multiprocessing.Value(c_bool, True)
 
-
     app = QApplication(sys.argv)
     myWin = MyWindow()
     myWin.show()
