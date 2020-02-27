@@ -130,13 +130,16 @@ class Ui_Dialog(object):
         hour3 = [7, 8, 9, 10]
         score23 = [27,38,32,44]
 
-
+        self.plot_widget.showGrid(x = True)
         self.plot_widget.setXRange(0, 10, padding=0)
         self.plot_widget.setYRange(20, 55, padding=0)
 
         self.plot_widget.plot(hour, score1, 'r')
         self.plot_widget.plot(hour, score2, 'b')
+
+        pg.setConfigOption('background', 'k')
         pen = pg.mkPen(color=(255, 0, 0))
+        pg.setConfigOption('foreground', 'w')
         pen2 = pg.mkPen(color=(0, 255, 0))
         # self.plot_widget.plot(hour, score1, name="Sensor 1",  pen=pen)
         # self.plot_widget.plot(hour, score2, name="Sensor 2",  pen=pen2)
