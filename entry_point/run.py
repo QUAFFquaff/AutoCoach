@@ -1,41 +1,27 @@
+#<<<<<<< HEAD
+from ctypes import c_bool
+
+
+import multiprocessing
+#=======
+#>>>>>>> 41fda5d4bf62ad27bd15912625ef54de80d2ab6b
+from entry_point.DetectProcess2 import DetectProcess2
+from entry_point.DetectProcess import DetectProcess
+from entry_point.Event import Event
+from entry_point.Listener import ListenerThread
 import sys
-import os
-from PyQt5.QtCore import pyqtSignal, QObject
+from PyQt5.QtCore import pyqtSignal
 from GUINext import Ui_Dialog
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from GUI import *
 from QssLoader import *
 import pyqtgraph as pg
-import serial
-import time
 import multiprocessing
+from ctypes import c_bool
 
 
 
-def getSerial():
-    ser = serial.Serial(port='/dev/rfcomm0', baudrate=57600, timeout=0.5)
-    if not ser.is_open:
-        ser.open()
-    return ser
 
-
-class detectProcess(multiprocessing.Process):
-    def __init__(self, args=()):
-        multiprocessing.Process.__init__(self, args=())
-        print('init')
-        self.eventQueue = args[0]
-        self.processLock = args[1]
-
-    def run(self):
-        i=0
-        while True:
-            time.sleep(1)
-            self.processLock.acquire()
-            self.eventQueue.put(i)
-            self.processLock.release()
-            print('process' + str(self.eventQueue.qsize()))
-            i = i+1
-            print('running')
 
 
 class MyWindow(QMainWindow, Ui_MainWindow):
@@ -81,30 +67,15 @@ class NextWindow(QMainWindow, Ui_Dialog):
         self.setVisible(False)
 
 
-class ListenerThread(QThread):
-    back_signal = pyqtSignal(int)
-    def __init__(self, parent=None, args=()):
-        super(ListenerThread, self).__init__(parent)
-        self.eventQueue = args[0]
-
-    def run(self):
-        count_down = 15
-        while True:
-            time.sleep(1)
-            print(self.eventQueue.qsize())
-
-            if not self.eventQueue.empty():
-                score = self.eventQueue.get()
-
-                self.back_signal.emit(score)
-
-
-
-
 
 def run():
+
     eventQueue = multiprocessing.Queue()
     processLock = multiprocessing.Lock()
+    speed = multiprocessing.Value("i", 0)
+    SVM_flag = multiprocessing.Value("i", 0)
+    LDA_flag = multiprocessing.Value(c_bool, True)
+
 
     app = QApplication(sys.argv)
     myWin = MyWindow()
@@ -113,17 +84,17 @@ def run():
 
 
 
-    timer = pg.QtCore.QTimer()
-    timer.timeout.connect(myWin.update2)
-    timer.start(50)
-
-    eventDetectP = detectProcess(args=(eventQueue,processLock,))
-    eventDetectP.daemon = True
-    eventDetectP.start()
-
-    listener = ListenerThread(args=(eventQueue,))
-    listener.back_signal.connect(myWin.setCurrentScore)
-    listener.start()
+    # # timer = pg.QtCore.QTimer()
+    # # timer.timeout.connect(myWin.update_flowing_score)
+    # # timer.start(50)
+    #
+    # eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    # eventDetectP.daemon = True
+    # eventDetectP.start()
+    #
+    # listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    # listener.bar_signal.connect(myWin.setBar)
+    # listener.start()
 
     myWin.setCurrentScore(45)
     myWin.setFeedBack(1,'acc')

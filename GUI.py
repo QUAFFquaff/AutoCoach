@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
         pass
     windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
 
-    def update2(self):
+    def update_flowing_score(self):
         data3 = self.data3
         ptr3 = self.ptr3
         data3[ptr3] = np.random.normal()
@@ -52,11 +52,13 @@ class Ui_MainWindow(object):
             tmp = data3
             data3 = np.empty(data3.shape[0] * 2)
             data3[:tmp.shape[0]] = tmp
-        self.pen1.setData(data3[:ptr3])
+        self.pen_y.setData(data3[:ptr3])
         self.data3 = data3
-        if(ptr3>100):
-            self.pen1.setPen(pg.mkPen('r', width=3))
-        self.pen1.setPos(-ptr3, 0)
+        if(data3[ptr3]>100):
+            self.pen_y.setPen(pg.mkPen('r', width=3))
+        if(data3[ptr3]<100):
+            self.pen_y.setPen(pg.mkPen('y', width=3))
+        self.pen_y.setPos(-ptr3, 0)
         self.ptr3 = ptr3
 
     def setupUi(self, MainWindow):
@@ -117,17 +119,17 @@ class Ui_MainWindow(object):
         self.gridLayout_down.setHorizontalSpacing(5)
         self.gridLayout_down.setObjectName("gridLayout_down")
         # pg.setConfigOption('background', '#17191A')
-        self.widget = PlotWidget(self.down)
+        self.flowing_scores = PlotWidget(self.down)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
-        self.widget.setSizePolicy(sizePolicy)
-        self.widget.setMinimumSize(QtCore.QSize(0, 0))
-        self.widget.setMaximumSize(QtCore.QSize(300, 120))
-        self.widget.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.widget.setObjectName("widget")
-        self.gridLayout_down.addWidget(self.widget, 0, 0, 1, 1)
+        sizePolicy.setHeightForWidth(self.flowing_scores.sizePolicy().hasHeightForWidth())
+        self.flowing_scores.setSizePolicy(sizePolicy)
+        self.flowing_scores.setMinimumSize(QtCore.QSize(0, 0))
+        self.flowing_scores.setMaximumSize(QtCore.QSize(300, 120))
+        self.flowing_scores.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.flowing_scores.setObjectName("widget")
+        self.gridLayout_down.addWidget(self.flowing_scores, 0, 0, 1, 1)
 
         self.current_score = QtWidgets.QLabel(self.down)
         # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
@@ -373,32 +375,14 @@ class Ui_MainWindow(object):
         self.swerve_pic_coin.setScaledContents(True)
         self.swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
-        # # self.acc_bar_top = QtWidgets.QLabel(self.acc_bar1)
-        # self.acc_bar1.setPixmap(self.acc_bar1)
-        # self.acc_bar1.setScaledContents(True)
-        # self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
-        #
-        #
-        # self.acc_bar2 = QtWidgets.QLabel(self.acc_bar2)
-        # self.acc_bar2.setPixmap(self.acc_bar2)
-        # self.acc_bar2.setScaledContents(True)
-        # self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
-        #
-        #
-        # self.acc_bar3 = QtWidgets.QLabel(self.acc_bar3)
-        # self.acc_bar3.setPixmap(self.acc_bar3)
-        # self.acc_bar3.setScaledContents(True)
-        # self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
 
-
-        # draw graph of lines--should be deleted later
-
-        self.widget.setDownsampling(mode='peak')
-        self.widget.setClipToView(True)
-        self.widget.setXRange(0, 100)
-        self.widget.setLimits(xMax=0)
-        self.pen1 = self.widget.plot()
-        self.pen1.setPen(pg.mkPen('y', width=3))
+        # draw graph of lines
+        self.flowing_scores.setDownsampling(mode='peak')
+        self.flowing_scores.setClipToView(True)
+        self.flowing_scores.setXRange(0, 100)
+        self.flowing_scores.setLimits(xMax=0)
+        self.pen_y = self.flowing_scores.plot()
+        self.pen_y.setPen(pg.mkPen('y', width=3))
         self.data3 = np.empty(10)
         self.ptr3 = 0
 
@@ -455,7 +439,7 @@ class Ui_MainWindow(object):
 
 
 
-    def change_icons(self,level:int, type: str):
+    def change_icons(self,level:int, type:str):
         if type == 'acc':
             self.change_acc_icon(level)
         elif type == 'brake':
@@ -496,6 +480,7 @@ class Ui_MainWindow(object):
             self.swerve_pic_coin.setPixmap(self._coin_gold1)
         elif level == 2:
             self.swerve_pic_coin.setPixmap(self._coin_gold2)
+
     def setBar(self,level:str,type:str):
 
         if type == 'acc':
@@ -628,10 +613,6 @@ class Ui_MainWindow(object):
         self.brake_bar3.setMaximumSize(QtCore.QSize(50, 67))
 
 
-
-
-
-    
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

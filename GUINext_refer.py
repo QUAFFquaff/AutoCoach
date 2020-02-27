@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUINext_refer.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.2
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -15,7 +15,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(750, 500)
         self.back = QtWidgets.QFrame(Dialog)
-        self.back.setGeometry(QtCore.QRect(9, 9, 731, 481))
+        self.back.setGeometry(QtCore.QRect(9, 9, 741, 491))
         self.back.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.back.setFrameShadow(QtWidgets.QFrame.Raised)
         self.back.setObjectName("back")
@@ -25,8 +25,22 @@ class Ui_Dialog(object):
         self.canvas = QtWidgets.QWidget(self.back)
         self.canvas.setMinimumSize(QtCore.QSize(0, 0))
         self.canvas.setObjectName("canvas")
-        self.gridLayout = QtWidgets.QGridLayout(self.canvas)
-        self.gridLayout.setObjectName("gridLayout")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.canvas)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.graph_widget = QtWidgets.QWidget(self.canvas)
+        self.graph_widget.setObjectName("graph_widget")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.graph_widget)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.pie_widget = QtWidgets.QWidget(self.graph_widget)
+        self.pie_widget.setMinimumSize(QtCore.QSize(300, 200))
+        self.pie_widget.setObjectName("pie_widget")
+        self.horizontalLayout_2.addWidget(self.pie_widget)
+        spacerItem = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem)
+        self.verticalLayout.addWidget(self.graph_widget)
+        self.plot_widget = PlotWidget(self.canvas)
+        self.plot_widget.setObjectName("plot_widget")
+        self.verticalLayout.addWidget(self.plot_widget)
         self.verticalLayout_2.addWidget(self.canvas)
         self.down = QtWidgets.QWidget(self.back)
         self.down.setMinimumSize(QtCore.QSize(0, 50))
@@ -34,8 +48,8 @@ class Ui_Dialog(object):
         self.down.setObjectName("down")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.down)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem1)
         self.backBtn = QtWidgets.QPushButton(self.down)
         self.backBtn.setMaximumSize(QtCore.QSize(60, 16777215))
         self.backBtn.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -52,3 +66,4 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.backBtn.setText(_translate("Dialog", "back"))
+from pyqtgraph import PlotWidget

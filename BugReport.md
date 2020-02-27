@@ -18,5 +18,50 @@ add control function for coins.
 add init function change format
 
 ---------
+###meeting recorder
+
+>score: current or history?
+
+>formula to change the score
+
+>total points: will change or not?? then how often?
+
+
+##color and the shape for bars
+
+backgroud-->light gray
+
+black bars into gray
+
+
+how much time to show:
+
+how long to keep
+
+
+## for chart
+
+time zone?
+
+stock market tools
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
