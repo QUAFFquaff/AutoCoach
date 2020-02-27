@@ -15,3 +15,4 @@ pg.setConfigOption('foreground', 'k')
 
 ## The following plot has inverted colors
 pg.plot([1,4,2,3,5])
+pg.show()

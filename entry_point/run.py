@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #<<<<<<< HEAD
 from ctypes import c_bool
 
@@ -5,6 +6,11 @@ from ctypes import c_bool
 import multiprocessing
 #=======
 #>>>>>>> 41fda5d4bf62ad27bd15912625ef54de80d2ab6b
+=======
+from ctypes import c_bool
+
+
+>>>>>>> ad7388039dd0c03890237e13c94182d85e3de715
 from entry_point.DetectProcess2 import DetectProcess2
 from entry_point.DetectProcess import DetectProcess
 from entry_point.Event import Event
@@ -75,7 +81,6 @@ def run():
     speed = multiprocessing.Value("i", 0)
     SVM_flag = multiprocessing.Value("i", 0)
     LDA_flag = multiprocessing.Value(c_bool, True)
-
 
     app = QApplication(sys.argv)
     myWin = MyWindow()
