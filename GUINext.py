@@ -130,26 +130,30 @@ class Ui_Dialog(object):
         hour3 = [7, 8, 9, 10]
         score23 = [27,38,32,44]
 
+        bonder = [0,100,100,0,0]
+        b_hour_g = [5,5,7.5,7.5,5]
+
         self.plot_widget.showGrid(x = True)
         self.plot_widget.setXRange(0, 10, padding=0)
         self.plot_widget.setYRange(20, 55, padding=0)
 
         self.plot_widget.plot(hour, score1, 'r')
-        self.plot_widget.plot(hour, score2, 'b')
 
         pg.setConfigOption('background', 'k')
         pen = pg.mkPen(color=(255, 0, 0))
         pg.setConfigOption('foreground', 'w')
         pen2 = pg.mkPen(color=(0, 255, 0))
+        pen_b = pg.mkPen(color=(0, 255, 0),width=5)
         # self.plot_widget.plot(hour, score1, name="Sensor 1",  pen=pen)
         # self.plot_widget.plot(hour, score2, name="Sensor 2",  pen=pen2)
         self.plot_widget.plot(hour1, score21, name="Sensor 1",  pen=pen)
         self.plot_widget.plot(hour3, score23, name="Sensor 1",  pen=pen)
         self.plot_widget.plot(hour2, score22, name="Sensor 2",  pen=pen2)
+        self.plot_widget.plot(b_hour_g,bonder, name="Sensor 2",  pen=pen_b)
 
-    def plot(self, x, y, plotname, color):
-        pen = pg.mkPen(color=color)
-        self.graphWidget.plot(x, y, name=plotname, pen=pen, symbol='+', symbolSize=30, symbolBrush=(color))
+    # def plot(self, x, y, plotname, color):
+    #     pen = pg.mkPen(color=color)
+    #     self.graphWidget.plot(x, y, name=plotname, pen=pen, symbol='+', symbolSize=30, symbolBrush=(color))
 
     def mousePressEvent(self,event):
         if event.button() == QtCore.Qt.LeftButton:

@@ -17,7 +17,7 @@ class ListenerThread(QThread):
         self.eventQueue = eventQueue
         self.processLock = processLock
         self.SVM_flag = SVM_flag
-        self.ldamodel = LDAForEvent()
+        self.ldamodel = LDAForEvent("entry_point/model")
 
 
 
