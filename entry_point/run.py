@@ -1,6 +1,7 @@
+
 from ctypes import c_bool
-
-
+import multiprocessing
+from ctypes import c_bool
 from entry_point.DetectProcess2 import DetectProcess2
 from entry_point.DetectProcess import DetectProcess
 from entry_point.Event import Event
@@ -79,9 +80,10 @@ def run():
 
 
 
-    # timer = pg.QtCore.QTimer()
-    # timer.timeout.connect(myWin.update_flowing_score)
-    # timer.start(50)
+    timer = pg.QtCore.QTimer()
+    timer.timeout.connect(myWin.update_flowing_score)
+
+    timer.start(400)
 
     eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
     eventDetectP.daemon = True
@@ -94,11 +96,14 @@ def run():
     myWin.setCurrentScore(45)
     myWin.setFeedBack(1,'acc')
 
-
+    myWin.initalface('acc')
+    myWin.initalface('turn')
+    myWin.initalface('swerve')
+    myWin.initalface('brake')
     myWin.setBar('safe','acc')
-    myWin.setBar('mediumrisk','brake')
-    myWin.setBar('highrisk','turn')
-    myWin.setBar('safe','swerve')
+    myWin.setBar('safe','brake')
+    myWin.setBar('mediumrisk','turn')
+    #myWin.setBar('safe','swerve')
 
 
     sys.exit(app.exec_())
