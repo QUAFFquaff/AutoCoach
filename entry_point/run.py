@@ -1,16 +1,7 @@
-<<<<<<< HEAD
-#<<<<<<< HEAD
+
 from ctypes import c_bool
-
-
 import multiprocessing
-#=======
-#>>>>>>> 41fda5d4bf62ad27bd15912625ef54de80d2ab6b
-=======
 from ctypes import c_bool
-
-
->>>>>>> ad7388039dd0c03890237e13c94182d85e3de715
 from entry_point.DetectProcess2 import DetectProcess2
 from entry_point.DetectProcess import DetectProcess
 from entry_point.Event import Event
@@ -89,22 +80,25 @@ def run():
 
 
 
-    # # timer = pg.QtCore.QTimer()
-    # # timer.timeout.connect(myWin.update_flowing_score)
-    # # timer.start(50)
-    #
-    # eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
-    # eventDetectP.daemon = True
-    # eventDetectP.start()
-    #
-    # listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
-    # listener.bar_signal.connect(myWin.setBar)
-    # listener.start()
+    timer = pg.QtCore.QTimer()
+    timer.timeout.connect(myWin.update_flowing_score)
+    timer.start(400)
+
+    eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    eventDetectP.daemon = True
+    eventDetectP.start()
+
+    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    listener.bar_signal.connect(myWin.setBar)
+    listener.start()
 
     myWin.setCurrentScore(45)
     myWin.setFeedBack(1,'acc')
 
-    myWin.initalface()
+    myWin.initalface('acc')
+    myWin.initalface('turn')
+    myWin.initalface('swerve')
+    myWin.initalface('brake')
     myWin.setBar('safe','acc')
     myWin.setBar('safe','brake')
     myWin.setBar('mediumrisk','turn')

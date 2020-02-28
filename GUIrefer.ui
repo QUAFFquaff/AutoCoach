@@ -265,7 +265,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>0</height>
+          <height>300</height>
          </size>
         </property>
         <property name="maximumSize">
@@ -509,7 +509,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QWidget" name="Brake_level" native="true">
+          <widget class="QWidget" name="brake_level" native="true">
            <property name="maximumSize">
             <size>
              <width>80</width>
@@ -519,7 +519,7 @@
           </widget>
          </item>
          <item row="2" column="5">
-          <widget class="QWidget" name="Turn_level" native="true">
+          <widget class="QWidget" name="turn_level" native="true">
            <property name="maximumSize">
             <size>
              <width>80</width>
@@ -596,7 +596,7 @@
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QWidget" name="Acc_level" native="true">
+          <widget class="QWidget" name="acc_level" native="true">
            <property name="maximumSize">
             <size>
              <width>80</width>
@@ -606,7 +606,7 @@
           </widget>
          </item>
          <item row="2" column="6">
-          <widget class="QWidget" name="Swerve_level" native="true">
+          <widget class="QWidget" name="swerve_level" native="true">
            <property name="maximumSize">
             <size>
              <width>80</width>

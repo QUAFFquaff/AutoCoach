@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUIrefer.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.1
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -112,7 +112,7 @@ class Ui_MainWindow(object):
         self.gridLayout_down.addWidget(self.TotalScore, 0, 2, 1, 1)
         self.Menu.addWidget(self.down, 5, 0, 1, 1)
         self.up = QtWidgets.QWidget(self.centralwidget)
-        self.up.setMinimumSize(QtCore.QSize(0, 0))
+        self.up.setMinimumSize(QtCore.QSize(0, 300))
         self.up.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.up.setObjectName("up")
         self.gridLayout_up = QtWidgets.QGridLayout(self.up)
@@ -190,14 +190,14 @@ class Ui_MainWindow(object):
         self.brake_icon.setObjectName("brake_icon")
         self.verticalLayout_break.addWidget(self.brake_icon, 0, QtCore.Qt.AlignHCenter)
         self.gridLayout_up.addWidget(self.brake_bar, 1, 1, 1, 1)
-        self.Brake_level = QtWidgets.QWidget(self.up)
-        self.Brake_level.setMaximumSize(QtCore.QSize(80, 35))
-        self.Brake_level.setObjectName("Brake_level")
-        self.gridLayout_up.addWidget(self.Brake_level, 2, 1, 1, 1)
-        self.Turn_level = QtWidgets.QWidget(self.up)
-        self.Turn_level.setMaximumSize(QtCore.QSize(80, 35))
-        self.Turn_level.setObjectName("Turn_level")
-        self.gridLayout_up.addWidget(self.Turn_level, 2, 5, 1, 1)
+        self.brake_level = QtWidgets.QWidget(self.up)
+        self.brake_level.setMaximumSize(QtCore.QSize(80, 35))
+        self.brake_level.setObjectName("brake_level")
+        self.gridLayout_up.addWidget(self.brake_level, 2, 1, 1, 1)
+        self.turn_level = QtWidgets.QWidget(self.up)
+        self.turn_level.setMaximumSize(QtCore.QSize(80, 35))
+        self.turn_level.setObjectName("turn_level")
+        self.gridLayout_up.addWidget(self.turn_level, 2, 5, 1, 1)
         self.turn_bar = QtWidgets.QWidget(self.up)
         self.turn_bar.setMaximumSize(QtCore.QSize(80, 220))
         self.turn_bar.setObjectName("turn_bar")
@@ -224,14 +224,14 @@ class Ui_MainWindow(object):
         self.turn_icon.setObjectName("turn_icon")
         self.verticalLayout_turn.addWidget(self.turn_icon, 0, QtCore.Qt.AlignHCenter)
         self.gridLayout_up.addWidget(self.turn_bar, 1, 5, 1, 1)
-        self.Acc_level = QtWidgets.QWidget(self.up)
-        self.Acc_level.setMaximumSize(QtCore.QSize(80, 35))
-        self.Acc_level.setObjectName("Acc_level")
-        self.gridLayout_up.addWidget(self.Acc_level, 2, 0, 1, 1)
-        self.Swerve_level = QtWidgets.QWidget(self.up)
-        self.Swerve_level.setMaximumSize(QtCore.QSize(80, 35))
-        self.Swerve_level.setObjectName("Swerve_level")
-        self.gridLayout_up.addWidget(self.Swerve_level, 2, 6, 1, 1)
+        self.acc_level = QtWidgets.QWidget(self.up)
+        self.acc_level.setMaximumSize(QtCore.QSize(80, 35))
+        self.acc_level.setObjectName("acc_level")
+        self.gridLayout_up.addWidget(self.acc_level, 2, 0, 1, 1)
+        self.swerve_level = QtWidgets.QWidget(self.up)
+        self.swerve_level.setMaximumSize(QtCore.QSize(80, 35))
+        self.swerve_level.setObjectName("swerve_level")
+        self.gridLayout_up.addWidget(self.swerve_level, 2, 6, 1, 1)
         self.acc_bar = QtWidgets.QWidget(self.up)
         self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
         self.acc_bar.setObjectName("acc_bar")
