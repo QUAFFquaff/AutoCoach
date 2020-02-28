@@ -141,7 +141,7 @@ class Ui_Dialog(object):
         # pen = pg.mkPen(color=(255, 0, 0))
         # pg.setConfigOption('foreground', 'w')
         # pen2 = pg.mkPen(color=(0, 255, 0))
-        # pen_b = pg.mkPen(color=(0, 255, 0),width=5)
+        pen_b = pg.mkPen(color=(0, 255, 0),width=5)
         # pen_r = pg.mkPen(color=(255, 0, 0),width=5)
         # self.plot_widget.plot(hour1, score21, name="Sensor 1",  pen=pen)
         # self.plot_widget.plot(hour3, score23, name="Sensor 1",  pen=pen)
@@ -162,6 +162,7 @@ class Ui_Dialog(object):
 
         self.plot.showGrid(x=True, y=True, alpha=0.5)
         self.plot.plot(x=hour, y=score1, pen='r', name='score', symbolBrush=(255, 0, 0), )
+        self.plot.plot(x=b_hour_g, y=bonder, pen='g', name='score',  )
         self.plot.setLabel(axis='left', text='score')
         self.plot.setLabel(axis='bottom', text='date')
         self.vLine = pg.InfiniteLine(angle=90, movable=False, )
@@ -192,16 +193,6 @@ class Ui_Dialog(object):
         y_min = self.data[:,3].min()
         print(y_min)
         y_max = self.data[:,4].max()
-        # self.axis_dict = dict(enumerate(self.data.index))
-        # # 州的先生 zmister.com
-        # axis_1 = [(i, list(self.data.index)[i]) for i in range(0, len(self.data.index), 3)]  # 获取日期值
-        # axis_2 = [(i, list(self.data.index)[i]) for i in range(0, len(self.data.index), 5)]
-        # axis_3 = [(i, list(self.data.index)[i]) for i in range(0, len(self.data.index), 8)]
-        # axis_4 = [(i, list(self.data.index)[i]) for i in range(0, len(self.data.index), 10)]
-        # axis_5 = [(i, list(self.data.index)[i]) for i in range(0, len(self.data.index), 30)]
-        # stringaxis = pg.AxisItem(orientation='bottom')  # 创建一个刻度项
-        # stringaxis.setTicks([axis_5, axis_4, axis_3, axis_2, axis_1, self.axis_dict.items()])  # 设置X轴刻度值
-        # self.k_plt.getAxis("bottom").setTicks([axis_5, axis_4, axis_3, axis_2, axis_1, self.axis_dict.items()])
 
         self.k_plt.plotItem.clear() # 清空绘图部件中的项
         # item = self.picture  # 生成蜡烛图数据
@@ -223,22 +214,6 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.backBtn.setText(_translate("Dialog", "back"))
-
-#-----------------------------------------------------------------
-    # def generatePicture(self):
-    #     self.picture = QtGui.QPicture() # 实例化一个绘图设备
-    #     p = QtGui.QPainter(self.picture) # 在picture上实例化QPainter用于绘图
-    #     p.setPen(pg.mkPen('w')) # 设置画笔颜色
-    #     w = (self.data[1][0] - self.data[0][0]) / 3.
-    #     for (t, open, close, min, max) in self.data:
-    #         print(t, open, close, min, max)
-    #         p.drawLine(QtCore.QPointF(t, min), QtCore.QPointF(t, max)) # 绘制线条
-    #         if open > close: # 开盘价大于收盘价
-    #             p.setBrush(pg.mkBrush('g')) # 设置画刷颜色为绿
-    #         else:
-    #             p.setBrush(pg.mkBrush('r')) # 设置画刷颜色为红
-    #         p.drawRect(QtCore.QRectF(t - w, open, w * 2, close - open)) # 绘制箱子
-    #     p.end()
 
 
 
