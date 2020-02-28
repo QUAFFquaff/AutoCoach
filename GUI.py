@@ -407,12 +407,18 @@ class Ui_MainWindow(object):
         self.ptr3 = 0
 
         #draw acc icon
-        # self.acc_icon.setPixmap(self.acc_icon_png)
-        # self.acc_icon.setScaledContents(True)
-        # self.acc_icon.setMaximumSize(QtCore.QSize(20, 20))
-        # self.turn_icon.setPixmap(self.acc_icon_png)
-        # self.turn_icon.setScaledContents(True)
-        # self.turn_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.acc_icon.setPixmap(self.acc_icon_png)
+        self.acc_icon.setScaledContents(True)
+        self.acc_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.turn_icon.setPixmap(self.turn_icon_png)
+        self.turn_icon.setScaledContents(True)
+        self.turn_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.brake_icon.setPixmap(self.brake_icon_png)
+        self.brake_icon.setScaledContents(True)
+        self.brake_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.swerve_icon.setPixmap(self.swerve_icon_png)
+        self.swerve_icon.setScaledContents(True)
+        self.swerve_icon.setMaximumSize(QtCore.QSize(20, 20))
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -533,9 +539,7 @@ class Ui_MainWindow(object):
             self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
             self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
             self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
-            self.acc_icon.setPixmap(self.acc_icon_png)
-            self.acc_icon.setScaledContents(True)
-            self.acc_icon.setMaximumSize(QtCore.QSize(20, 20))
+
         elif type=='turn':
             self.turn_bar1.setPixmap(self.grey_bar)
             self.turn_bar2.setPixmap(self.grey_bar)
@@ -546,9 +550,7 @@ class Ui_MainWindow(object):
             self.turn_bar1.setMaximumSize(QtCore.QSize(50, 67))
             self.turn_bar2.setMaximumSize(QtCore.QSize(50, 67))
             self.turn_bar3.setMaximumSize(QtCore.QSize(50, 67))
-            self.turn_icon.setPixmap(self.turn_icon_png)
-            self.turn_icon.setScaledContents(True)
-            self.turn_icon.setMaximumSize(QtCore.QSize(20, 20))
+
         elif type=='swerve':
             self.swerve_bar1.setPixmap(self.grey_bar)
             self.swerve_bar2.setPixmap(self.grey_bar)
@@ -559,9 +561,7 @@ class Ui_MainWindow(object):
             self.swerve_bar1.setMaximumSize(QtCore.QSize(50, 67))
             self.swerve_bar2.setMaximumSize(QtCore.QSize(50, 67))
             self.swerve_bar3.setMaximumSize(QtCore.QSize(50, 67))
-            self.swerve_icon.setPixmap(self.swerve_icon_png)
-            self.swerve_icon.setScaledContents(True)
-            self.swerve_icon.setMaximumSize(QtCore.QSize(20, 20))
+
         elif type=='brake':
             self.brake_bar1.setPixmap(self.grey_bar)
             self.brake_bar2.setPixmap(self.grey_bar)
@@ -572,9 +572,7 @@ class Ui_MainWindow(object):
             self.brake_bar1.setMaximumSize(QtCore.QSize(50, 67))
             self.brake_bar2.setMaximumSize(QtCore.QSize(50, 67))
             self.brake_bar3.setMaximumSize(QtCore.QSize(50, 67))
-            self.brake_icon.setPixmap(self.brake_icon_png)
-            self.brake_icon.setScaledContents(True)
-            self.brake_icon.setMaximumSize(QtCore.QSize(20, 20))
+
     def change_acc_bar(self,level):
         if level=='safe':
             self.acc_bar1.setPixmap(self.grey_bar)
