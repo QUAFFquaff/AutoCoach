@@ -12,6 +12,7 @@ import joblib
 
 class ListenerThread(QThread):
     bar_signal = pyqtSignal([int, str])
+    score_signal = pyqtSignal([int])
     def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_flag: Value):
         QThread.__init__(self)
         self.eventQueue = eventQueue
@@ -36,8 +37,11 @@ class ListenerThread(QThread):
                     if event_list[i] is not None:
                         vect = np.array(event_list[i].getValue())
                         vect = vect.astype(np.float64)
-                        # calculate the 17 features  To-Do
-                        vect = self.calcData(vect)
+                        # function name: calculate_feature()
+                        # calculate the 17 features
+                        # @param: vect[timestamp, speed, acc_x, acc_y, acc_z, gyo_x, gyo_y, gyo_z, axis(0 or 1)]
+                        # To-Do
+                        vect = self.calculate_feature(vect)
                         # nomaliz the 17 features
                         vect = self.nomalization(vect)
 
@@ -47,6 +51,7 @@ class ListenerThread(QThread):
 
                         event_label = self.get_event_label(event_list[i], score)
                         level, type = self.get_level_type(event_label[0])
+
                         self.bar_signal[int, str].emit(level, type)
 
                         # emit pattern score to ui
