@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GUIrefer.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(750, 500)
+        MainWindow.resize(750, 528)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -64,7 +64,7 @@ class Ui_MainWindow(object):
         self.Menu.setObjectName("Menu")
         self.down = QtWidgets.QWidget(self.centralwidget)
         self.down.setMinimumSize(QtCore.QSize(0, 130))
-        self.down.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.down.setMaximumSize(QtCore.QSize(16777215, 130))
         self.down.setObjectName("down")
         self.gridLayout_down = QtWidgets.QGridLayout(self.down)
         self.gridLayout_down.setHorizontalSpacing(5)
@@ -117,10 +117,12 @@ class Ui_MainWindow(object):
         self.up.setObjectName("up")
         self.gridLayout_up = QtWidgets.QGridLayout(self.up)
         self.gridLayout_up.setContentsMargins(-1, 0, -1, 0)
-        self.gridLayout_up.setSpacing(0)
+        self.gridLayout_up.setHorizontalSpacing(0)
+        self.gridLayout_up.setVerticalSpacing(15)
         self.gridLayout_up.setObjectName("gridLayout_up")
         self.swerve_bar = QtWidgets.QWidget(self.up)
-        self.swerve_bar.setMaximumSize(QtCore.QSize(80, 220))
+        self.swerve_bar.setMinimumSize(QtCore.QSize(80, 220))
+        self.swerve_bar.setMaximumSize(QtCore.QSize(80, 250))
         self.swerve_bar.setObjectName("swerve_bar")
         self.verticalLayout_swerve = QtWidgets.QVBoxLayout(self.swerve_bar)
         self.verticalLayout_swerve.setContentsMargins(15, 0, 15, 0)
@@ -166,7 +168,8 @@ class Ui_MainWindow(object):
         self.backCircleLayout.addWidget(self.feedback, 0, 0, 1, 1)
         self.gridLayout_up.addWidget(self.backCircle, 1, 3, 2, 1)
         self.brake_bar = QtWidgets.QWidget(self.up)
-        self.brake_bar.setMaximumSize(QtCore.QSize(80, 220))
+        self.brake_bar.setMinimumSize(QtCore.QSize(80, 220))
+        self.brake_bar.setMaximumSize(QtCore.QSize(80, 250))
         self.brake_bar.setObjectName("brake_bar")
         self.verticalLayout_break = QtWidgets.QVBoxLayout(self.brake_bar)
         self.verticalLayout_break.setContentsMargins(15, 0, 15, 0)
@@ -187,6 +190,7 @@ class Ui_MainWindow(object):
         self.brake_icon = QtWidgets.QLabel(self.brake_bar)
         self.brake_icon.setMinimumSize(QtCore.QSize(20, 20))
         self.brake_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.brake_icon.setText("")
         self.brake_icon.setObjectName("brake_icon")
         self.verticalLayout_break.addWidget(self.brake_icon, 0, QtCore.Qt.AlignHCenter)
         self.gridLayout_up.addWidget(self.brake_bar, 1, 1, 1, 1)
@@ -199,7 +203,8 @@ class Ui_MainWindow(object):
         self.turn_level.setObjectName("turn_level")
         self.gridLayout_up.addWidget(self.turn_level, 2, 5, 1, 1)
         self.turn_bar = QtWidgets.QWidget(self.up)
-        self.turn_bar.setMaximumSize(QtCore.QSize(80, 220))
+        self.turn_bar.setMinimumSize(QtCore.QSize(80, 220))
+        self.turn_bar.setMaximumSize(QtCore.QSize(80, 250))
         self.turn_bar.setObjectName("turn_bar")
         self.verticalLayout_turn = QtWidgets.QVBoxLayout(self.turn_bar)
         self.verticalLayout_turn.setContentsMargins(15, 0, 15, 0)
@@ -233,7 +238,8 @@ class Ui_MainWindow(object):
         self.swerve_level.setObjectName("swerve_level")
         self.gridLayout_up.addWidget(self.swerve_level, 2, 6, 1, 1)
         self.acc_bar = QtWidgets.QWidget(self.up)
-        self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
+        self.acc_bar.setMinimumSize(QtCore.QSize(80, 220))
+        self.acc_bar.setMaximumSize(QtCore.QSize(80, 250))
         self.acc_bar.setObjectName("acc_bar")
         self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.acc_bar)
         self.verticalLayout_acc.setContentsMargins(15, 0, 15, 0)
@@ -272,7 +278,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.Menu)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 750, 18))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 750, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -288,5 +294,4 @@ class Ui_MainWindow(object):
         self.next_page.setText(_translate("MainWindow", "Next Page"))
         self.CurrentScore.setText(_translate("MainWindow", "86"))
         self.TotalScore.setText(_translate("MainWindow", "1240 points"))
-        self.brake_icon.setText(_translate("MainWindow", "l"))
 from pyqtgraph import PlotWidget

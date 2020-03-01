@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>750</width>
-    <height>500</height>
+    <height>528</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -156,7 +156,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>16777215</height>
+          <height>130</height>
          </size>
         </property>
         <layout class="QGridLayout" name="gridLayout_down">
@@ -281,15 +281,24 @@
          <property name="bottomMargin">
           <number>0</number>
          </property>
-         <property name="spacing">
+         <property name="horizontalSpacing">
           <number>0</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>15</number>
          </property>
          <item row="1" column="6">
           <widget class="QWidget" name="swerve_bar" native="true">
-           <property name="maximumSize">
+           <property name="minimumSize">
             <size>
              <width>80</width>
              <height>220</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>250</height>
             </size>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_swerve">
@@ -440,10 +449,16 @@
          </item>
          <item row="1" column="1">
           <widget class="QWidget" name="brake_bar" native="true">
-           <property name="maximumSize">
+           <property name="minimumSize">
             <size>
              <width>80</width>
              <height>220</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>250</height>
             </size>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_break">
@@ -501,7 +516,7 @@
                </size>
               </property>
               <property name="text">
-               <string>l</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -530,10 +545,16 @@
          </item>
          <item row="1" column="5">
           <widget class="QWidget" name="turn_bar" native="true">
-           <property name="maximumSize">
+           <property name="minimumSize">
             <size>
              <width>80</width>
              <height>220</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>250</height>
             </size>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_turn">
@@ -617,10 +638,16 @@
          </item>
          <item row="1" column="0">
           <widget class="QWidget" name="acc_bar" native="true">
-           <property name="maximumSize">
+           <property name="minimumSize">
             <size>
              <width>80</width>
              <height>220</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>250</height>
             </size>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_acc">
@@ -720,7 +747,7 @@
      <x>0</x>
      <y>0</y>
      <width>750</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
