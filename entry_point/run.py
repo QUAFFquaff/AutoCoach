@@ -102,8 +102,8 @@ def run():
     myWin.initalface('brake')
     myWin.setBar('normal','acc')
     myWin.setBar('safe','brake')
-    myWin.setBar('mediumrisk','turn')
-    myWin.setBar('normal','swerve')
+    myWin.setBar('highrisk','turn')
+    myWin.setBar('mediumrisk','swerve')
 
 
     sys.exit(app.exec_())

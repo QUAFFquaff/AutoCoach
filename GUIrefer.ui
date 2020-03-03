@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>500</height>
+    <width>692</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -260,6 +260,19 @@
         </layout>
        </widget>
       </item>
+      <item row="2" column="0">
+       <widget class="Line" name="line">
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>10</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
        <widget class="QWidget" name="up" native="true">
         <property name="minimumSize">
@@ -281,165 +294,20 @@
          <property name="bottomMargin">
           <number>0</number>
          </property>
-         <property name="spacing">
+         <property name="horizontalSpacing">
+          <number>10</number>
+         </property>
+         <property name="verticalSpacing">
           <number>0</number>
          </property>
-         <item row="1" column="6">
-          <widget class="QWidget" name="swerve_bar" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>220</height>
-            </size>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_swerve">
-            <property name="spacing">
-             <number>0</number>
-            </property>
-            <property name="leftMargin">
-             <number>15</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>15</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="swerve_bar1">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="swerve_bar2">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="swerve_bar3">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item alignment="Qt::AlignHCenter">
-             <widget class="QLabel" name="swerve_icon">
-              <property name="minimumSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <spacer name="Spacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>15</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="4">
-          <spacer name="Spacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>15</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="3" rowspan="2">
-          <widget class="QWidget" name="backCircle" native="true">
+         <item row="1" column="1" alignment="Qt::AlignHCenter|Qt::AlignTop">
+          <widget class="QWidget" name="brake_bar" native="true">
            <property name="minimumSize">
             <size>
              <width>50</width>
-             <height>50</height>
+             <height>200</height>
             </size>
            </property>
-           <property name="maximumSize">
-            <size>
-             <width>320</width>
-             <height>320</height>
-            </size>
-           </property>
-           <layout class="QGridLayout" name="backCircleLayout">
-            <property name="leftMargin">
-             <number>60</number>
-            </property>
-            <property name="topMargin">
-             <number>50</number>
-            </property>
-            <property name="rightMargin">
-             <number>60</number>
-            </property>
-            <property name="bottomMargin">
-             <number>50</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QToolButton" name="feedback">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>320</width>
-                <height>320</height>
-               </size>
-              </property>
-              <property name="focusPolicy">
-               <enum>Qt::TabFocus</enum>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QWidget" name="brake_bar" native="true">
            <property name="maximumSize">
             <size>
              <width>80</width>
@@ -462,8 +330,14 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignTop">
              <widget class="QLabel" name="brake_bar1">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -472,15 +346,27 @@
               </property>
              </widget>
             </item>
-            <item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignTop">
              <widget class="QLabel" name="brake_bar2">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
-            <item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignTop">
              <widget class="QLabel" name="brake_bar3">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -501,24 +387,69 @@
                </size>
               </property>
               <property name="text">
-               <string>l</string>
+               <string/>
               </property>
              </widget>
             </item>
            </layout>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QWidget" name="brake_level" native="true">
-           <property name="maximumSize">
+         <item row="1" column="2" rowspan="2" alignment="Qt::AlignHCenter">
+          <widget class="QWidget" name="backCircle" native="true">
+           <property name="minimumSize">
             <size>
-             <width>80</width>
-             <height>35</height>
+             <width>280</width>
+             <height>300</height>
             </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>320</width>
+             <height>320</height>
+            </size>
+           </property>
+           <layout class="QGridLayout" name="backCircleLayout">
+            <property name="leftMargin">
+             <number>60</number>
+            </property>
+            <property name="topMargin">
+             <number>50</number>
+            </property>
+            <property name="rightMargin">
+             <number>60</number>
+            </property>
+            <property name="bottomMargin">
+             <number>50</number>
+            </property>
+            <item row="0" column="0" alignment="Qt::AlignHCenter">
+             <widget class="QToolButton" name="feedback">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>320</width>
+                <height>320</height>
+               </size>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::TabFocus</enum>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
-         <item row="2" column="5">
+         <item row="2" column="3">
           <widget class="QWidget" name="turn_level" native="true">
            <property name="maximumSize">
             <size>
@@ -526,73 +457,6 @@
              <height>35</height>
             </size>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="5">
-          <widget class="QWidget" name="turn_bar" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>220</height>
-            </size>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_turn">
-            <property name="spacing">
-             <number>0</number>
-            </property>
-            <property name="leftMargin">
-             <number>15</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>15</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="turn_bar1">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="turn_bar2">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="turn_bar3">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item alignment="Qt::AlignHCenter">
-             <widget class="QLabel" name="turn_icon">
-              <property name="minimumSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
           </widget>
          </item>
          <item row="2" column="0">
@@ -605,18 +469,14 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="6">
-          <widget class="QWidget" name="swerve_level" native="true">
-           <property name="maximumSize">
+         <item row="1" column="0" alignment="Qt::AlignTop">
+          <widget class="QWidget" name="acc_bar" native="true">
+           <property name="minimumSize">
             <size>
-             <width>80</width>
-             <height>35</height>
+             <width>50</width>
+             <height>200</height>
             </size>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QWidget" name="acc_bar" native="true">
            <property name="maximumSize">
             <size>
              <width>80</width>
@@ -639,22 +499,40 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignTop">
              <widget class="QLabel" name="acc_bar1">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
-            <item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignTop">
              <widget class="QLabel" name="acc_bar2">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
-            <item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignTop">
              <widget class="QLabel" name="acc_bar3">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -694,20 +572,209 @@
            </layout>
           </widget>
          </item>
+         <item row="1" column="4">
+          <widget class="QWidget" name="swerve_bar" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>220</height>
+            </size>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_swerve">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>15</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>15</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="swerve_bar1">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="swerve_bar2">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="swerve_bar3">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="swerve_icon">
+              <property name="minimumSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QWidget" name="brake_level" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>35</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QWidget" name="turn_bar" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>220</height>
+            </size>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_turn">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>15</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>15</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="turn_bar1">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="turn_bar2">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="turn_bar3">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>47</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="turn_icon">
+              <property name="minimumSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QWidget" name="swerve_level" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>35</height>
+            </size>
+           </property>
+          </widget>
+         </item>
         </layout>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="Line" name="line">
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="lineWidth">
-         <number>10</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
        </widget>
       </item>
      </layout>
@@ -719,7 +786,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>750</width>
+     <width>692</width>
      <height>18</height>
     </rect>
    </property>
