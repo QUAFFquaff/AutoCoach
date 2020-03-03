@@ -39,7 +39,7 @@ class ListenerThread(QThread):
                         vect = vect.astype(np.float64)
                         # function name: calculate_feature()
                         # calculate the 17 features
-                        # @param: vect[timestamp, speed, acc_x, acc_y, acc_z, gyo_x, gyo_y, gyo_z, axis(0 or 1)]
+                        # @param: vect[timestamp, speed, acc_y, acc_x, acc_z, gyo_x, gyo_y, gyo_z, axis(0 or 1)]
                         # To-Do
                         vect = self.calculate_feature(vect)
                         # nomaliz the 17 features
@@ -57,6 +57,48 @@ class ListenerThread(QThread):
                         # emit pattern score to ui
                         self.bar_signal[int].emit(score)
 
+    def calculate_feature(self,vect):
+        maxAX = max(vect[:, 4])
+        maxAY = max(vect[:, 3])
+        minAX = min(vect[:, 4])
+        minAY = min(vect[:, 3])
+        maxAccX = max(abs(vect[:, 4]))
+        maxAccY = max(abs(vect[:, 3]))
+        datalist = vect[:, 3].tolist()
+        # print(datalist.index(max(datalist)))
+        fraction = datalist.index(max(datalist)) / len(datalist)
+
+        rangeAX = maxAX - minAX
+        rangeAY = maxAY - minAY
+        startAY = vect[0, 3]
+        endAY = vect[-1, 3]
+        varAX = np.std(vect[:, 4])
+        varAY = np.std(vect[:, 3])
+        varOX = np.std(vect[:, 7])
+        varOY = np.std(vect[:, 6])
+        meanAX = np.mean(vect[:, 4])
+        meanAY = np.mean(vect[:, 3])
+        meanOX = np.mean(vect[:, 7])
+        meanOY = np.mean(vect[:, 6])
+        maxOX = max(abs(vect[:, 7]))
+        maxOY = max(abs(vect[:, 6]))
+        maxOri = max(maxOX, maxOY)
+        t = (vect[-1, 1] - vect[0, 1]) / 1000
+        meanSP = np.mean(vect[:, 2])
+        differenceSP = vect[-1, 2] - vect[0, 2]
+        accelerate = differenceSP / t
+        varSP = np.std(vect[:, 2])
+        StartEndAccx = vect[0, 4] + vect[-1, 4]
+        StartEndAccy = vect[0, 3] + vect[-1, 3]
+        axis = 0
+        if (vect[0, -1] < 6):
+            axis = 0
+        else:
+            axis = 1
+
+        # return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY,differenceSP,meanSP, StartEndAccx,StartEndAccy, t, axis, data[0, -1]] #99% 86%
+        return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY, differenceSP,
+                meanSP, StartEndAccx, StartEndAccy, t, axis]  # 99% 86%
 
     def get_level_type(self, label):
         type = ""
