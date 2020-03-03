@@ -51,6 +51,10 @@ QWidget#bar{
     border-top-left-radius:10px;
 }
 
+#up{
+    border:1px solid darkGray;
+}
+
 /*style for up area*/
 QWidget#up{
     color:#A7BDBA;

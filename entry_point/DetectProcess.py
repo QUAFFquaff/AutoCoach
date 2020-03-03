@@ -93,8 +93,8 @@ class DetectProcess(multiprocessing.Process):
                     acc_z_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'z'))
 
                     # detect event
-                    event_x = self.detect_x_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
-                    event_y = self.detect_y_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
+                    event_x = self.detect_x_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, 0, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
+                    event_y = self.detect_y_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, 1, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
 
                     if event_x is not None:
                         event_x.filter(b, a)
@@ -193,16 +193,16 @@ class DetectProcess(multiprocessing.Process):
             std_container = []
             for i in range(self.std_x_queue.qsize()):
                 temp = self.std_x_queue.get()
-                std_container.append(temp[9])
+                std_container.append(temp[10])
                 if i >=self.std_window - 1:
                     std_x_array.append(np.std(std_container[i-self.std_window+1:i+1], ddof=1))
-                    raw_x_array.append(temp[0:8])
+                    raw_x_array.append(temp[0:9])
                 self.std_x_queue.put(temp)
             self.std_x_queue.get()  #delete current node
             start_index = std_x_array.index(min(std_x_array))
 
             std_x = std_x_array[-1]
-            acc_x = data[9]
+            acc_x = data[10]
             timestamp = data[0]
 
             if acc_x > 0.12 and max(std_x_array) > 0.02 and self.acc_threshold_num == 0:  # if detect a new event
@@ -225,7 +225,7 @@ class DetectProcess(multiprocessing.Process):
                 self.acc_threshold_num = 0
                 if self.acc_threshold_num > min_event_length:
                     self.acc_event.set_endtime(timestamp)
-                    self.acc_event.add_value(data[0:8])
+                    self.acc_event.add_value(data[0:9])
                     return self.acc_event
                 else:
                     #  acquire process lock to add SVM_flag
@@ -252,16 +252,16 @@ class DetectProcess(multiprocessing.Process):
                 self.brake_fault = fault_num
                 if self.brake_threshold_num > min_event_length:
                     self.brake_event.set_endtime(timestamp)
-                    self.brake_event.add_value(data[0:8])
+                    self.brake_event.add_value(data[0:9])
                     return self.brake_event
                 else:
                     #  acquire process lock to add SVM_flag
                     self.change_event_num(-1)  # minus 1 current event num
 
             if acc_flag:
-                self.acc_event.add_value(data[0:8])
+                self.acc_event.add_value(data[0:9])
             if brake_flag:
-                self.brake_event.add_value(data[0:8])
+                self.brake_event.add_value(data[0:9])
 
     def detect_y_event(self, data) -> Event:
         std_y_array = []
@@ -276,10 +276,10 @@ class DetectProcess(multiprocessing.Process):
             std_container = []
             for i in range(self.std_y_queue.qsize()):
                 temp = self.std_y_queue.get()
-                std_container.append(temp[8])
+                std_container.append(temp[9])
                 if i >= self.std_window - 1:
                     std_y_array.append(np.std(std_container[i - self.std_window + 1:i + 1], ddof=1))
-                    raw_y_array.append(temp[0:8])
+                    raw_y_array.append(temp[0:9])
                 self.std_y_queue.put(temp)
             self.std_y_queue.get()  # delete current node
             start_index = std_y_array.index(min(std_y_array))
@@ -310,7 +310,7 @@ class DetectProcess(multiprocessing.Process):
                     self.y_negative = True
                     if min_length < self.turn_threshold_num < max_length:
                         self.turn_event.set_endtime(timestamp)
-                        self.turn_event.add_value(data[0:8])
+                        self.turn_event.add_value(data[0:9])
                         return self.turn_event
                     else:
                         self.change_event_num(-1)
@@ -337,13 +337,13 @@ class DetectProcess(multiprocessing.Process):
                     self.y_positive = True
                     if min_length < self.turn_threshold_num < max_length:
                         self.turn_event.set_endtime(timestamp)
-                        self.turn_event.add_value(data[0:8])
+                        self.turn_event.add_value(data[0:9])
                         return self.turn_event
                     else:
                         self.change_event_num(-1)
 
             if flag:
-                self.turn_event.add_value(data[0:8])
+                self.turn_event.add_value(data[0:9])
 
 
 
