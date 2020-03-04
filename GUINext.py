@@ -190,7 +190,7 @@ class Ui_Dialog(object):
 
         # data = [[0, 10, 20, 9, 23], [1, 10, 20, 9, 23], [2, 10, 20, 9, 23], [3, 10, 20, 9, 23]]
         y_min = self.data[:,3].min()
-        print(y_min)
+        # print(y_min)
         y_max = self.data[:,4].max()
 
         self.k_plt.plotItem.clear() # 清空绘图部件中的项
@@ -230,7 +230,7 @@ class CandlestickItem(pg.GraphicsObject):
         p.setPen(pg.mkPen('w')) # 设置画笔颜色
         w = (self.data[1][0] - self.data[0][0]) / 3.
         for (t, open, close, min, max) in self.data:
-            print(t, open, close, min, max)
+            # print(t, open, close, min, max)
             p.drawLine(QtCore.QPointF(t, min), QtCore.QPointF(t, max)) # 绘制线条
             if open > close: # 开盘价大于收盘价
                 p.setBrush(pg.mkBrush('g')) # 设置画刷颜色为绿
