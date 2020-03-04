@@ -58,45 +58,35 @@ class ListenerThread(QThread):
                         self.bar_signal[int].emit(score)
 
     def calculate_feature(self,vect):
-        maxAX = max(vect[:, 4])
-        maxAY = max(vect[:, 3])
-        minAX = min(vect[:, 4])
-        minAY = min(vect[:, 3])
-        maxAccX = max(abs(vect[:, 4]))
-        maxAccY = max(abs(vect[:, 3]))
+        maxAX = max(vect[:, 3])
+        maxAY = max(vect[:, 2])
+        minAX = min(vect[:, 3])
+        minAY = min(vect[:, 2])
+        maxAccX = max(abs(vect[:, 3]))
+        maxAccY = max(abs(vect[:, 2]))
         datalist = vect[:, 3].tolist()
         # print(datalist.index(max(datalist)))
         fraction = datalist.index(max(datalist)) / len(datalist)
 
         rangeAX = maxAX - minAX
         rangeAY = maxAY - minAY
-        startAY = vect[0, 3]
-        endAY = vect[-1, 3]
-        varAX = np.std(vect[:, 4])
-        varAY = np.std(vect[:, 3])
-        varOX = np.std(vect[:, 7])
-        varOY = np.std(vect[:, 6])
-        meanAX = np.mean(vect[:, 4])
-        meanAY = np.mean(vect[:, 3])
-        meanOX = np.mean(vect[:, 7])
-        meanOY = np.mean(vect[:, 6])
-        maxOX = max(abs(vect[:, 7]))
+
+        varAX = np.std(vect[:, 3])
+        varAY = np.std(vect[:, 2])
+        meanAX = np.mean(vect[:, 3])
+        meanAY = np.mean(vect[:, 2])
+        meanOX = np.mean(vect[:, 5])
+        maxOX = max(abs(vect[:, 5]))
         maxOY = max(abs(vect[:, 6]))
         maxOri = max(maxOX, maxOY)
         t = (vect[-1, 1] - vect[0, 1]) / 1000
-        meanSP = np.mean(vect[:, 2])
-        differenceSP = vect[-1, 2] - vect[0, 2]
+        meanSP = np.mean(vect[:, 1])
+        differenceSP = vect[-1, 1] - vect[0, 1]
         accelerate = differenceSP / t
-        varSP = np.std(vect[:, 2])
-        StartEndAccx = vect[0, 4] + vect[-1, 4]
-        StartEndAccy = vect[0, 3] + vect[-1, 3]
+        varSP = np.std(vect[:, 1])
+        StartEndAccx = vect[0, 3] + vect[-1, 3]
+        StartEndAccy = vect[0, 2] + vect[-1, 2]
         axis = 0
-        if (vect[0, -1] < 6):
-            axis = 0
-        else:
-            axis = 1
-
-        # return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY,differenceSP,meanSP, StartEndAccx,StartEndAccy, t, axis, data[0, -1]] #99% 86%
         return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY, differenceSP,
                 meanSP, StartEndAccx, StartEndAccy, t, axis]  # 99% 86%
 
