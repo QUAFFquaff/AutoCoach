@@ -91,19 +91,19 @@ def run():
 
     listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
     listener.bar_signal.connect(myWin.setBar)
+    listener.score_signal.connect(myWin.setCurrentScore)
     listener.start()
 
-    myWin.setCurrentScore(45)
     myWin.setFeedBack(1,'acc')
 
     myWin.initalface('acc')
     myWin.initalface('turn')
     myWin.initalface('swerve')
     myWin.initalface('brake')
-    myWin.setBar('normal','acc')
-    myWin.setBar('safe','brake')
-    myWin.setBar('highrisk','turn')
-    myWin.setBar('mediumrisk','swerve')
+    myWin.setBar(-1,'acc')
+    myWin.setBar(0, 'brake')
+    myWin.setBar(1, 'turn')
+    myWin.setBar(2, 'swerve')
 
 
     sys.exit(app.exec_())

@@ -55,7 +55,7 @@ class ListenerThread(QThread):
                         self.bar_signal[int, str].emit(level, type)
 
                         # emit pattern score to ui
-                        self.bar_signal[int].emit(score)
+                        self.score_signal[int].emit(score)
 
     def calculate_feature(self,vect):
         maxAX = max(vect[:, 3])
@@ -86,7 +86,7 @@ class ListenerThread(QThread):
         varSP = np.std(vect[:, 1])
         StartEndAccx = vect[0, 3] + vect[-1, 3]
         StartEndAccy = vect[0, 2] + vect[-1, 2]
-        axis = 0
+        axis = vect[0, -1]
         return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY, differenceSP,
                 meanSP, StartEndAccx, StartEndAccy, t, axis]  # 99% 86%
 
