@@ -45,6 +45,11 @@ time zone?
 
 stock market tools
 
+## for low pass filter
+
+it needs another package to import signal from scipy
+sudo apt-get install libatlas-base-dev
+
  
 
 
