@@ -25,9 +25,9 @@ class Ui_MainWindow(object):
 
 
         self.grey_bar = QtGui.QPixmap('icons/bars/lightgrey_bar.png')
-        self.top_bar = QtGui.QPixmap('icons/bars/top_bar.png')
-        self.medium_bar = QtGui.QPixmap('icons/bars/medium_bar.png')
-        self.bottom_bar = QtGui.QPixmap('icons/bars/bottom_bar.png')
+        self.top_bar = QtGui.QPixmap('icons/bars/red_bar.png')
+        self.medium_bar = QtGui.QPixmap('icons/bars/yellow_bar.png')
+        self.bottom_bar = QtGui.QPixmap('icons/bars/green_bar.png')
 
 
 
@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
         self.Menu.setObjectName("Menu")
         self.down = QtWidgets.QWidget(self.centralwidget)
         self.down.setMinimumSize(QtCore.QSize(0, 130))
-        self.down.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.down.setMaximumSize(QtCore.QSize(16777215, 130))
         self.down.setObjectName("down")
         self.gridLayout_down = QtWidgets.QGridLayout(self.down)
         self.gridLayout_down.setHorizontalSpacing(5)
@@ -185,32 +185,40 @@ class Ui_MainWindow(object):
         self.gridLayout_up = QtWidgets.QGridLayout(self.up)
         self.gridLayout_up.setContentsMargins(-1, 0, -1, 0)
         self.gridLayout_up.setHorizontalSpacing(0)
-        self.gridLayout_up.setVerticalSpacing(0)
-        self.gridLayout_up.setSpacing(0)
+        self.gridLayout_up.setVerticalSpacing(20)
         self.gridLayout_up.setObjectName("gridLayout_up")
 
         self.swerve_bar = QtWidgets.QWidget(self.up)
+#<<<<<<< HEAD
+        self.swerve_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.swerve_bar.setMaximumSize(QtCore.QSize(80, 220))
+#=======
+        self.swerve_bar.setMinimumSize(QtCore.QSize(80, 220))
+        self.swerve_bar.setMaximumSize(QtCore.QSize(80, 250))
+#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.swerve_bar.setObjectName("swerve_bar")
         self.verticalLayout_swerve = QtWidgets.QVBoxLayout(self.swerve_bar)
         self.verticalLayout_swerve.setContentsMargins(15, 0, 15, 0)
         self.verticalLayout_swerve.setSpacing(0)
         self.verticalLayout_swerve.setObjectName("verticalLayout_swerve")
         self.swerve_bar1 = QtWidgets.QLabel(self.swerve_bar)
+        self.swerve_bar1.setMinimumSize(QtCore.QSize(40, 47))
         self.swerve_bar1.setText("")
         self.swerve_bar1.setObjectName("swerve_bar1")
-        self.verticalLayout_swerve.addWidget(self.swerve_bar1)
+        self.verticalLayout_swerve.addWidget(self.swerve_bar1, 0, QtCore.Qt.AlignHCenter)
         self.swerve_bar2 = QtWidgets.QLabel(self.swerve_bar)
+        self.swerve_bar2.setMinimumSize(QtCore.QSize(40, 47))
         self.swerve_bar2.setText("")
         self.swerve_bar2.setObjectName("swerve_bar2")
-        self.verticalLayout_swerve.addWidget(self.swerve_bar2)
+        self.verticalLayout_swerve.addWidget(self.swerve_bar2, 0, QtCore.Qt.AlignHCenter)
         self.swerve_bar3 = QtWidgets.QLabel(self.swerve_bar)
+        self.swerve_bar3.setMinimumSize(QtCore.QSize(40, 47))
         self.swerve_bar3.setText("")
         self.swerve_bar3.setObjectName("swerve_bar3")
-        self.verticalLayout_swerve.addWidget(self.swerve_bar3)
+        self.verticalLayout_swerve.addWidget(self.swerve_bar3, 0, QtCore.Qt.AlignHCenter)
         self.swerve_icon = QtWidgets.QLabel(self.swerve_bar)
-        self.swerve_icon.setMinimumSize(QtCore.QSize(20, 20))
-        self.swerve_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.swerve_icon.setMinimumSize(QtCore.QSize(25, 35))
+        self.swerve_icon.setMaximumSize(QtCore.QSize(25, 35))
         self.swerve_icon.setText("")
         self.swerve_icon.setObjectName("swerve_icon")
         self.verticalLayout_swerve.addWidget(self.swerve_icon, 0, QtCore.Qt.AlignHCenter)
@@ -221,27 +229,41 @@ class Ui_MainWindow(object):
         self.gridLayout_up.addItem(spacerItem2, 1, 4, 1, 1)
 
         self.brake_bar = QtWidgets.QWidget(self.up)
+#<<<<<<< HEAD
+        self.brake_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.brake_bar.setMaximumSize(QtCore.QSize(80, 220))
+#=======
+        self.brake_bar.setMinimumSize(QtCore.QSize(80, 220))
+        self.brake_bar.setMaximumSize(QtCore.QSize(80, 250))
+#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.brake_bar.setObjectName("brake_bar")
         self.verticalLayout_break = QtWidgets.QVBoxLayout(self.brake_bar)
         self.verticalLayout_break.setContentsMargins(15, 0, 15, 0)
         self.verticalLayout_break.setSpacing(0)
         self.verticalLayout_break.setObjectName("verticalLayout_break")
         self.brake_bar1 = QtWidgets.QLabel(self.brake_bar)
+        self.brake_bar1.setMinimumSize(QtCore.QSize(40, 47))
         self.brake_bar1.setText("")
         self.brake_bar1.setObjectName("brake_bar1")
-        self.verticalLayout_break.addWidget(self.brake_bar1)
+        self.verticalLayout_break.addWidget(self.brake_bar1, 0, QtCore.Qt.AlignHCenter)
         self.brake_bar2 = QtWidgets.QLabel(self.brake_bar)
+        self.brake_bar2.setMinimumSize(QtCore.QSize(40, 47))
         self.brake_bar2.setText("")
         self.brake_bar2.setObjectName("brake_bar2")
-        self.verticalLayout_break.addWidget(self.brake_bar2)
+        self.verticalLayout_break.addWidget(self.brake_bar2, 0, QtCore.Qt.AlignHCenter)
         self.brake_bar3 = QtWidgets.QLabel(self.brake_bar)
+        self.brake_bar3.setMinimumSize(QtCore.QSize(40, 47))
         self.brake_bar3.setText("")
         self.brake_bar3.setObjectName("brake_bar3")
-        self.verticalLayout_break.addWidget(self.brake_bar3)
+        self.verticalLayout_break.addWidget(self.brake_bar3, 0, QtCore.Qt.AlignHCenter)
         self.brake_icon = QtWidgets.QLabel(self.brake_bar)
-        self.brake_icon.setMinimumSize(QtCore.QSize(20, 20))
-        self.brake_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.brake_icon.setMinimumSize(QtCore.QSize(25, 35))
+        self.brake_icon.setMaximumSize(QtCore.QSize(25, 35))
+#=======
+        # self.brake_icon.setMinimumSize(QtCore.QSize(25, 20))
+        # self.brake_icon.setMaximumSize(QtCore.QSize(20, 20))
+#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
+        self.brake_icon.setText("")
         self.brake_icon.setObjectName("brake_icon")
         self.verticalLayout_break.addWidget(self.brake_icon, 0, QtCore.Qt.AlignHCenter)
         self.gridLayout_up.addWidget(self.brake_bar, 1, 1, 1, 1)
@@ -254,27 +276,35 @@ class Ui_MainWindow(object):
         self.turn_level.setObjectName("turn_level")
         self.gridLayout_up.addWidget(self.turn_level, 2, 5, 1, 1)
         self.turn_bar = QtWidgets.QWidget(self.up)
+#<<<<<<< HEAD
+        self.turn_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.turn_bar.setMaximumSize(QtCore.QSize(80, 220))
+        self.turn_bar.setMinimumSize(QtCore.QSize(80, 220))
+        self.turn_bar.setMaximumSize(QtCore.QSize(80, 250))
+#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.turn_bar.setObjectName("turn_bar")
         self.verticalLayout_turn = QtWidgets.QVBoxLayout(self.turn_bar)
         self.verticalLayout_turn.setContentsMargins(15, 0, 15, 0)
         self.verticalLayout_turn.setSpacing(0)
         self.verticalLayout_turn.setObjectName("verticalLayout_turn")
         self.turn_bar1 = QtWidgets.QLabel(self.turn_bar)
+        self.turn_bar1.setMinimumSize(QtCore.QSize(40, 47))
         self.turn_bar1.setText("")
         self.turn_bar1.setObjectName("turn_bar1")
-        self.verticalLayout_turn.addWidget(self.turn_bar1)
+        self.verticalLayout_turn.addWidget(self.turn_bar1, 0, QtCore.Qt.AlignHCenter)
         self.turn_bar2 = QtWidgets.QLabel(self.turn_bar)
+        self.turn_bar2.setMinimumSize(QtCore.QSize(40, 47))
         self.turn_bar2.setText("")
         self.turn_bar2.setObjectName("turn_bar2")
-        self.verticalLayout_turn.addWidget(self.turn_bar2)
+        self.verticalLayout_turn.addWidget(self.turn_bar2, 0, QtCore.Qt.AlignHCenter)
         self.turn_bar3 = QtWidgets.QLabel(self.turn_bar)
+        self.turn_bar3.setMinimumSize(QtCore.QSize(40, 47))
         self.turn_bar3.setText("")
         self.turn_bar3.setObjectName("turn_bar3")
-        self.verticalLayout_turn.addWidget(self.turn_bar3)
+        self.verticalLayout_turn.addWidget(self.turn_bar3, 0, QtCore.Qt.AlignHCenter)
         self.turn_icon = QtWidgets.QLabel(self.turn_bar)
-        self.turn_icon.setMinimumSize(QtCore.QSize(20, 20))
-        self.turn_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.turn_icon.setMinimumSize(QtCore.QSize(25, 35))
+        self.turn_icon.setMaximumSize(QtCore.QSize(25, 35))
         self.turn_icon.setText("")
         self.turn_icon.setObjectName("turn_icon")
         self.verticalLayout_turn.addWidget(self.turn_icon, 0, QtCore.Qt.AlignHCenter)
@@ -288,27 +318,34 @@ class Ui_MainWindow(object):
         self.swerve_level.setObjectName("swerve_level")
         self.gridLayout_up.addWidget(self.swerve_level, 2, 6, 1, 1)
         self.acc_bar = QtWidgets.QWidget(self.up)
+        self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
+        self.acc_bar.setMinimumSize(QtCore.QSize(80, 220))
+        self.acc_bar.setMaximumSize(QtCore.QSize(80, 250))
+#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.acc_bar.setObjectName("acc_bar")
         self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.acc_bar)
         self.verticalLayout_acc.setContentsMargins(15, 0, 15, 0)
         self.verticalLayout_acc.setSpacing(0)
         self.verticalLayout_acc.setObjectName("verticalLayout_acc")
         self.acc_bar1 = QtWidgets.QLabel(self.acc_bar)
+        self.acc_bar1.setMinimumSize(QtCore.QSize(40, 47))
         self.acc_bar1.setText("")
         self.acc_bar1.setObjectName("acc_bar1")
-        self.verticalLayout_acc.addWidget(self.acc_bar1)
+        self.verticalLayout_acc.addWidget(self.acc_bar1, 0, QtCore.Qt.AlignHCenter)
         self.acc_bar2 = QtWidgets.QLabel(self.acc_bar)
+        self.acc_bar2.setMinimumSize(QtCore.QSize(40, 47))
         self.acc_bar2.setText("")
         self.acc_bar2.setObjectName("acc_bar2")
-        self.verticalLayout_acc.addWidget(self.acc_bar2)
+        self.verticalLayout_acc.addWidget(self.acc_bar2, 0, QtCore.Qt.AlignHCenter)
         self.acc_bar3 = QtWidgets.QLabel(self.acc_bar)
+        self.acc_bar3.setMinimumSize(QtCore.QSize(40, 47))
         self.acc_bar3.setText("")
         self.acc_bar3.setObjectName("acc_bar3")
-        self.verticalLayout_acc.addWidget(self.acc_bar3)
+        self.verticalLayout_acc.addWidget(self.acc_bar3, 0, QtCore.Qt.AlignHCenter)
         self.acc_icon = QtWidgets.QLabel(self.acc_bar)
-        self.acc_icon.setMinimumSize(QtCore.QSize(20, 20))
-        self.acc_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.acc_icon.setMinimumSize(QtCore.QSize(25, 35))
+        self.acc_icon.setMaximumSize(QtCore.QSize(25, 35))
         self.acc_icon.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.acc_icon.setAutoFillBackground(False)
         self.acc_icon.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -323,12 +360,12 @@ class Ui_MainWindow(object):
 
         self.backCircle = PlotWidget(self.up)
         self.backCircle.setMinimumSize(QtCore.QSize(50, 50))
-        self.backCircle.setMaximumSize(QtCore.QSize(300, 320))
+        self.backCircle.setMaximumSize(QtCore.QSize(249, 249))
         self.backCircle.setObjectName("backCircle")
         self.backCircle.getPlotItem().hideAxis('bottom')
         self.backCircle.getPlotItem().hideAxis('left')
         self.backCircleLayout = QtWidgets.QGridLayout(self.backCircle)
-        self.backCircleLayout.setContentsMargins(60, 50, 60, 50)
+        self.backCircleLayout.setContentsMargins(58, 50, 60, 50)
         self.backCircleLayout.setObjectName("backCircleLayout")
 
         self.feedback = QtWidgets.QToolButton(self.backCircle)
@@ -420,6 +457,7 @@ class Ui_MainWindow(object):
         self.swerve_icon.setScaledContents(True)
         self.swerve_icon.setMaximumSize(QtCore.QSize(20, 20))
 
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -469,10 +507,7 @@ class Ui_MainWindow(object):
             self.feedback.setIcon(self.swerve_svg)
             self.feedback.setIconSize(QtCore.QSize(150, 150))
 
-
-
-
-    def change_icons(self,level:int, type:str):
+    def change_icons(self, level: int, type: str):
         if type == 'acc':
             self.change_acc_icon(level)
         elif type == 'brake':
@@ -514,8 +549,7 @@ class Ui_MainWindow(object):
         elif level == 2:
             self.swerve_pic_coin.setPixmap(self._coin_gold2)
 
-    def setBar(self,level:str,type:str):
-
+    def setBar(self, level: int, type: str):
         if type == 'acc':
             self.initalface(type)
             self.change_acc_bar(level)
@@ -528,61 +562,62 @@ class Ui_MainWindow(object):
         elif type == 'swerve':
             self.initalface(type)
             self.change_swerve_bar(level)
-    def initalface(self,type):
-        if type=='acc':
+
+    def initalface(self, type: str):
+        if type == 'acc':
             self.acc_bar1.setPixmap(self.grey_bar)
             self.acc_bar2.setPixmap(self.grey_bar)
             self.acc_bar3.setPixmap(self.grey_bar)
             self.acc_bar1.setScaledContents(True)
             self.acc_bar2.setScaledContents(True)
             self.acc_bar3.setScaledContents(True)
-            self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
-            self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
-            self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
+            self.acc_bar1.setMaximumSize(QtCore.QSize(40, 47))
+            self.acc_bar2.setMaximumSize(QtCore.QSize(40, 47))
+            self.acc_bar3.setMaximumSize(QtCore.QSize(40, 47))
 
-        elif type=='turn':
+        elif type == 'turn':
             self.turn_bar1.setPixmap(self.grey_bar)
             self.turn_bar2.setPixmap(self.grey_bar)
             self.turn_bar3.setPixmap(self.grey_bar)
             self.turn_bar1.setScaledContents(True)
             self.turn_bar2.setScaledContents(True)
             self.turn_bar3.setScaledContents(True)
-            self.turn_bar1.setMaximumSize(QtCore.QSize(50, 67))
-            self.turn_bar2.setMaximumSize(QtCore.QSize(50, 67))
-            self.turn_bar3.setMaximumSize(QtCore.QSize(50, 67))
+            self.turn_bar1.setMaximumSize(QtCore.QSize(40, 47))
+            self.turn_bar2.setMaximumSize(QtCore.QSize(40, 47))
+            self.turn_bar3.setMaximumSize(QtCore.QSize(40, 47))
 
-        elif type=='swerve':
+        elif type == 'swerve':
             self.swerve_bar1.setPixmap(self.grey_bar)
             self.swerve_bar2.setPixmap(self.grey_bar)
             self.swerve_bar3.setPixmap(self.grey_bar)
             self.swerve_bar1.setScaledContents(True)
             self.swerve_bar2.setScaledContents(True)
             self.swerve_bar3.setScaledContents(True)
-            self.swerve_bar1.setMaximumSize(QtCore.QSize(50, 67))
-            self.swerve_bar2.setMaximumSize(QtCore.QSize(50, 67))
-            self.swerve_bar3.setMaximumSize(QtCore.QSize(50, 67))
+            self.swerve_bar1.setMaximumSize(QtCore.QSize(40, 47))
+            self.swerve_bar2.setMaximumSize(QtCore.QSize(40, 47))
+            self.swerve_bar3.setMaximumSize(QtCore.QSize(40, 47))
 
-        elif type=='brake':
+        elif type == 'brake':
             self.brake_bar1.setPixmap(self.grey_bar)
             self.brake_bar2.setPixmap(self.grey_bar)
             self.brake_bar3.setPixmap(self.grey_bar)
             self.brake_bar1.setScaledContents(True)
             self.brake_bar2.setScaledContents(True)
             self.brake_bar3.setScaledContents(True)
-            self.brake_bar1.setMaximumSize(QtCore.QSize(50, 67))
-            self.brake_bar2.setMaximumSize(QtCore.QSize(50, 67))
-            self.brake_bar3.setMaximumSize(QtCore.QSize(50, 67))
+            self.brake_bar1.setMaximumSize(QtCore.QSize(40, 47))
+            self.brake_bar2.setMaximumSize(QtCore.QSize(40, 47))
+            self.brake_bar3.setMaximumSize(QtCore.QSize(40, 47))
 
-    def change_acc_bar(self,level):
-        if level=='safe':
+    def change_acc_bar(self, level: int):
+        if level == 0:
             self.acc_bar1.setPixmap(self.grey_bar)
             self.acc_bar2.setPixmap(self.grey_bar)
             self.acc_bar3.setPixmap(self.bottom_bar)
-        elif level=='mediumrisk':
+        elif level == 1:
             self.acc_bar1.setPixmap(self.grey_bar)
             self.acc_bar2.setPixmap(self.medium_bar)
             self.acc_bar3.setPixmap(self.bottom_bar)
-        elif level=='highrisk':
+        elif level == 2:
             self.acc_bar1.setPixmap(self.top_bar)
             self.acc_bar2.setPixmap(self.medium_bar)
             self.acc_bar3.setPixmap(self.bottom_bar)
@@ -590,72 +625,71 @@ class Ui_MainWindow(object):
         self.acc_bar1.setScaledContents(True)
         self.acc_bar2.setScaledContents(True)
         self.acc_bar3.setScaledContents(True)
-        self.acc_bar1.setMaximumSize(QtCore.QSize(50, 67))
-        self.acc_bar2.setMaximumSize(QtCore.QSize(50, 67))
-        self.acc_bar3.setMaximumSize(QtCore.QSize(50, 67))
+        self.acc_bar1.setMaximumSize(QtCore.QSize(40, 47))
+        self.acc_bar2.setMaximumSize(QtCore.QSize(40, 47))
+        self.acc_bar3.setMaximumSize(QtCore.QSize(40, 47))
 
 
 
-
-    def change_turn_bar(self,level):
-        if level == 'safe':
+    def change_turn_bar(self, level: int):
+        if level == 0:
             self.turn_bar1.setPixmap(self.grey_bar)
             self.turn_bar2.setPixmap(self.grey_bar)
             self.turn_bar3.setPixmap(self.bottom_bar)
-        elif level == 'mediumrisk':
+        elif level == 1:
             self.turn_bar1.setPixmap(self.grey_bar)
             self.turn_bar2.setPixmap(self.medium_bar)
             self.turn_bar3.setPixmap(self.bottom_bar)
-        elif level == 'highrisk':
+        elif level == 2:
             self.turn_bar1.setPixmap(self.top_bar)
             self.turn_bar2.setPixmap(self.medium_bar)
             self.turn_bar3.setPixmap(self.bottom_bar)
         self.turn_bar1.setScaledContents(True)
         self.turn_bar2.setScaledContents(True)
         self.turn_bar3.setScaledContents(True)
-        self.turn_bar1.setMaximumSize(QtCore.QSize(50, 67))
-        self.turn_bar2.setMaximumSize(QtCore.QSize(50, 67))
-        self.turn_bar3.setMaximumSize(QtCore.QSize(50, 67))
+        self.turn_bar1.setMaximumSize(QtCore.QSize(40, 47))
+        self.turn_bar2.setMaximumSize(QtCore.QSize(40, 47))
+        self.turn_bar3.setMaximumSize(QtCore.QSize(40, 47))
 
-    def change_swerve_bar(self,level):
-        if level == 'safe':
+    def change_swerve_bar(self, level:int):
+        if level == 0:
             self.swerve_bar1.setPixmap(self.grey_bar)
             self.swerve_bar2.setPixmap(self.grey_bar)
             self.swerve_bar3.setPixmap(self.bottom_bar)
-        elif level == 'mediumrisk':
+        elif level == 1:
             self.swerve_bar1.setPixmap(self.grey_bar)
             self.swerve_bar2.setPixmap(self.medium_bar)
             self.swerve_bar3.setPixmap(self.bottom_bar)
-        elif level == 'highrisk':
+        elif level == 2:
             self.swerve_bar1.setPixmap(self.top_bar)
             self.swerve_bar2.setPixmap(self.medium_bar)
             self.swerve_bar3.setPixmap(self.bottom_bar)
         self.swerve_bar1.setScaledContents(True)
         self.swerve_bar2.setScaledContents(True)
         self.swerve_bar3.setScaledContents(True)
-        self.swerve_bar1.setMaximumSize(QtCore.QSize(50, 67))
-        self.swerve_bar2.setMaximumSize(QtCore.QSize(50, 67))
-        self.swerve_bar3.setMaximumSize(QtCore.QSize(50, 67))
+        self.swerve_bar1.setMaximumSize(QtCore.QSize(40, 47))
+        self.swerve_bar2.setMaximumSize(QtCore.QSize(40, 47))
+        self.swerve_bar3.setMaximumSize(QtCore.QSize(40, 47))
 
-    def change_brake_bar(self,level,):
-        if level == 'safe':
+    def change_brake_bar(self, level: int):
+        if level == 0:
             self.brake_bar1.setPixmap(self.grey_bar)
             self.brake_bar2.setPixmap(self.grey_bar)
             self.brake_bar3.setPixmap(self.bottom_bar)
-        elif level == 'mediumrisk':
+        elif level == 1:
             self.brake_bar1.setPixmap(self.grey_bar)
             self.brake_bar2.setPixmap(self.medium_bar)
             self.brake_bar3.setPixmap(self.bottom_bar)
-        elif level == 'highrisk':
+        elif level == 2:
             self.brake_bar1.setPixmap(self.top_bar)
             self.brake_bar2.setPixmap(self.medium_bar)
             self.brake_bar3.setPixmap(self.bottom_bar)
         self.brake_bar1.setScaledContents(True)
         self.brake_bar2.setScaledContents(True)
         self.brake_bar3.setScaledContents(True)
-        self.brake_bar1.setMaximumSize(QtCore.QSize(50, 67))
-        self.brake_bar2.setMaximumSize(QtCore.QSize(50, 67))
-        self.brake_bar3.setMaximumSize(QtCore.QSize(50, 67))
+        self.brake_bar1.setMaximumSize(QtCore.QSize(40, 47))
+        self.brake_bar2.setMaximumSize(QtCore.QSize(40, 47))
+        self.brake_bar3.setMaximumSize(QtCore.QSize(40, 47))
 
 
 

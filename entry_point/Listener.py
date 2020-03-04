@@ -12,7 +12,7 @@ import joblib
 
 class ListenerThread(QThread):
     bar_signal = pyqtSignal([int, str])
-    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_buffer:list):
+    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_buffer: Value):
         QThread.__init__(self)
         self.eventQueue = eventQueue
         self.processLock = processLock
@@ -35,8 +35,11 @@ class ListenerThread(QThread):
                     if event_list[i] is not None:
                         vect = np.array(event_list[i].getValue())
                         vect = vect.astype(np.float64)
-                        # calculate the 17 features  To-Do
-                        vect = self.calcData(vect)
+                        # function name: calculate_feature()
+                        # calculate the 17 features
+                        # @param: vect[timestamp, speed, acc_y, acc_x, acc_z, gyo_x, gyo_y, gyo_z, axis(0 or 1)]
+                        # To-Do
+                        vect = self.calculate_feature(vect)
                         # nomaliz the 17 features
                         vect = self.nomalization(vect)
 
@@ -46,13 +49,51 @@ class ListenerThread(QThread):
 
                         event_label = self.get_event_label(event_list[i], score)
                         level, type = self.get_level_type(event_label[0])
+
                         self.bar_signal[int, str].emit(level, type)
 
                         # emit pattern score to ui
+<<<<<<< HEAD
                         self.bar_signal[int].emit(score)
                         self.buffer.append(type)
 
 
+=======
+                        self.score_signal[int].emit(score)
+
+    def calculate_feature(self,vect):
+        maxAX = max(vect[:, 3])
+        maxAY = max(vect[:, 2])
+        minAX = min(vect[:, 3])
+        minAY = min(vect[:, 2])
+        maxAccX = max(abs(vect[:, 3]))
+        maxAccY = max(abs(vect[:, 2]))
+        datalist = vect[:, 3].tolist()
+        # print(datalist.index(max(datalist)))
+        fraction = datalist.index(max(datalist)) / len(datalist)
+
+        rangeAX = maxAX - minAX
+        rangeAY = maxAY - minAY
+
+        varAX = np.std(vect[:, 3])
+        varAY = np.std(vect[:, 2])
+        meanAX = np.mean(vect[:, 3])
+        meanAY = np.mean(vect[:, 2])
+        meanOX = np.mean(vect[:, 5])
+        maxOX = max(abs(vect[:, 5]))
+        maxOY = max(abs(vect[:, 6]))
+        maxOri = max(maxOX, maxOY)
+        t = (vect[-1, 1] - vect[0, 1]) / 1000
+        meanSP = np.mean(vect[:, 1])
+        differenceSP = vect[-1, 1] - vect[0, 1]
+        accelerate = differenceSP / t
+        varSP = np.std(vect[:, 1])
+        StartEndAccx = vect[0, 3] + vect[-1, 3]
+        StartEndAccy = vect[0, 2] + vect[-1, 2]
+        axis = vect[0, -1]
+        return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY, differenceSP,
+                meanSP, StartEndAccx, StartEndAccy, t, axis]  # 99% 86%
+>>>>>>> 032d3190ae021784b995d3e26b43b1251627ed6f
 
     def get_level_type(self, label):
         type = ""

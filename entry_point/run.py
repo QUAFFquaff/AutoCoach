@@ -92,23 +92,27 @@ def run():
 
     listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, buffer)
     listener.bar_signal.connect(myWin.setBar)
+    listener.score_signal.connect(myWin.setCurrentScore)
     listener.start()
 
+<<<<<<< HEAD
     lda_controller = LDAController(LDA_buffer)
     lda_controller.score_signal.connect(myWin.setCurrentScore)
     lda_controller.start()
 
     myWin.setCurrentScore(45)
+=======
+>>>>>>> 032d3190ae021784b995d3e26b43b1251627ed6f
     myWin.setFeedBack(1,'acc')
 
     myWin.initalface('acc')
     myWin.initalface('turn')
     myWin.initalface('swerve')
     myWin.initalface('brake')
-    myWin.setBar('safe','acc')
-    myWin.setBar('safe','brake')
-    myWin.setBar('mediumrisk','turn')
-    #myWin.setBar('safe','swerve')
+    myWin.setBar(-1,'acc')
+    myWin.setBar(0, 'brake')
+    myWin.setBar(1, 'turn')
+    myWin.setBar(2, 'swerve')
 
 
     sys.exit(app.exec_())
