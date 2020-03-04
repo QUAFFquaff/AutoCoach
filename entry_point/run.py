@@ -76,13 +76,15 @@ def run():
     app = QApplication(sys.argv)
     myWin = MyWindow()
     myWin.show()
-
+    myWin.initalface('acc')
+    myWin.initalface('turn')
+    myWin.initalface('swerve')
+    myWin.initalface('brake')
 
 
 
     timer = pg.QtCore.QTimer()
     timer.timeout.connect(myWin.update_flowing_score)
-
     timer.start(400)
 
     eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
@@ -94,16 +96,11 @@ def run():
     listener.score_signal.connect(myWin.setCurrentScore)
     listener.start()
 
-    myWin.setFeedBack(1,'acc')
-
-    myWin.initalface('acc')
-    myWin.initalface('turn')
-    myWin.initalface('swerve')
-    myWin.initalface('brake')
-    myWin.setBar(-1,'acc')
-    myWin.setBar(0, 'brake')
-    myWin.setBar(1, 'turn')
-    myWin.setBar(2, 'swerve')
+    # myWin.setFeedBack(1,'acc')
+    # myWin.setBar(-1,'acc')
+    # myWin.setBar(0, 'brake')
+    # myWin.setBar(1, 'turn')
+    # myWin.setBar(2, 'swerve')
 
 
     sys.exit(app.exec_())

@@ -11,8 +11,8 @@ import joblib
 
 
 class ListenerThread(QThread):
-    bar_signal = pyqtSignal([int, str])
-    score_signal = pyqtSignal([int])
+    bar_signal = pyqtSignal(int, str)
+    score_signal = pyqtSignal(int)
     def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_flag: Value):
         QThread.__init__(self)
         self.eventQueue = eventQueue
@@ -52,10 +52,10 @@ class ListenerThread(QThread):
                         event_label = self.get_event_label(event_list[i], score)
                         level, type = self.get_level_type(event_label[0])
 
-                        self.bar_signal[int, str].emit(level, type)
+                        self.bar_signal.emit(level, type)
 
                         # emit pattern score to ui
-                        self.score_signal[int].emit(score)
+                        self.score_signal.emit(score)
 
     def calculate_feature(self,vect):
         maxAX = max(vect[:, 3])
