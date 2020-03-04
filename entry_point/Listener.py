@@ -19,7 +19,7 @@ class ListenerThread(QThread):
         self.processLock = processLock
         self.SVM_flag = SVM_flag
         self.buffer = LDA_buffer
-        self.svm = joblib.load('svm.pkl')
+        self.svm = joblib.load('entry_point/svm.pkl')
 
 
 
