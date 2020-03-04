@@ -12,13 +12,12 @@ from PyQt5.QtCore import QThread, pyqtSignal
 
 from entry_point.LDA_scoreing import LDAForEvent
 
-pattern = ['aa']
 class LDAController(QThread):
 
     score_signal = pyqtSignal([int])
     def __init__(self, LDAbuffer):
         super().__init__()
-        self.ldamodel = LDAForEvent("model")
+        self.ldamodel = LDAForEvent("entry_point/model")
         self.pattern = LDAbuffer
     def run(self) -> None:
         while True:
@@ -41,6 +40,6 @@ class LDAController(QThread):
         score = self.ldamodel.score_pattern(result)
         return score
 
-lda = LDAController(pattern)
-lda.run()
-print(pattern)
+# lda = LDAController(pattern)
+# lda.run()
+# print(pattern)
