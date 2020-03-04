@@ -26,9 +26,9 @@ class DetectProcess(multiprocessing.Process):
         self.SVM_flag = SVM_flag
         self.LDA_flag = LDA_flag
         # oriantation matrix
-        self.matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
-                  [-0.993610238, 0.079, -0.079680179],
-                  [0.079680205, 0.99687, 0.006389762]])
+        self.matrix = np.array([[-0.22220486, 0.00E+00, 0.975],
+                  [0.974561151, -0.03, 0.222104846],
+                  [0.02925, 0.999549899, 0.006666146]])
         # initial sampling rate and window for standard deviation calculation
         self.sampling_rate = 0
         self.std_window = 0
