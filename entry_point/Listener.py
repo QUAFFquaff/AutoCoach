@@ -25,9 +25,6 @@ class ListenerThread(QThread):
 
 
     def run(self):
-        print("sad")
-
-        print("sadas")
         while True:
 
             if (not self.eventQueue.empty()) and self.SVM_flag.value == 0:
