@@ -53,12 +53,10 @@ class ListenerThread(QThread):
                         self.bar_signal[int, str].emit(level, type)
 
                         # emit pattern score to ui
-<<<<<<< HEAD
                         self.bar_signal[int].emit(score)
                         self.buffer.append(type)
 
 
-=======
                         self.score_signal[int].emit(score)
 
     def calculate_feature(self,vect):
@@ -93,7 +91,6 @@ class ListenerThread(QThread):
         axis = vect[0, -1]
         return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY, differenceSP,
                 meanSP, StartEndAccx, StartEndAccy, t, axis]  # 99% 86%
->>>>>>> 032d3190ae021784b995d3e26b43b1251627ed6f
 
     def get_level_type(self, label):
         type = ""
