@@ -23,7 +23,7 @@ class LDAController(QThread):
     def run(self) -> None:
         while True:
             start_time = datetime.datetime.now()
-            self.score_pattern()
+            score = self.score_pattern()
             end_time = datetime.datetime.now()
             print(end_time)
             dur = end_time - start_time
@@ -32,11 +32,14 @@ class LDAController(QThread):
             self.pattern = ['a']
             print(self.pattern)
 
+            self.score_signal.emit(score)
+
     def score_pattern(self):
         pattern = copy.deepcopy(self.pattern)
         self.pattern = []
         result = self.ldamodel.LDATest(pattern)
-        print(self.ldamodel.score_pattern(result))
+        score = self.ldamodel.score_pattern(result)
+        return score
 
 lda = LDAController(pattern)
 lda.run()
