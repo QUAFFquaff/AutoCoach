@@ -1,51 +1,22 @@
-
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# @Time    : 2/24/2020 12:58
-# @Author  : Haoyu Lyu
-# @File    : test.py
-# @Software: PyCharm
-import pyqtgraph as pg
-import tushare as ts
+from scipy.stats import bernoulli
+import matplotlib.pyplot as plt
 import numpy as np
-app = pg.QtGui.QApplication([])
-data = ts.get_hist_data('sh', start='2017-10-01', end='2017-12-01').sort_index()
-xdict = dict(enumerate(data.index))
-axis_1 = [(i, list(data.index)[i]) for i in range(0, len(data.index), 5)]
-stringaxis = pg.AxisItem(orientation='bottom')
-stringaxis.setTicks([axis_1, xdict.items()])
-win = pg.GraphicsWindow(title='州的先生zmister.com pyqtgraph数据可视化 - 绘制精美折线图')
-plot = win.addPlot(axisItems={'bottom': stringaxis}, title='上证指数 - zmister.com绘制')
-
-label = pg.TextItem()
-plot.addItem(label)
-
-plot.showGrid(x=True, y=True, alpha=0.5)
-plot.plot(x=list(xdict.keys()), y=data['open'].values, pen='r', name='开盘指数', symbolBrush=(255, 0, 0), )
-plot.plot(x=list(xdict.keys()), y=data['close'].values, pen='g', name='收盘指数', symbolBrush=(0, 255, 0))
-plot.setLabel(axis='left', text='指数')
-plot.setLabel(axis='bottom', text='日期')
-vLine = pg.InfiniteLine(angle=90, movable=False, )
-hLine = pg.InfiniteLine(angle=0, movable=False, )
-plot.addItem(vLine, ignoreBounds=True)
-plot.addItem(hLine, ignoreBounds=True)
-vb = plot.vb
-
-def mouseMoved(evt):
-    pos = evt[0]  ## using signal proxy turns original arguments into a tuple
-    if plot.sceneBoundingRect().contains(pos):
-        mousePoint = vb.mapSceneToView(pos)
-        index = int(mousePoint.x())
-        pos_y = int(mousePoint.y())
-        print(index)
-        if 0 < index < len(data.index):
-            print(xdict[index], data['open'][index], data['close'][index])
-            label.setHtml(
-                "<p style='color:white'>日期：{0}</p><p style='color:white'>开盘：{1}</p><p style='color:white'>收盘：{2}</p>".format(
-                    xdict[index], data['open'][index], data['close'][index]))
-            label.setPos(mousePoint.x(), mousePoint.y())
-        vLine.setPos(mousePoint.x())
-        hLine.setPos(mousePoint.y())
-
-proxy = pg.SignalProxy(plot.scene().sigMouseMoved, rateLimit=60, slot=mouseMoved)
-app.exec_()
+p = 0.5
+temp = np.random.binomial(1,p,size=100)
+x = []
+for i in range(len(temp)):
+    x.append(2 * temp[i] -1)
+print(x)
+y = [x[0]/2]
+for i in range(1,len(x)):
+    y.append((x[i]+x[i-1])/2)
+z = [x[0]*2/3]
+for i in range(1,len(x)):
+    z.append( x[i] * 2/3 + x[i-1] / 3 )
+print(y)
+print('E[x] = ')
+print(sum(x)/100)
+print('E[y] = ')
+print(sum(y)/100)
+print('E[z] = ')
+print(sum(z)/100)

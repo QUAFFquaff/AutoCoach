@@ -10,7 +10,6 @@ import traceback
 from PyQt5 import QtCore, QtGui, QtWidgets
 # from PyQt5.QtChart import *
 import pyqtgraph as pg
-import tushare as ts
 import numpy as np
 from pyqtgraph import PlotWidget
 

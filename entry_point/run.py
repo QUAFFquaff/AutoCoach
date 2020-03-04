@@ -5,6 +5,7 @@ from ctypes import c_bool
 from entry_point.DetectProcess2 import DetectProcess2
 from entry_point.DetectProcess import DetectProcess
 from entry_point.Event import Event
+from entry_point.LDAController import LDAController
 from entry_point.Listener import ListenerThread
 import sys
 from PyQt5.QtCore import pyqtSignal
@@ -19,7 +20,7 @@ from ctypes import c_bool
 
 
 
-
+LDA_buffer = []
 
 class MyWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
@@ -66,7 +67,7 @@ class NextWindow(QMainWindow, Ui_Dialog):
 
 
 def run():
-
+    buffer = []
     eventQueue = multiprocessing.Queue()
     processLock = multiprocessing.Lock()
     speed = multiprocessing.Value("i", 0)
@@ -89,9 +90,13 @@ def run():
     eventDetectP.daemon = True
     eventDetectP.start()
 
-    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, buffer)
     listener.bar_signal.connect(myWin.setBar)
     listener.start()
+
+    lda_controller = LDAController(LDA_buffer)
+    lda_controller.score_signal.connect(myWin.setCurrentScore)
+    lda_controller.start()
 
     myWin.setCurrentScore(45)
     myWin.setFeedBack(1,'acc')

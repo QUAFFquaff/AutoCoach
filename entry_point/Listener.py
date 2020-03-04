@@ -12,13 +12,12 @@ import joblib
 
 class ListenerThread(QThread):
     bar_signal = pyqtSignal([int, str])
-    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_flag: Value):
+    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_buffer:list):
         QThread.__init__(self)
         self.eventQueue = eventQueue
         self.processLock = processLock
         self.SVM_flag = SVM_flag
-        self.ldamodel = LDAForEvent("entry_point/model")
-
+        self.buffer = LDA_buffer
 
 
     def run(self):
@@ -51,6 +50,8 @@ class ListenerThread(QThread):
 
                         # emit pattern score to ui
                         self.bar_signal[int].emit(score)
+                        self.buffer.append(type)
+
 
 
     def get_level_type(self, label):
