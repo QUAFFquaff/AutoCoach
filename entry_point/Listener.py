@@ -13,17 +13,21 @@ import joblib
 class ListenerThread(QThread):
     bar_signal = pyqtSignal(int, str)
     score_signal = pyqtSignal(int)
-    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_buffer: Value):
+    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_buffer: list):
         QThread.__init__(self)
         self.eventQueue = eventQueue
         self.processLock = processLock
         self.SVM_flag = SVM_flag
         self.buffer = LDA_buffer
+        self.svm = joblib.load('svm.pkl')
+
+
 
 
     def run(self):
-        svm = joblib.load('svm.pkl')
+        print("sad")
 
+        print("sadas")
         while True:
 
             if (not self.eventQueue.empty()) and self.SVM_flag.value == 0:
@@ -44,8 +48,8 @@ class ListenerThread(QThread):
                         # nomaliz the 17 features
                         vect = self.nomalization(vect)
 
-                        result = svm.predict([vect])
-                        score = svm.decision_function([vect])
+                        result = self.svm.predict([vect])
+                        score = self.svm.decision_function([vect])
                         score = np.array(score[0])
 
                         event_label = self.get_event_label(event_list[i], score)
