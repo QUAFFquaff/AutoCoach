@@ -189,13 +189,8 @@ class Ui_MainWindow(object):
         self.gridLayout_up.setObjectName("gridLayout_up")
 
         self.swerve_bar = QtWidgets.QWidget(self.up)
-#<<<<<<< HEAD
         self.swerve_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.swerve_bar.setMaximumSize(QtCore.QSize(80, 220))
-#=======
-        self.swerve_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.swerve_bar.setMaximumSize(QtCore.QSize(80, 250))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.swerve_bar.setObjectName("swerve_bar")
         self.verticalLayout_swerve = QtWidgets.QVBoxLayout(self.swerve_bar)
         self.verticalLayout_swerve.setContentsMargins(15, 0, 15, 0)
@@ -229,13 +224,8 @@ class Ui_MainWindow(object):
         self.gridLayout_up.addItem(spacerItem2, 1, 4, 1, 1)
 
         self.brake_bar = QtWidgets.QWidget(self.up)
-#<<<<<<< HEAD
         self.brake_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.brake_bar.setMaximumSize(QtCore.QSize(80, 220))
-#=======
-        self.brake_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.brake_bar.setMaximumSize(QtCore.QSize(80, 250))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.brake_bar.setObjectName("brake_bar")
         self.verticalLayout_break = QtWidgets.QVBoxLayout(self.brake_bar)
         self.verticalLayout_break.setContentsMargins(15, 0, 15, 0)
@@ -259,10 +249,6 @@ class Ui_MainWindow(object):
         self.brake_icon = QtWidgets.QLabel(self.brake_bar)
         self.brake_icon.setMinimumSize(QtCore.QSize(25, 35))
         self.brake_icon.setMaximumSize(QtCore.QSize(25, 35))
-#=======
-        # self.brake_icon.setMinimumSize(QtCore.QSize(25, 20))
-        # self.brake_icon.setMaximumSize(QtCore.QSize(20, 20))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.brake_icon.setText("")
         self.brake_icon.setObjectName("brake_icon")
         self.verticalLayout_break.addWidget(self.brake_icon, 0, QtCore.Qt.AlignHCenter)
@@ -276,12 +262,8 @@ class Ui_MainWindow(object):
         self.turn_level.setObjectName("turn_level")
         self.gridLayout_up.addWidget(self.turn_level, 2, 5, 1, 1)
         self.turn_bar = QtWidgets.QWidget(self.up)
-#<<<<<<< HEAD
         self.turn_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.turn_bar.setMaximumSize(QtCore.QSize(80, 220))
-        self.turn_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.turn_bar.setMaximumSize(QtCore.QSize(80, 250))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.turn_bar.setObjectName("turn_bar")
         self.verticalLayout_turn = QtWidgets.QVBoxLayout(self.turn_bar)
         self.verticalLayout_turn.setContentsMargins(15, 0, 15, 0)
@@ -320,9 +302,6 @@ class Ui_MainWindow(object):
         self.acc_bar = QtWidgets.QWidget(self.up)
         self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
-        self.acc_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.acc_bar.setMaximumSize(QtCore.QSize(80, 250))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.acc_bar.setObjectName("acc_bar")
         self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.acc_bar)
         self.verticalLayout_acc.setContentsMargins(15, 0, 15, 0)
@@ -400,7 +379,7 @@ class Ui_MainWindow(object):
         # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
         self.setWindowOpacity(0.98)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
         self.exit.clicked.connect(self.close)       # close window
         self.mini.clicked.connect(self.showMinimized)  # minimum window
         self.windowMoved.connect(self.move)  # move window
