@@ -67,7 +67,7 @@ class NextWindow(QMainWindow, Ui_Dialog):
 
 
 def run():
-    buffer = []
+    global LDA_buffer
     eventQueue = multiprocessing.Queue()
     processLock = multiprocessing.Lock()
     speed = multiprocessing.Value("i", 0)
@@ -92,7 +92,7 @@ def run():
     eventDetectP.daemon = True
     eventDetectP.start()
 
-    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, buffer)
+    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_buffer)
     listener.bar_signal.connect(myWin.setBar)
     listener.start()
 

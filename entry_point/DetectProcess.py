@@ -97,6 +97,7 @@ class DetectProcess(multiprocessing.Process):
                     event_y = self.detect_y_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, 1, acc_y_filtered[-15], acc_x_filtered[-15], acc_z_filtered[-15]])
 
                     if event_x is not None:
+                        print("there is a event from x axis")
                         event_x.filter(b, a)
                         self.processLock.acquire()  # get the lock
                         self.eventQueue.put(event_x)
@@ -104,6 +105,7 @@ class DetectProcess(multiprocessing.Process):
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
                     if event_y is not None:
+                        print("there is a event from yaxis")
                         event_y.filter(b, a)
                         self.processLock.acquire()  # get the lock
                         self.eventQueue.put(event_y)
@@ -176,16 +178,17 @@ class DetectProcess(multiprocessing.Process):
 
     def change_event_num(self, num: int):
         self.processLock.acquire()
-        self.SVM_flag += num
+        self.SVM_flag.value += num
         self.processLock.release()
 
     def detect_x_event(self, data) -> Event:
+        #print(data)
         std_x_array = []
         raw_x_array = []
         acc_flag = False
         brake_flag = False
-        fault_num = int(2 * self.sampling_rate / 5)  # fault tolerance
-        min_event_length = int(self.sampling_rate * 1.2)  # minimum length for event
+        fault_num = int(1 * self.sampling_rate / 5)  # fault tolerance
+        min_event_length = int(self.sampling_rate * 0.4)  # minimum length for event
 
         self.std_x_queue.put(data)
 
@@ -205,56 +208,66 @@ class DetectProcess(multiprocessing.Process):
             acc_x = data[10]
             timestamp = data[0]
 
-            if acc_x > 0.12 and max(std_x_array) > 0.02 and self.acc_threshold_num == 0:  # if detect a new event
+            if acc_x > 0.08 and max(std_x_array) > 0.02 and self.acc_threshold_num == 0:  # if detect a new event
+                print("acc event start")
                 self.acc_threshold_num += 1
                 self.acc_event = Event(raw_x_array[start_index][0], 0)
                 for i in range(start_index, len(raw_x_array)):
                     self.acc_event.add_value(raw_x_array[i])
                 #  acquire process lock to add SVM_flag
                 self.change_event_num(1)  # add 1 current event num
-            elif acc_x > 0.06 and self.acc_threshold_num > 0:  # if event is continuing
+            elif acc_x > 0.05 and self.acc_threshold_num > 0:  # if event is continuing
                 self.acc_threshold_num += 1
                 self.acc_fault = fault_num
                 acc_flag = True
-            elif acc_x <= 0.06 and self.acc_fault > 0 and self.acc_threshold_num > 0:
+            elif acc_x <= 0.04 and self.acc_fault > 0 and self.acc_threshold_num > 0:
                 self.acc_fault -= 1
                 self.acc_threshold_num += 1
                 acc_flag = True
-            elif (acc_x <= 0.06 or std_x < 0.01) and self.acc_threshold_num > 0:
+            elif (acc_x <= 0.04 or std_x < 0.01) and self.acc_threshold_num > 0:
                 self.acc_fault = fault_num
-                self.acc_threshold_num = 0
+                
                 if self.acc_threshold_num > min_event_length:
+                    print("there is acc event end")
                     self.acc_event.set_endtime(timestamp)
                     self.acc_event.add_value(data[0:9])
+                    self.acc_threshold_num = 0
                     return self.acc_event
                 else:
+                    self.acc_threshold_num = 0
+                    print(" acc event cancel")
                     #  acquire process lock to add SVM_flag
                     self.change_event_num(-1)  # minus 1 current event num
 
 
-            if acc_x < -0.15 and max(std_x_array) > 0.02 and self.brake_threshold_num == 0:
+            if acc_x < -0.08 and max(std_x_array) > 0.02 and self.brake_threshold_num == 0:
+                print("brake event start")
                 self.brake_threshold_num +=1
-                self.brake_event = Event(std_x_array[start_index][0], 1)
-                for i in range(start_index, len(std_x_array)):
+                self.brake_event = Event(raw_x_array[start_index][0], 1)
+                for i in range(start_index, len(raw_x_array)):
                     self.brake_event.add_value(raw_x_array[i])
                 #  acquire process lock to add SVM_flag
                 self.change_event_num(1)  # add 1 current event num
-            elif acc_x < -0.06 and self.brake_threshold_num > 0:
+            elif acc_x < -0.04 and self.brake_threshold_num > 0:
                 self.brake_threshold_num += 1
                 self.brake_fault = fault_num
                 brake_flag = True
-            elif acc_x >= -0.06 and self.brake_fault > 0 and self.brake_threshold_num > 0:
+            elif acc_x >= -0.04 and self.brake_fault > 0 and self.brake_threshold_num > 0:
                 self.brake_fault -= 1
                 self.brake_threshold_num += 1
                 brake_flag = True
-            elif (acc_x >= -0.06 or std_x < 0.01) and self.brake_threshold_num >0:
-                self.brake_threshold_num = 0
+            elif (acc_x >= -0.04 or std_x < 0.01) and self.brake_threshold_num >0:
+                
                 self.brake_fault = fault_num
                 if self.brake_threshold_num > min_event_length:
+                    print("brake event end")
                     self.brake_event.set_endtime(timestamp)
                     self.brake_event.add_value(data[0:9])
+                    self.brake_threshold_num = 0
                     return self.brake_event
                 else:
+                    self.brake_threshold_num = 0
+                    print("brake event cancel")
                     #  acquire process lock to add SVM_flag
                     self.change_event_num(-1)  # minus 1 current event num
 
@@ -290,6 +303,7 @@ class DetectProcess(multiprocessing.Process):
 
             if self.y_positive:
                 if acc_y > 0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
+                    #print("left start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 2)
                     for i in range(start_index, len(std_y_array)):
@@ -305,18 +319,23 @@ class DetectProcess(multiprocessing.Process):
                     self.turn_threshold_num += 1
                     flag = True
                 elif (acc_y <= 0.08 or std_y < 0.015) and self.turn_threshold_num > 0:
-                    self.turn_threshold_num = 0
+                    
                     self.turn_fault = 0
                     self.y_negative = True
                     if min_length < self.turn_threshold_num < max_length:
+                        print("left turn ends")
                         self.turn_event.set_endtime(timestamp)
                         self.turn_event.add_value(data[0:9])
+                        self.turn_threshold_num = 0
                         return self.turn_event
                     else:
+                        #print("left turn cancel")
+                        self.turn_threshold_num = 0
                         self.change_event_num(-1)
 
             if self.y_negative:
                 if acc_y < -0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
+                    #print("right trun start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 3)
                     for i in range(start_index, len(std_y_array)):
@@ -332,14 +351,18 @@ class DetectProcess(multiprocessing.Process):
                     self.turn_threshold_num += 1
                     flag = True
                 elif (acc_y >= -0.08 or std_y < 0.015) and self.turn_threshold_num > 0:
-                    self.turn_threshold_num = 0
+                    
                     self.turn_fault = 0
                     self.y_positive = True
                     if min_length < self.turn_threshold_num < max_length:
+                        print("right turn ends")
                         self.turn_event.set_endtime(timestamp)
                         self.turn_event.add_value(data[0:9])
+                        self.turn_threshold_num = 0
                         return self.turn_event
                     else:
+                        #print("right cancel")
+                        self.turn_threshold_num = 0
                         self.change_event_num(-1)
 
             if flag:
