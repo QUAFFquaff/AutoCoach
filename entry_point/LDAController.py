@@ -22,20 +22,20 @@ class LDAController(QThread):
     def run(self) -> None:
         while True:
             start_time = datetime.datetime.now()
+            print(self.pattern)
             score = self.score_pattern()
             end_time = datetime.datetime.now()
             print(end_time)
             dur = end_time - start_time
             time.sleep(20-dur.seconds)
-            self.buffer = []
-            self.pattern = ['a']
-            print(self.pattern)
 
             self.score_signal.emit(score)
 
     def score_pattern(self):
         pattern = copy.deepcopy(self.pattern)
-        self.pattern = []
+        print("copy:",pattern)
+        while len(self.pattern)>0:
+            self.pattern.remove(self.pattern[-1])
         result = self.ldamodel.LDATest(pattern)
         score = self.ldamodel.score_pattern(result)
         return score

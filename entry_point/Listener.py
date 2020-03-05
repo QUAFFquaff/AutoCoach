@@ -14,12 +14,12 @@ import time
 class ListenerThread(QThread):
     bar_signal = pyqtSignal(int, str)
     score_signal = pyqtSignal(int)
-    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_buffer: list):
+    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDAbuffer: list):
         QThread.__init__(self)
         self.eventQueue = eventQueue
         self.processLock = processLock
         self.SVM_flag = SVM_flag
-        self.buffer = LDA_buffer
+        self.buffer = LDAbuffer
         self.svm = joblib.load('entry_point/svm.pkl')
 
 
@@ -36,7 +36,7 @@ class ListenerThread(QThread):
 
                 for i in range(0, len(event_list)):
                     if event_list[i] is not None:
-                        vect = np.array(event_list[i].getValue())
+                        vect = np.array(event_list[i].get_value())
                         vect = vect.astype(np.float64)
                         # function name: calculate_feature()
                         # calculate the 17 features
@@ -56,10 +56,9 @@ class ListenerThread(QThread):
                         self.bar_signal.emit(level, type)
 
                         # emit pattern score to ui
-                        self.bar_signal[int].emit(score)
-
                         pattern = self.get_pattern(event_label[0])
                         self.buffer.append(pattern)
+
 
 
 
@@ -139,7 +138,7 @@ class ListenerThread(QThread):
 
     def get_event_label(self, event, score):
         result = [0]
-        if event.getType() >= 2:
+        if event.get_type() >= 2:
             index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
             if index == 0:
                 result = [2]
@@ -153,7 +152,7 @@ class ListenerThread(QThread):
                 result = [10]
             else:
                 result = [11]
-        elif event.getType() == 0:
+        elif event.get_type() == 0:
             index = np.argmax([score[0], score[4], score[8]])
             if index == 0:
                 result = [0]
@@ -161,7 +160,7 @@ class ListenerThread(QThread):
                 result = [4]
             elif index == 2:
                 result = [8]
-        elif event.getType() == 1:
+        elif event.get_type() == 1:
             index = np.argmax([score[1], score[5], score[9]])
             if index == 0:
                 result = [1]
