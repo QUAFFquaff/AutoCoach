@@ -50,6 +50,13 @@ stock market tools
 it needs another package to import signal from scipy
 sudo apt-get install libatlas-base-dev
 
+## PyQt5 on Raspberry pi
+get error of "libEGL warning: DRI2: failed to authenticate"
+and also "error while loading shared libraries: libGLESv2.so: cannot open shared object file: No such file or directory"
+https://github.com/tipam/pi3d/issues/177
+https://pi3d.github.io/html/FAQ.html
+https://github.com/WayneKeenan/python-vrzero/issues/8
+https://www.ywlib.com/archives/147.html
  
 
 
