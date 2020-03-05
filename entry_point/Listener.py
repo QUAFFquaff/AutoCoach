@@ -8,6 +8,7 @@ from PyQt5.QtCore import pyqtSignal, QThread
 
 from entry_point.LDA_scoreing import LDAForEvent
 import joblib
+import time
 
 
 class ListenerThread(QThread):
@@ -26,7 +27,7 @@ class ListenerThread(QThread):
 
     def run(self):
         while True:
-
+            time.sleep(2)
             if (not self.eventQueue.empty()) and self.SVM_flag.value == 0:
                 event_list = []
                 while(not self.eventQueue.empty()):
