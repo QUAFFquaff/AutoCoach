@@ -1,60 +1,48 @@
-<<<<<<< HEAD
-from scipy.stats import bernoulli
-import matplotlib.pyplot as plt
-import numpy as np
-p = 0.5
-temp = np.random.binomial(1,p,size=100)
-x = []
-for i in range(len(temp)):
-    x.append(2 * temp[i] -1)
-print(x)
-y = [x[0]/2]
-for i in range(1,len(x)):
-    y.append((x[i]+x[i-1])/2)
-z = [x[0]*2/3]
-for i in range(1,len(x)):
-    z.append( x[i] * 2/3 + x[i-1] / 3 )
-print(y)
-print('E[x] = ')
-print(sum(x)/100)
-print('E[y] = ')
-print(sum(y)/100)
-print('E[z] = ')
-print(sum(z)/100)
-=======
+
 from asyncio import sleep
 from datetime import time
-
+import time
 from PyQt5.QtCore import QThread
 
 data = []
 
 
-class Test1(QThread):
-    def __init__(self):
-        super().__init__()
-        self.data =data
-        self.data.append('a')
-
-    def run(self):
-        while True:
-            self.data.append('a')
-            print(self.data)
-
-
 class Test2(QThread):
-    def __init__(self):
+    def __init__(self, data2:list):
         super().__init__()
-        self.data = data
+        self.dat = data2
 
     def run(self):
         while True:
-            self.data.append('b')
+            # self.dat.append('b')
+            pattern = copy.deepcopy(self.dat)
+            print(pattern)
+            time.sleep(1)
+            while len(self.dat)>0:
+                self.dat.remove(self.dat[-1])
 
-test1 = Test1()
-test2 = Test2()
-test1.start()
-test2.start()
-while True:
-    pass
->>>>>>> 032d3190ae021784b995d3e26b43b1251627ed6f
+
+class Test1(QThread):
+    def __init__(self,data1:list):
+        super().__init__()
+        self.data1 =data1
+        # self.data.append('a')
+
+    def run(self):
+        while True:
+            self.data1.append('a')
+            print(self.data1)
+            time.sleep(1)
+
+
+
+
+
+def run():
+    test1 = Test1(data)
+    test2 = Test2(data)
+    test1.start()
+    test2.start()
+    while True:
+        pass
+
