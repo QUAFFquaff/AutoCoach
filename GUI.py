@@ -373,7 +373,7 @@ class Ui_MainWindow(object):
         # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
         # self.setWindowOpacity(0.98)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
 
         self.exit.clicked.connect(self.close)       # close window
         self.mini.clicked.connect(self.showMinimized)  # minimum window
