@@ -101,8 +101,8 @@ class Ui_Dialog(object):
         # self.pie_widget.setStyleSheet("#pie_widget{background-color: yellow}")
         # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
-        self.setWindowOpacity(0.98)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
+        # self.setWindowOpacity(0.98)
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
 
         # window move
         self.windowMoved.connect(self.move)  # move window
@@ -208,6 +208,20 @@ class Ui_Dialog(object):
         self.hLine = pg.InfiniteLine(angle=0, movable=False, )  # 创建一个水平线条
         self.k_plt.addItem(self.vLine, ignoreBounds=True)  # 在图形部件中添加垂直线条
         self.k_plt.addItem(self.hLine, ignoreBounds=True)  # 在图形部件中添加水平线条
+
+    def mousePressEvent(self,event):
+        if event.button() == QtCore.Qt.LeftButton:
+            self.mPos = event.pos()
+        event.accept()
+
+    def mouseReleaseEvent(self, event):
+        self.mPos = None
+        event.accept()
+
+    def mouseMoveEvent(self,event):
+        if event.buttons() == QtCore.Qt.LeftButton and self.mPos:
+            self.windowMoved.emit(self.mapToGlobal(event.pos() - self.mPos))
+        event.accept()
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
