@@ -100,7 +100,7 @@ def run():
     lda_controller.score_signal.connect(myWin.setCurrentScore)
     lda_controller.start()
 
-    myWin.setCurrentScore(45)
+
     myWin.setFeedBack(1,'acc')
 
 

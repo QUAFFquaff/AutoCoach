@@ -94,7 +94,7 @@ QLabel#TotalScore{
     border-right:2px solid white;
 }
 
-QToolButton#feedback{
+QLabel#feedback{
     background: transparent;
 }
 
