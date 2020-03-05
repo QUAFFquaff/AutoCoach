@@ -216,7 +216,7 @@ class DetectProcess(multiprocessing.Process):
                     self.acc_event.add_value(raw_x_array[i])
                 #  acquire process lock to add SVM_flag
                 self.change_event_num(1)  # add 1 current event num
-            elif acc_x > 0.05 and self.acc_threshold_num > 0:  # if event is continuing
+            elif acc_x > 0.04 and self.acc_threshold_num > 0:  # if event is continuing
                 self.acc_threshold_num += 1
                 self.acc_fault = fault_num
                 acc_flag = True
@@ -310,15 +310,15 @@ class DetectProcess(multiprocessing.Process):
                         self.turn_event.add_value(raw_y_array[i])
                     #  acquire process lock to add SVM_flag
                     self.change_event_num(1)  # add 1 current event num
-                elif acc_y > 0.08 and self.turn_threshold_num > 0:
+                elif acc_y > 0.06 and self.turn_threshold_num > 0:
                     self.turn_threshold_num += 1
                     self.turn_fault = fault_num
                     flag = True
-                elif acc_y <=0.08 and self.turn_fault > 0 and self.turn_threshold_num > 0:
+                elif acc_y <=0.06 and self.turn_fault > 0 and self.turn_threshold_num > 0:
                     self.turn_fault -= 1
                     self.turn_threshold_num += 1
                     flag = True
-                elif (acc_y <= 0.08 or std_y < 0.015) and self.turn_threshold_num > 0:
+                elif (acc_y <= 0.06 or std_y < 0.015) and self.turn_threshold_num > 0:
                     
                     self.turn_fault = 0
                     self.y_negative = True
@@ -342,15 +342,15 @@ class DetectProcess(multiprocessing.Process):
                         self.turn_event.add_value(raw_y_array[i])
                     #  acquire process lock to add SVM_flag
                     self.change_event_num(1)  # add 1 current event num
-                elif acc_y < -0.08 and self.turn_threshold_num > 0:
+                elif acc_y < -0.06 and self.turn_threshold_num > 0:
                     self.turn_threshold_num += 1
                     self.turn_fault = fault_num
                     flag = True
-                elif acc_y >= -0.08 and self.turn_fault > 0 and self.turn_threshold_num > 0:
+                elif acc_y >= -0.06 and self.turn_fault > 0 and self.turn_threshold_num > 0:
                     self.turn_fault -= 1
                     self.turn_threshold_num += 1
                     flag = True
-                elif (acc_y >= -0.08 or std_y < 0.015) and self.turn_threshold_num > 0:
+                elif (acc_y >= -0.06 or std_y < 0.015) and self.turn_threshold_num > 0:
                     
                     self.turn_fault = 0
                     self.y_positive = True
