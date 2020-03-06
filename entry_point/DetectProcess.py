@@ -65,6 +65,7 @@ class DetectProcess(multiprocessing.Process):
         print('std_window:', str(self.std_window))
 
         lowpass_queue = Queue()
+        data_buffer = Queue(maxsize=6)
         cutoff = 2 * (1 / self.sampling_rate)  # cutoff frequency of low pass filter
         b, a = signal.butter(3, cutoff, 'low')  # parameter for lowpass
 
@@ -87,14 +88,18 @@ class DetectProcess(multiprocessing.Process):
                 #calibration
                 acc_list = np.dot(self.matrix, acc_list)
                 lowpass_queue.put(acc_list)
+                if data_buffer.full():
+                    data_buffer.get()
+                data_buffer.put(np.array([timestamp, self.speed.value, acc_y, acc_x, acc_z, gyo_x, gyo_y, gyo_z]))
                 if lowpass_queue.qsize() > 59:
                     acc_x_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'x'))
                     acc_y_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'y'))
                     acc_z_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'z'))
+                    event_data = data_buffer.get()
 
                     # detect event
-                    event_x = self.detect_x_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, 0, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
-                    event_y = self.detect_y_event([timestamp, self.speed.value, acc_list[0], acc_list[1], acc_list[2], gyo_x, gyo_y, gyo_y, 1, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
+                    event_x = self.detect_x_event([event_data[0], event_data[1].value, event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 0, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
+                    event_y = self.detect_y_event([event_data[0], event_data[1].value, event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 1, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
 
                     if event_x is not None:
                         print("there is a event from x axis")
