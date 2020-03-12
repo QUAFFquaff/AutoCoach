@@ -102,6 +102,8 @@ def run():
 
     myWin.setFeedBack(1,'acc')
 
+    myWin.setBar(1,"acc")
+
 
     myWin.initalface('acc')
     myWin.initalface('turn')

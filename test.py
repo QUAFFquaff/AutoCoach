@@ -11,15 +11,15 @@ data = []
 class Test1(QThread):
     def __init__(self, data1):
         super().__init__()
-        self.data =data1
+        self.dat =data1
+
     def run(self):
         while True:
-            # self.dat.append('b')
             pattern = copy.deepcopy(self.dat)
             print(pattern)
             time.sleep(1)
-            while len(self.dat)>0:
-                self.dat.remove(self.dat[-1])
+            # while len(self.dat)>0:
+            self.dat.remove(self.dat[-1])
 
 
 class Test2(QThread):
@@ -30,18 +30,16 @@ class Test2(QThread):
     def run(self):
         while True:
             self.data.append('b')
+            time.sleep(1)
+
+test1 = Test1(data)
+test2 = Test2(data)
+test1.start()
+test2.start()
+while True:
+    pass
 
 
-
-
-
-def run():
-    test1 = Test1(data)
-    test2 = Test2(data)
-    test1.start()
-    test2.start()
-    while True:
-        pass
 
 
 
