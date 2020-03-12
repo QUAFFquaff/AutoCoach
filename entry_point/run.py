@@ -100,7 +100,7 @@ def run():
     myWin.initalface('turn')
     myWin.initalface('swerve')
     myWin.initalface('brake')
-    myWin.setBar('normal','acc')
+    myWin.setBar('highrisk','acc')
     myWin.setBar('safe','brake')
     myWin.setBar('highrisk','turn')
     myWin.setBar('mediumrisk','swerve')

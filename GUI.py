@@ -25,9 +25,9 @@ class Ui_MainWindow(object):
 
 
         self.grey_bar = QtGui.QPixmap('icons/bars/lightgrey_bar.png')
-        self.top_bar = QtGui.QPixmap('icons/bars/red_bar.png')
-        self.medium_bar = QtGui.QPixmap('icons/bars/yellow_bar.png')
-        self.bottom_bar = QtGui.QPixmap('icons/bars/green_bar.png')
+        self.top_bar = QtGui.QPixmap('icons/bars/red_wide.png')
+        self.medium_bar = QtGui.QPixmap('icons/bars/yellow_wide.png')
+        self.bottom_bar = QtGui.QPixmap('icons/bars/green_wide.png')
 
 
 
@@ -318,8 +318,8 @@ class Ui_MainWindow(object):
         self.swerve_level.setObjectName("swerve_level")
         self.gridLayout_up.addWidget(self.swerve_level, 2, 6, 1, 1)
         self.acc_bar = QtWidgets.QWidget(self.up)
-        self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
-        self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
+        # self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
+        # self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
         self.acc_bar.setMinimumSize(QtCore.QSize(80, 220))
         self.acc_bar.setMaximumSize(QtCore.QSize(80, 250))
 #>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
@@ -329,17 +329,17 @@ class Ui_MainWindow(object):
         self.verticalLayout_acc.setSpacing(0)
         self.verticalLayout_acc.setObjectName("verticalLayout_acc")
         self.acc_bar1 = QtWidgets.QLabel(self.acc_bar)
-        self.acc_bar1.setMinimumSize(QtCore.QSize(40, 47))
+        self.acc_bar1.setMinimumSize(QtCore.QSize(40, 50))
         self.acc_bar1.setText("")
         self.acc_bar1.setObjectName("acc_bar1")
         self.verticalLayout_acc.addWidget(self.acc_bar1, 0, QtCore.Qt.AlignHCenter)
         self.acc_bar2 = QtWidgets.QLabel(self.acc_bar)
-        self.acc_bar2.setMinimumSize(QtCore.QSize(40, 47))
+        self.acc_bar2.setMinimumSize(QtCore.QSize(40, 50))
         self.acc_bar2.setText("")
         self.acc_bar2.setObjectName("acc_bar2")
         self.verticalLayout_acc.addWidget(self.acc_bar2, 0, QtCore.Qt.AlignHCenter)
         self.acc_bar3 = QtWidgets.QLabel(self.acc_bar)
-        self.acc_bar3.setMinimumSize(QtCore.QSize(40, 47))
+        self.acc_bar3.setMinimumSize(QtCore.QSize(40, 50))
         self.acc_bar3.setText("")
         self.acc_bar3.setObjectName("acc_bar3")
         self.verticalLayout_acc.addWidget(self.acc_bar3, 0, QtCore.Qt.AlignHCenter)
