@@ -67,7 +67,7 @@ class NextWindow(QMainWindow, Ui_Dialog):
 
 
 def run():
-    buffer = []
+    global LDA_buffer
     eventQueue = multiprocessing.Queue()
     processLock = multiprocessing.Lock()
     speed = multiprocessing.Value("i", 0)
@@ -84,15 +84,15 @@ def run():
 
 
 
-    timer = pg.QtCore.QTimer()
-    timer.timeout.connect(myWin.update_flowing_score)
-    timer.start(400)
+    # timer = pg.QtCore.QTimer()
+    # timer.timeout.connect(myWin.update_flowing_score)
+    # timer.start(400)
 
     eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
     eventDetectP.daemon = True
     eventDetectP.start()
 
-    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, buffer)
+    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_buffer)
     listener.bar_signal.connect(myWin.setBar)
     listener.start()
 
@@ -100,7 +100,7 @@ def run():
     lda_controller.score_signal.connect(myWin.setCurrentScore)
     lda_controller.start()
 
-    myWin.setCurrentScore(45)
+
     myWin.setFeedBack(1,'acc')
 
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>750</width>
-    <height>528</height>
+    <height>529</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -420,10 +420,7 @@
              <number>50</number>
             </property>
             <item row="0" column="0">
-             <widget class="QToolButton" name="feedback">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
+             <widget class="QLabel" name="feedback">
               <property name="minimumSize">
                <size>
                 <width>50</width>
@@ -436,11 +433,11 @@
                 <height>320</height>
                </size>
               </property>
-              <property name="focusPolicy">
-               <enum>Qt::TabFocus</enum>
-              </property>
               <property name="text">
                <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>

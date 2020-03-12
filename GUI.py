@@ -35,11 +35,6 @@ class Ui_MainWindow(object):
         self.orange_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
         self.yellow_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Yellow-Glow.png'))
 
-        self.brake_svg = QtGui.QIcon('icons/events/Brake.svg')
-        self.acc_svg = QtGui.QIcon('icons/events/Accelerate.svg')
-        self.turn_svg = QtGui.QIcon('icons/events/Turn.svg')
-        self.swerve_svg = QtGui.QIcon('icons/events/Swerve.svg')
-
         self.acc_icon_png = QtGui.QPixmap('icons/bars/acc_icon.png')
         self.brake_icon_png = QtGui.QPixmap('icons/bars/brake_icon.png')
         self.turn_icon_png = QtGui.QPixmap('icons/bars/turn_icon.png')
@@ -189,13 +184,8 @@ class Ui_MainWindow(object):
         self.gridLayout_up.setObjectName("gridLayout_up")
 
         self.swerve_bar = QtWidgets.QWidget(self.up)
-#<<<<<<< HEAD
         self.swerve_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.swerve_bar.setMaximumSize(QtCore.QSize(80, 220))
-#=======
-        self.swerve_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.swerve_bar.setMaximumSize(QtCore.QSize(80, 250))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.swerve_bar.setObjectName("swerve_bar")
         self.verticalLayout_swerve = QtWidgets.QVBoxLayout(self.swerve_bar)
         self.verticalLayout_swerve.setContentsMargins(15, 0, 15, 0)
@@ -229,13 +219,8 @@ class Ui_MainWindow(object):
         self.gridLayout_up.addItem(spacerItem2, 1, 4, 1, 1)
 
         self.brake_bar = QtWidgets.QWidget(self.up)
-#<<<<<<< HEAD
         self.brake_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.brake_bar.setMaximumSize(QtCore.QSize(80, 220))
-#=======
-        self.brake_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.brake_bar.setMaximumSize(QtCore.QSize(80, 250))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.brake_bar.setObjectName("brake_bar")
         self.verticalLayout_break = QtWidgets.QVBoxLayout(self.brake_bar)
         self.verticalLayout_break.setContentsMargins(15, 0, 15, 0)
@@ -259,10 +244,6 @@ class Ui_MainWindow(object):
         self.brake_icon = QtWidgets.QLabel(self.brake_bar)
         self.brake_icon.setMinimumSize(QtCore.QSize(25, 35))
         self.brake_icon.setMaximumSize(QtCore.QSize(25, 35))
-#=======
-        # self.brake_icon.setMinimumSize(QtCore.QSize(25, 20))
-        # self.brake_icon.setMaximumSize(QtCore.QSize(20, 20))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.brake_icon.setText("")
         self.brake_icon.setObjectName("brake_icon")
         self.verticalLayout_break.addWidget(self.brake_icon, 0, QtCore.Qt.AlignHCenter)
@@ -276,12 +257,8 @@ class Ui_MainWindow(object):
         self.turn_level.setObjectName("turn_level")
         self.gridLayout_up.addWidget(self.turn_level, 2, 5, 1, 1)
         self.turn_bar = QtWidgets.QWidget(self.up)
-#<<<<<<< HEAD
         self.turn_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.turn_bar.setMaximumSize(QtCore.QSize(80, 220))
-        self.turn_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.turn_bar.setMaximumSize(QtCore.QSize(80, 250))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.turn_bar.setObjectName("turn_bar")
         self.verticalLayout_turn = QtWidgets.QVBoxLayout(self.turn_bar)
         self.verticalLayout_turn.setContentsMargins(15, 0, 15, 0)
@@ -320,9 +297,6 @@ class Ui_MainWindow(object):
         self.acc_bar = QtWidgets.QWidget(self.up)
         self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
-        self.acc_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.acc_bar.setMaximumSize(QtCore.QSize(80, 250))
-#>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
         self.acc_bar.setObjectName("acc_bar")
         self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.acc_bar)
         self.verticalLayout_acc.setContentsMargins(15, 0, 15, 0)
@@ -368,12 +342,11 @@ class Ui_MainWindow(object):
         self.backCircleLayout.setContentsMargins(58, 50, 60, 50)
         self.backCircleLayout.setObjectName("backCircleLayout")
 
-        self.feedback = QtWidgets.QToolButton(self.backCircle)
-        self.feedback.setEnabled(False)
+        self.feedback = QtWidgets.QLabel(self.backCircle)
         self.feedback.setMinimumSize(QtCore.QSize(50, 50))
         self.feedback.setMaximumSize(QtCore.QSize(320, 320))
-        self.feedback.setFocusPolicy(QtCore.Qt.TabFocus)
         self.feedback.setText("")
+        self.feedback.setAlignment(QtCore.Qt.AlignCenter)
         self.feedback.setObjectName("feedback")
         self.backCircleLayout.addWidget(self.feedback, 0, 0, 1, 1)
         self.gridLayout_up.addWidget(self.backCircle, 0, 3, 2, 1)
@@ -399,8 +372,9 @@ class Ui_MainWindow(object):
 
         # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
-        self.setWindowOpacity(0.98)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
+        # self.setWindowOpacity(0.98)
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
+
         self.exit.clicked.connect(self.close)       # close window
         self.mini.clicked.connect(self.showMinimized)  # minimum window
         self.windowMoved.connect(self.move)  # move window
@@ -495,17 +469,21 @@ class Ui_MainWindow(object):
             self.backCircle.addItem(self.orange_glow)
 
         if type == 'acc':
-            self.feedback.setIcon(self.acc_svg)
-            self.feedback.setIconSize(QtCore.QSize(150, 150))
+            self.feedback.setPixmap(self.acc_icon_png)
+            self.feedback.setScaledContents(True)
+            self.feedback.setMaximumSize(QtCore.QSize(100, 150))
         elif type == 'brake':
-            self.feedback.setIcon(self.brake_svg)
-            self.feedback.setIconSize(QtCore.QSize(150, 150))
+            self.feedback.setPixmap(self.brake_icon_png)
+            self.feedback.setScaledContents(True)
+            self.feedback.setMaximumSize(QtCore.QSize(100, 150))
         elif type == 'turn':
-            self.feedback.setIcon(self.turn_svg)
-            self.feedback.setIconSize(QtCore.QSize(150, 150))
+            self.feedback.setPixmap(self.turn_icon_png)
+            self.feedback.setScaledContents(True)
+            self.feedback.setMaximumSize(QtCore.QSize(100, 150))
         elif type == 'swerve':
-            self.feedback.setIcon(self.swerve_svg)
-            self.feedback.setIconSize(QtCore.QSize(150, 150))
+            self.feedback.setPixmap(self.swerve_icon_png)
+            self.feedback.setScaledContents(True)
+            self.feedback.setMaximumSize(QtCore.QSize(100, 150))
 
     def change_icons(self, level: int, type: str):
         if type == 'acc':
