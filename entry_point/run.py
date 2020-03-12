@@ -2,9 +2,9 @@
 from ctypes import c_bool
 import multiprocessing
 from ctypes import c_bool
-from entry_point.DetectProcess2 import DetectProcess2
 from entry_point.DetectProcess import DetectProcess
 from entry_point.Event import Event
+from entry_point.LDAController import LDAController
 from entry_point.Listener import ListenerThread
 import sys
 from PyQt5.QtCore import pyqtSignal
@@ -19,7 +19,7 @@ from ctypes import c_bool
 
 
 
-
+LDA_buffer = []
 
 class MyWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
@@ -66,7 +66,7 @@ class NextWindow(QMainWindow, Ui_Dialog):
 
 
 def run():
-
+    global LDA_buffer
     eventQueue = multiprocessing.Queue()
     processLock = multiprocessing.Lock()
     speed = multiprocessing.Value("i", 0)
@@ -76,34 +76,43 @@ def run():
     app = QApplication(sys.argv)
     myWin = MyWindow()
     myWin.show()
+    # myWin.initalface('acc')
+    # myWin.initalface('turn')
+    # myWin.initalface('swerve')
+    # myWin.initalface('brake')
 
 
 
-
-    timer = pg.QtCore.QTimer()
-    timer.timeout.connect(myWin.update_flowing_score)
-
-    timer.start(400)
+    # timer = pg.QtCore.QTimer()
+    # timer.timeout.connect(myWin.update_flowing_score)
+    # timer.start(400)
 
     eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
     eventDetectP.daemon = True
     eventDetectP.start()
 
-    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_buffer)
     listener.bar_signal.connect(myWin.setBar)
     listener.start()
 
-    myWin.setCurrentScore(45)
+    lda_controller = LDAController(LDA_buffer)
+    lda_controller.score_signal.connect(myWin.setCurrentScore)
+    lda_controller.start()
+
+
     myWin.setFeedBack(1,'acc')
+
 
     myWin.initalface('acc')
     myWin.initalface('turn')
     myWin.initalface('swerve')
     myWin.initalface('brake')
-    myWin.setBar('highrisk','acc')
-    myWin.setBar('safe','brake')
-    myWin.setBar('highrisk','turn')
-    myWin.setBar('mediumrisk','swerve')
+    myWin.setBar(2,'acc')
+    myWin.setBar(2,'brake')
+    myWin.setBar(1,'turn')
+    myWin.setBar(0,'swerve')
+# # =======
+# >>>>>>> ead530635418d7021d6e366e0f44ad129f29d7a2
 
 
     sys.exit(app.exec_())

@@ -8,25 +8,26 @@ from PyQt5.QtCore import pyqtSignal, QThread
 
 from entry_point.LDA_scoreing import LDAForEvent
 import joblib
+import time
 
 
 class ListenerThread(QThread):
-    bar_signal = pyqtSignal([int, str])
-    score_signal = pyqtSignal([int])
-    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_flag: Value):
+    bar_signal = pyqtSignal(int, str)
+    score_signal = pyqtSignal(int)
+    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDAbuffer: list):
         QThread.__init__(self)
         self.eventQueue = eventQueue
         self.processLock = processLock
         self.SVM_flag = SVM_flag
-        self.ldamodel = LDAForEvent("entry_point/model")
+        self.buffer = LDAbuffer
+        self.svm = joblib.load('entry_point/svm.pkl')
+
 
 
 
     def run(self):
-        svm = joblib.load('svm.pkl')
-
         while True:
-
+            time.sleep(1)
             if (not self.eventQueue.empty()) and self.SVM_flag.value == 0:
                 event_list = []
                 while(not self.eventQueue.empty()):
@@ -35,7 +36,7 @@ class ListenerThread(QThread):
 
                 for i in range(0, len(event_list)):
                     if event_list[i] is not None:
-                        vect = np.array(event_list[i].getValue())
+                        vect = np.array(event_list[i].get_value())
                         vect = vect.astype(np.float64)
                         # function name: calculate_feature()
                         # calculate the 17 features
@@ -45,17 +46,21 @@ class ListenerThread(QThread):
                         # nomaliz the 17 features
                         vect = self.nomalization(vect)
 
-                        result = svm.predict([vect])
-                        score = svm.decision_function([vect])
+                        result = self.svm.predict([vect])
+                        score = self.svm.decision_function([vect])
                         score = np.array(score[0])
 
                         event_label = self.get_event_label(event_list[i], score)
                         level, type = self.get_level_type(event_label[0])
 
-                        self.bar_signal[int, str].emit(level, type)
+                        self.bar_signal.emit(level, type)
 
                         # emit pattern score to ui
-                        self.bar_signal[int].emit(score)
+                        pattern = self.get_pattern(event_label[0])
+                        self.buffer.append(pattern)
+
+
+
 
     def calculate_feature(self,vect):
         maxAX = max(vect[:, 3])
@@ -86,7 +91,7 @@ class ListenerThread(QThread):
         varSP = np.std(vect[:, 1])
         StartEndAccx = vect[0, 3] + vect[-1, 3]
         StartEndAccy = vect[0, 2] + vect[-1, 2]
-        axis = 0
+        axis = vect[0, -1]
         return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY, differenceSP,
                 meanSP, StartEndAccx, StartEndAccy, t, axis]  # 99% 86%
 
@@ -103,9 +108,37 @@ class ListenerThread(QThread):
 
         return (label % 3), type
 
+    def get_pattern(self, label):
+        pattern = ''
+        if label == 0:
+            pattern = 'a'
+        if label == 1:
+            pattern = 'h'
+        if label == 2:
+            pattern = 'o'
+        if label == 3:
+            pattern = 'v'
+        if label == 4:
+            pattern = 'b'
+        if label == 5:
+            pattern = 'i'
+        if label == 6:
+            pattern = 'p'
+        if label == 7:
+            pattern = 'w'
+        if label == 8:
+            pattern = 'c'
+        if label == 9:
+            pattern = 'j'
+        if label == 10:
+            pattern = 'q'
+        if label == 11:
+            pattern = 'x'
+        return pattern
+
     def get_event_label(self, event, score):
         result = [0]
-        if event.getType() >= 2:
+        if event.get_type() >= 2:
             index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
             if index == 0:
                 result = [2]
@@ -119,7 +152,7 @@ class ListenerThread(QThread):
                 result = [10]
             else:
                 result = [11]
-        elif event.getType() == 0:
+        elif event.get_type() == 0:
             index = np.argmax([score[0], score[4], score[8]])
             if index == 0:
                 result = [0]
@@ -127,7 +160,7 @@ class ListenerThread(QThread):
                 result = [4]
             elif index == 2:
                 result = [8]
-        elif event.getType() == 1:
+        elif event.get_type() == 1:
             index = np.argmax([score[1], score[5], score[9]])
             if index == 0:
                 result = [1]

@@ -10,7 +10,6 @@ import traceback
 from PyQt5 import QtCore, QtGui, QtWidgets
 # from PyQt5.QtChart import *
 import pyqtgraph as pg
-import tushare as ts
 import numpy as np
 from pyqtgraph import PlotWidget
 
@@ -102,8 +101,8 @@ class Ui_Dialog(object):
         # self.pie_widget.setStyleSheet("#pie_widget{background-color: yellow}")
         # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
-        self.setWindowOpacity(0.98)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
+        # self.setWindowOpacity(0.98)
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
 
         # window move
         self.windowMoved.connect(self.move)  # move window
@@ -191,7 +190,7 @@ class Ui_Dialog(object):
 
         # data = [[0, 10, 20, 9, 23], [1, 10, 20, 9, 23], [2, 10, 20, 9, 23], [3, 10, 20, 9, 23]]
         y_min = self.data[:,3].min()
-        print(y_min)
+        # print(y_min)
         y_max = self.data[:,4].max()
 
         self.k_plt.plotItem.clear() # 清空绘图部件中的项
@@ -209,6 +208,20 @@ class Ui_Dialog(object):
         self.hLine = pg.InfiniteLine(angle=0, movable=False, )  # 创建一个水平线条
         self.k_plt.addItem(self.vLine, ignoreBounds=True)  # 在图形部件中添加垂直线条
         self.k_plt.addItem(self.hLine, ignoreBounds=True)  # 在图形部件中添加水平线条
+
+    def mousePressEvent(self,event):
+        if event.button() == QtCore.Qt.LeftButton:
+            self.mPos = event.pos()
+        event.accept()
+
+    def mouseReleaseEvent(self, event):
+        self.mPos = None
+        event.accept()
+
+    def mouseMoveEvent(self,event):
+        if event.buttons() == QtCore.Qt.LeftButton and self.mPos:
+            self.windowMoved.emit(self.mapToGlobal(event.pos() - self.mPos))
+        event.accept()
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -231,7 +244,7 @@ class CandlestickItem(pg.GraphicsObject):
         p.setPen(pg.mkPen('w')) # 设置画笔颜色
         w = (self.data[1][0] - self.data[0][0]) / 3.
         for (t, open, close, min, max) in self.data:
-            print(t, open, close, min, max)
+            # print(t, open, close, min, max)
             p.drawLine(QtCore.QPointF(t, min), QtCore.QPointF(t, max)) # 绘制线条
             if open > close: # 开盘价大于收盘价
                 p.setBrush(pg.mkBrush('g')) # 设置画刷颜色为绿
