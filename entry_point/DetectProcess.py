@@ -285,9 +285,9 @@ class DetectProcess(multiprocessing.Process):
         std_y_array = []
         raw_y_array = []
         flag = False
-        min_length = int(self.sampling_rate * 1.5)
+        min_length = int(self.sampling_rate)
         max_length = int(self.sampling_rate * 14)
-        fault_num = int(5 * self.sampling_rate / 10)
+        fault_num = int(2 * self.sampling_rate / 10)
         self.std_y_queue.put(data)
 
         if self.std_y_queue.full():
@@ -315,6 +315,7 @@ class DetectProcess(multiprocessing.Process):
                         self.turn_event.add_value(raw_y_array[i])
                     #  acquire process lock to add SVM_flag
                     self.change_event_num(1)  # add 1 current event num
+                    self.y_negative = False
                 elif acc_y > 0.06 and self.turn_threshold_num > 0:
                     self.turn_threshold_num += 1
                     self.turn_fault = fault_num
@@ -347,6 +348,7 @@ class DetectProcess(multiprocessing.Process):
                         self.turn_event.add_value(raw_y_array[i])
                     #  acquire process lock to add SVM_flag
                     self.change_event_num(1)  # add 1 current event num
+                    self.y_positive = False
                 elif acc_y < -0.06 and self.turn_threshold_num > 0:
                     self.turn_threshold_num += 1
                     self.turn_fault = fault_num
