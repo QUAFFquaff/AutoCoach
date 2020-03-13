@@ -78,19 +78,17 @@ class Ui_Dialog(object):
         self.graph_widget.setObjectName("graph_widget")
 
         self.pie_widget =  QtWidgets.QWidget(self.graph_widget)
-        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.pie_widget.sizePolicy().hasHeightForWidth())
-        # self.pie_widget.setSizePolicy(sizePolicy)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pie_widget.sizePolicy().hasHeightForWidth())
+        self.pie_widget.setSizePolicy(sizePolicy)
         self.pie_widget.setMinimumSize(QtCore.QSize(0, 50))
-        # # self.pie_widget.setMaximumSize(QtCore.QSize(16777215, 50))
-        # self.k_widget.setObjectName("pie_widget")
-        # self.pie_widget.setStyleSheet("#pie_widget{background-color: yellow}")
+        self.pie_widget.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.k_widget.setObjectName("pie_widget")
+        self.pie_widget.setStyleSheet("#pie_widget{background-color: yellow}")
         # beautify window
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
-        # self.setWindowOpacity(0.98)
-        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
 
         # window move
         self.windowMoved.connect(self.move)  # move window
