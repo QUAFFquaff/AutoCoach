@@ -28,7 +28,9 @@ class ListenerThread(QThread):
     def run(self):
         while True:
             time.sleep(1)
-            if (not self.eventQueue.empty()) and self.SVM_flag.value == 0:
+            print(self.SVM_flag.value)
+            
+            if (not self.eventQueue.empty()):
                 event_list = []
                 while not self.eventQueue.empty():
                     event_list.append(self.eventQueue.get())

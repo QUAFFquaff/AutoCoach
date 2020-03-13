@@ -98,8 +98,8 @@ class DetectProcess(multiprocessing.Process):
                     event_data = data_buffer.get()
 
                     # detect event
-                    event_x = self.detect_x_event([event_data[0], event_data[1].value, event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 0, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
-                    event_y = self.detect_y_event([event_data[0], event_data[1].value, event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 1, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
+                    event_x = self.detect_x_event([event_data[0], event_data[1], event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 0, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
+                    event_y = self.detect_y_event([event_data[0], event_data[1], event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 1, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
 
                     if event_x is not None:
                         print("there is a event from x axis")
