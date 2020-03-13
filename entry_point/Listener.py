@@ -30,8 +30,9 @@ class ListenerThread(QThread):
             time.sleep(1)
             if (not self.eventQueue.empty()) and self.SVM_flag.value == 0:
                 event_list = []
-                while(not self.eventQueue.empty()):
+                while not self.eventQueue.empty():
                     event_list.append(self.eventQueue.get())
+                print("overlap:"+str(len(event_list)))
                 event_list = self.makeDecision(event_list)
 
                 for i in range(0, len(event_list)):

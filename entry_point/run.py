@@ -1,7 +1,4 @@
 
-from ctypes import c_bool
-import multiprocessing
-from ctypes import c_bool
 from entry_point.DetectProcess import DetectProcess
 from entry_point.Event import Event
 from entry_point.LDAController import LDAController
@@ -15,8 +12,9 @@ from QssLoader import *
 import pyqtgraph as pg
 import multiprocessing
 from ctypes import c_bool
-
-
+import threading
+from entry_point.FeedbackController import FeedbackController
+from queue import Queue
 
 
 LDA_buffer = []
@@ -76,16 +74,10 @@ def run():
     app = QApplication(sys.argv)
     myWin = MyWindow()
     myWin.show()
-    # myWin.initalface('acc')
-    # myWin.initalface('turn')
-    # myWin.initalface('swerve')
-    # myWin.initalface('brake')
 
-
-
-    # timer = pg.QtCore.QTimer()
-    # timer.timeout.connect(myWin.update_flowing_score)
-    # timer.start(400)
+    timer = pg.QtCore.QTimer()
+    timer.timeout.connect(myWin.update_flowing_score)
+    timer.start(400)
 
     eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
     eventDetectP.daemon = True
@@ -95,9 +87,17 @@ def run():
     listener.bar_signal.connect(myWin.setBar)
     listener.start()
 
-    lda_controller = LDAController(LDA_buffer)
+    cond = threading.Condition()
+    feedback_queue = Queue(maxsize=6)
+    feedback_controller = FeedbackController(feedback_queue, cond)
+    feedback_controller.daemon = True
+    # feedback_controller.feedback_signal.connect(myWin.setFeedBack)
+    feedback_controller.start()
+
+    lda_controller = LDAController(LDA_buffer, feedback_queue, cond)
     lda_controller.score_signal.connect(myWin.setCurrentScore)
     lda_controller.start()
+
 
 
     myWin.setFeedBack(1,'acc')
