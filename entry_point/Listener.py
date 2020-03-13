@@ -110,32 +110,8 @@ class ListenerThread(QThread):
         return (label % 3), type
 
     def get_pattern(self, label):
-        pattern = ''
-        if label == 0:
-            pattern = 'a'
-        if label == 1:
-            pattern = 'h'
-        if label == 2:
-            pattern = 'o'
-        if label == 3:
-            pattern = 'v'
-        if label == 4:
-            pattern = 'b'
-        if label == 5:
-            pattern = 'i'
-        if label == 6:
-            pattern = 'p'
-        if label == 7:
-            pattern = 'w'
-        if label == 8:
-            pattern = 'c'
-        if label == 9:
-            pattern = 'j'
-        if label == 10:
-            pattern = 'q'
-        if label == 11:
-            pattern = 'x'
-        return pattern
+        pattern = 'ahovbipwcjqx'
+        return pattern[label]
 
     def get_event_label(self, event, score):
         result = [0]
