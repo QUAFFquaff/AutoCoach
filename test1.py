@@ -1,7 +1,7 @@
 import MySQLdb
 import datetime
 
-'''连接数据库'''
+'''connect to db'''
 conn = MySQLdb.connect(host = 'autocoach.cexuitmi8ofq.us-west-1.rds.amazonaws.com',
 
                              user = 'admin',
