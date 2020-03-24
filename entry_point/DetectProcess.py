@@ -17,12 +17,11 @@ from entry_point.Event import Event
 
 # process for event detection
 class DetectProcess(multiprocessing.Process):
-    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_flag: Value):
+    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, SVM_flag: Value, LDA_flag: Value):
         multiprocessing.Process.__init__(self)
         print('init event detection')
         self.eventQueue = eventQueue
         self.processLock = processLock
-        self.speed = speed
         self.SVM_flag = SVM_flag
         self.LDA_flag = LDA_flag
         # oriantation matrix
@@ -56,7 +55,7 @@ class DetectProcess(multiprocessing.Process):
         self.bt_serial = self.getSerial()
         obd_data = ''.encode('utf-8')
 
-        #initial sampling rate
+        # initial sampling rate and queue to contain data( used to calculate standard deviation)
         self.sampling_rate = self.getSamplingRate(obd_data)
         self.std_window = int(self.sampling_rate + 0.5)
         self.std_x_queue = Queue(maxsize=(2 * self.std_window - 1))
@@ -75,7 +74,7 @@ class DetectProcess(multiprocessing.Process):
             if row != "":
                 timestamp = int(round(time.time()*1000))
                 device_id = row[0]
-                self.speed.value = row[1]
+                speed = row[1]
                 acc_y = row[2]
                 acc_x = row[3]
                 acc_z = row[4]
@@ -90,14 +89,14 @@ class DetectProcess(multiprocessing.Process):
                 lowpass_queue.put(acc_list)
                 if data_buffer.full():
                     data_buffer.get()
-                data_buffer.put(np.array([timestamp, self.speed.value, acc_y, acc_x, acc_z, gyo_x, gyo_y, gyo_z]))
+                data_buffer.put(np.array([timestamp, speed, acc_y, acc_x, acc_z, gyo_x, gyo_y, gyo_z]))
                 if lowpass_queue.qsize() > 59:
                     acc_x_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'x'))
                     acc_y_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'y'))
                     acc_z_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'z'))
                     event_data = data_buffer.get()
 
-                    # detect event
+                    # detect event from x and y
                     event_x = self.detect_x_event([event_data[0], event_data[1], event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 0, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
                     event_y = self.detect_y_event([event_data[0], event_data[1], event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 1, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
 
@@ -105,16 +104,16 @@ class DetectProcess(multiprocessing.Process):
                         print("there is a event from x axis")
                         event_x.filter(b, a)
                         self.processLock.acquire()  # get the lock
-                        self.eventQueue.put(event_x)
                         self.SVM_flag.value -= 1
+                        self.eventQueue.put(event_x)
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
                     if event_y is not None:
                         print("there is a event from yaxis")
                         event_y.filter(b, a)
                         self.processLock.acquire()  # get the lock
-                        self.eventQueue.put(event_y)
                         self.SVM_flag.value -= 1
+                        self.eventQueue.put(event_y)
                         self.processLock.release()  # release the process lock
                         print("put turn into svm")
 
@@ -285,7 +284,7 @@ class DetectProcess(multiprocessing.Process):
         std_y_array = []
         raw_y_array = []
         flag = False
-        min_length = int(self.sampling_rate)
+        min_length = int(self.sampling_rate * 0.6)
         max_length = int(self.sampling_rate * 14)
         fault_num = int(2 * self.sampling_rate / 10)
         self.std_y_queue.put(data)
@@ -296,10 +295,11 @@ class DetectProcess(multiprocessing.Process):
                 temp = self.std_y_queue.get()
                 std_container.append(temp[9])
                 if i >= self.std_window - 1:
+                    # store the standard deviation
                     std_y_array.append(np.std(std_container[i - self.std_window + 1:i + 1], ddof=1))
                     raw_y_array.append(temp[0:9])
                 self.std_y_queue.put(temp)
-            self.std_y_queue.get()  # delete current node
+            self.std_y_queue.get()  # delete the first node
             start_index = std_y_array.index(min(std_y_array))
 
             std_y = std_y_array[-1]
