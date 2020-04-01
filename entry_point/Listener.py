@@ -111,7 +111,7 @@ class ListenerThread(QThread):
         return (label % 3), type
 
     def get_pattern(self, label: int):
-        pattern = 'ahovbipwcjqx'
+        pattern = 'abchijopqvwx'
         return pattern[label]
 
     def get_event_label(self, event, score):
