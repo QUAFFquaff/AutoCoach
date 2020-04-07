@@ -100,7 +100,7 @@ def run():
 
 
 
-    # myWin.setFeedBack(1,'acc')
+    myWin.setFeedBack(0,'acc')
 
 
     myWin.initalface('acc')
