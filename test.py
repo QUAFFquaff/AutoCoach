@@ -40,8 +40,9 @@ data = []
 #     pass
 
 
-event_dict = {'h':0, 'o':0, 'b':0, 'i':0, 'w':0, 'c':0, 'q':0, 'x':0}
-event_dict['a']+=1
-print(event_dict)
+event_mid_dict = {'i': 0, 'b': 0, 'p': 0, 'w': 0}
+event_high_dict = {'j': 0, 'c': 0, 'q': 0, 'x': 0}
+max_high = max(event_high_dict, key=event_high_dict.get)
+print(max_high)
 
 

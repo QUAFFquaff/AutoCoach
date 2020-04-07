@@ -27,8 +27,8 @@ class FeedbackController(threading.Thread, QThread):
                 self.cond.notify()
 
                 # deal with feedback
-                event_mid_dict = {'b':0, 'i':0, 'p':0, 'w':0}
-                event_high_dict = {'c':0, 'j':0, 'q':0, 'x':0}
+                event_mid_dict = {'i':0, 'b':0, 'p':0, 'w':0}
+                event_high_dict = {'j':0, 'c':0, 'q':0, 'x':0}
                 sum_score = 0
                 avg_score = 0
                 for feedbackPack in feedback_queue:
@@ -48,9 +48,9 @@ class FeedbackController(threading.Thread, QThread):
                         max_high = max(event_high_dict, key=event_high_dict.get)
                         max_mid = max(event_mid_dict, key=event_mid_dict.get)
                         if event_high_dict[max_high] != 0:
-                            self.feedback_signal.emit(2, max_high)
+                            self.feedback_signal.emit(2, self.transfer(max_high))
                         elif event_mid_dict[max_mid] != 0:
-                            self.feedback_signal.emit(1, max_mid)
+                            self.feedback_signal.emit(1, self.transfer(max_mid))
                         else:
                             pass
 
