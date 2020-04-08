@@ -44,8 +44,8 @@ event_mid_dict = {'i': 0, 'b': 0, 'p': 0, 'w': 0}
 event_high_dict = {'j': 0, 'c': 0, 'q': 0, 'x': 0}
 max_high = max(event_high_dict, key=event_high_dict.get)
 print(max_high)
+list = ['c','q','q','h']
+print("".join(list))
 
-data = [0,1,2,3,4,5,6,7,8,9,10]
-print(data[0:9])
 
 

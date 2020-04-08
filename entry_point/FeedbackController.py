@@ -55,9 +55,9 @@ class FeedbackController(threading.Thread, QThread):
                         elif event_mid_dict[max_mid] != 0:
                             self.feedback_signal.emit(1, self.transfer(max_mid))
                         else:
-                            print("到这里了吗")
-                            self.feedback_signal.emit(0, 'no')
-
+                            self.feedback_signal.emit(0, '')
+                    else:
+                        self.feedback_signal.emit(0, '')
 
     def transfer(self, event: str):
         if event == 'b' or event == 'c':
