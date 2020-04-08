@@ -31,6 +31,7 @@ class LDAController(QThread):
                 self.pattern_queue.put([self.pattern, score])
                 print("反馈队列长度："+str(self.pattern_queue.qsize()))
                 if self.pattern_queue.full():  # notify feedback to poll all the 6 patterns
+                    print("notify feedback thread")
                     self.condition.notify()
                     self.condition.wait()
                 end_time = datetime.datetime.now()

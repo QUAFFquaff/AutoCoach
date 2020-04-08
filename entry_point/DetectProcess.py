@@ -104,9 +104,7 @@ class DetectProcess(multiprocessing.Process):
                         print("there is a event from x axis")
                         event_x.filter(b, a)
                         self.processLock.acquire()  # get the lock
-                        print("svmflag减一前是"+str(self.SVM_flag.value))
                         self.SVM_flag.value -= 1
-                        print("svmflag减一后是" + str(self.SVM_flag.value))
                         self.eventQueue.put(event_x)
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
