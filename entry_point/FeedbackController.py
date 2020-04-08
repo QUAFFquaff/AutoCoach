@@ -18,7 +18,6 @@ class FeedbackController(threading.Thread, QThread):
 
     def run(self):
         with self.cond:
-            print("feedback")
             while True:
                 feedback_queue = []
                 self.cond.wait()
@@ -34,6 +33,9 @@ class FeedbackController(threading.Thread, QThread):
                 for feedbackPack in feedback_queue:
                     patterns = feedbackPack[0]
                     score = feedbackPack[1]
+
+                    print("pattern:"+patterns)
+                    print("score"+str(score))
                     sum_score+=score
                     for pattern in patterns:
                         if pattern in event_mid_dict:
