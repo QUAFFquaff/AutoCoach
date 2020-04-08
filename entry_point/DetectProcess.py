@@ -104,7 +104,9 @@ class DetectProcess(multiprocessing.Process):
                         print("there is a event from x axis")
                         event_x.filter(b, a)
                         self.processLock.acquire()  # get the lock
+                        print("svmflag减一前是"+str(self.SVM_flag.value))
                         self.SVM_flag.value -= 1
+                        print("svmflag减一后是" + str(self.SVM_flag.value))
                         self.eventQueue.put(event_x)
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
@@ -308,7 +310,7 @@ class DetectProcess(multiprocessing.Process):
 
             if self.y_positive:
                 if acc_y > 0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
-                    #print("left start")
+                    print("left start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 2)
                     for i in range(start_index, len(std_y_array)):
@@ -335,13 +337,13 @@ class DetectProcess(multiprocessing.Process):
                         self.turn_threshold_num = 0
                         return self.turn_event
                     else:
-                        #print("left turn cancel")
+                        print("left turn cancel")
                         self.turn_threshold_num = 0
                         self.change_event_num(-1)
 
             if self.y_negative:
                 if acc_y < -0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
-                    #print("right trun start")
+                    print("right trun start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 3)
                     for i in range(start_index, len(std_y_array)):
@@ -368,7 +370,7 @@ class DetectProcess(multiprocessing.Process):
                         self.turn_threshold_num = 0
                         return self.turn_event
                     else:
-                        #print("right cancel")
+                        print("right cancel")
                         self.turn_threshold_num = 0
                         self.change_event_num(-1)
 

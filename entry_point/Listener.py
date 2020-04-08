@@ -28,11 +28,12 @@ class ListenerThread(QThread):
     def run(self):
         while True:
             time.sleep(1)
-            print(self.SVM_flag.value)
+
             
             if (not self.eventQueue.empty()):
                 event_list = []
                 self.processLock.acquire()
+                print(self.SVM_flag.value)
                 while not self.eventQueue.empty():
                     event_list.append(self.eventQueue.get())
                 self.processLock.release()
