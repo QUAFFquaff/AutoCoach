@@ -21,6 +21,7 @@ data = [[0, 10, 20, 9, 30], [1, 50, 20, 9, 60], [2, 10, 20, 9, 23], [3, 10, 30, 
 class Ui_Dialog(object):
     windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
 
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(750, 500)
@@ -41,75 +42,17 @@ class Ui_Dialog(object):
         self.graph_widget.setObjectName("graph_widget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.graph_widget)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.pie_widget = QtWidgets.QWidget(self.graph_widget)
-        self.pie_widget.setMinimumSize(QtCore.QSize(300, 200))
-        self.pie_widget.setObjectName("pie_widget")
-        self.CurrentScore = QtWidgets.QLabel(self.pie_widget)
-        self.CurrentScore.setGeometry(QtCore.QRect(110, 70, 91, 61))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.CurrentScore.sizePolicy().hasHeightForWidth())
-        self.CurrentScore.setSizePolicy(sizePolicy)
-        self.CurrentScore.setMinimumSize(QtCore.QSize(20, 20))
-        self.CurrentScore.setMaximumSize(QtCore.QSize(300, 120))
-        font = QtGui.QFont()
-        font.setFamily("Brush Script Std")
-        font.setPointSize(50)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.CurrentScore.setFont(font)
-        self.CurrentScore.setAlignment(QtCore.Qt.AlignCenter)
-        self.CurrentScore.setObjectName("CurrentScore")
-
-        self.gridLayout_up = QtWidgets.QGridLayout(self.pie_widget)
-        self.gridLayout_up.setContentsMargins(-1, 0, -1, 0)
-        self.gridLayout_up.setHorizontalSpacing(0)
-        self.gridLayout_up.setVerticalSpacing(20)
-        self.gridLayout_up.setObjectName("gridLayout_up")
-        self.badge1 = QtWidgets.QWidget(self.pie_widget)
-        # self.badge1.setMaximumSize(QtCore.QSize(20, 35))
-        self.badge1.setObjectName("badge1")
-        self.gridLayout_up.addWidget(self.badge1, 2, 0, 1, 1)
-
-        self.badge2 = QtWidgets.QWidget(self.pie_widget)
-        self.badge2.setGeometry(QtCore.QRect(510, 60, 71, 61))
-        self.badge2.setObjectName("badge2")
-        self.widget_3 = QtWidgets.QWidget(self.pie_widget)
-        self.widget_3.setGeometry(QtCore.QRect(600, 60, 71, 61))
-        self.widget_3.setObjectName("widget_3")
-        self.CurrentScore_3 = QtWidgets.QLabel(self.pie_widget)
-        self.CurrentScore_3.setGeometry(QtCore.QRect(20, 0, 300, 61))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.CurrentScore_3.sizePolicy().hasHeightForWidth())
-        self.CurrentScore_3.setSizePolicy(sizePolicy)
-        self.CurrentScore_3.setMinimumSize(QtCore.QSize(20, 20))
-        self.CurrentScore_3.setMaximumSize(QtCore.QSize(300, 120))
-        font = QtGui.QFont()
-        font.setFamily("Brush Script Std")
-        font.setPointSize(33)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.CurrentScore_3.setFont(font)
-        self.CurrentScore_3.setAlignment(QtCore.Qt.AlignCenter)
-        self.CurrentScore_3.setObjectName("CurrentScore_3")
-        self.horizontalLayout_2.addWidget(self.pie_widget)
-        self.verticalLayout.addWidget(self.graph_widget)
 
         pg.setConfigOption('background', '#17191A')
 
-
-        self._badge1 = QtGui.QPixmap('icons/Badges/png/001-first-place.png')
-
-        self.acc_pic_coin = QtWidgets.QLabel(self.badge1)
+        self.pie_widget = QtWidgets.QWidget(self.graph_widget)
+        self.acc_pic_coin = QtWidgets.QLabel(self.pie_widget)
         self.acc_pic_coin.setMargin(5)
-        self.acc_pic_coin.setPixmap(self._badge1)
+        self._gold_coin = QtGui.QPixmap('icons/Badges/png/001-first-place.png')
+        self.acc_pic_coin.setPixmap(self._gold_coin)
         self.acc_pic_coin.setScaledContents(True)
         self.acc_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+
 
         spacerItem = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
@@ -184,11 +127,11 @@ class Ui_Dialog(object):
     def boundingRect(self):
         return QtCore.QRectF(self.picture.boundingRect())
 
+
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.CurrentScore.setText(_translate("Dialog", "86"))
-        self.CurrentScore_3.setText(_translate("Dialog", "Average Score:"))
         self.backBtn.setText(_translate("Dialog", "back"))
 
-from pyqtgraph import PlotWidget
+
+

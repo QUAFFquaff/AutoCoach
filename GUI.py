@@ -295,16 +295,10 @@ class Ui_MainWindow(object):
         self.swerve_level.setObjectName("swerve_level")
         self.gridLayout_up.addWidget(self.swerve_level, 2, 6, 1, 1)
         self.acc_bar = QtWidgets.QWidget(self.up)
-#<<<<<<< HEAD
-        # self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
-        # self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
-        self.acc_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.acc_bar.setMaximumSize(QtCore.QSize(80, 250))
-# #>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
-# =======
+
         self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
-# >>>>>>> ead530635418d7021d6e366e0f44ad129f29d7a2
+
         self.acc_bar.setObjectName("acc_bar")
         self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.acc_bar)
         self.verticalLayout_acc.setContentsMargins(15, 0, 15, 0)

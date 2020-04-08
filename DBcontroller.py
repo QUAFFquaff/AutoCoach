@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 # @Time    : 3/12/2020 16:53
 # @Author  : Haoyu Lyu
-# @File    : sendData.py
+# @File    : DBcontroller.py
 # @Software: PyCharm
+import datetime
 import re
+import time
 
 import MySQLdb
 
@@ -66,7 +68,7 @@ class DBController():
 
 
     def save_data(self):
-        l1 =np.array([['localFile', 'test_name', '1', '1', '1', 'o_x', 'o_y', 'o_z','str(datetime.time)']])
+        l1 =np.array([['realtime', 'test_name', '1', '1', '1', 'o_x', 'o_y', 'o_z',str(time.time())]])
         print(l1)
         f = open('test.txt', 'a')
         for lines in l1:
