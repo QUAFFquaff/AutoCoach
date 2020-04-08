@@ -309,7 +309,7 @@ class DetectProcess(multiprocessing.Process):
             timestamp = data[0]
 
             if self.y_positive:
-                print(acc_y)
+                # print(acc_y)
                 if acc_y > 0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
                     print("Left start")
                     self.turn_threshold_num += 1
