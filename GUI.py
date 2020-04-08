@@ -486,6 +486,8 @@ class Ui_MainWindow(object):
             self.feedback.setPixmap(self.swerve_icon_png)
             self.feedback.setScaledContents(True)
             self.feedback.setMaximumSize(QtCore.QSize(100, 150))
+        else:
+            self.feedback.clear()
 
     def change_icons(self, level: int, type: str):
         if type == 'acc':

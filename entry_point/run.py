@@ -79,19 +79,19 @@ def run():
     timer.timeout.connect(myWin.update_flowing_score)
     timer.start(400)
 
-    eventDetectP = DetectProcess(eventQueue, processLock, speed, SVM_flag, LDA_flag)
+    eventDetectP = DetectProcess(eventQueue, processLock, SVM_flag, LDA_flag)
     eventDetectP.daemon = True
     eventDetectP.start()
 
-    listener = ListenerThread(eventQueue, processLock, speed, SVM_flag, LDA_buffer)
+    listener = ListenerThread(eventQueue, processLock, SVM_flag, LDA_buffer)
     listener.bar_signal.connect(myWin.setBar)
     listener.start()
 
     cond = threading.Condition()
-    feedback_queue = Queue(maxsize=6)
+    feedback_queue = Queue(maxsize=1)
     feedback_controller = FeedbackController(feedback_queue, cond)
     feedback_controller.daemon = True
-    # feedback_controller.feedback_signal.connect(myWin.setFeedBack)
+    feedback_controller.feedback_signal.connect(myWin.setFeedBack)
     feedback_controller.start()
 
     lda_controller = LDAController(LDA_buffer, feedback_queue, cond)
@@ -100,7 +100,7 @@ def run():
 
 
 
-    myWin.setFeedBack(1,'acc')
+    myWin.setFeedBack(0,'acc')
 
 
     myWin.initalface('acc')

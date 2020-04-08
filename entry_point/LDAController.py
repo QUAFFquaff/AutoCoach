@@ -27,9 +27,13 @@ class LDAController(QThread):
             while True:
                 start_time = datetime.datetime.now()
                 print(self.pattern)
+                pattern_to_feedback = "".join(self.pattern)
                 score = self.score_pattern()
-                self.pattern_queue.put((self.pattern, score))
+
+                # communicate with feedback thread
+                self.pattern_queue.put([pattern_to_feedback, score])
                 if self.pattern_queue.full():  # notify feedback to poll all the 6 patterns
+                    print("notify feedback thread")
                     self.condition.notify()
                     self.condition.wait()
                 end_time = datetime.datetime.now()
