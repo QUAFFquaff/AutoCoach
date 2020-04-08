@@ -37,11 +37,15 @@ class ListenerThread(QThread):
                 while not self.eventQueue.empty():
                     event_list.append(self.eventQueue.get())
                 self.processLock.release()
-                print("overlap:"+str(len(event_list)))
+                 # print("overlap:"+str(len(event_list)))
+                print("___________")
+                print("svm receive")
                 event_list = self.makeDecision(event_list)
 
                 for i in range(0, len(event_list)):
                     if event_list[i] is not None:
+                        print("starttime:"+str(event_list[i].get_starttime())+"  endtime:"+str(event_list[i].get_endtime()))
+                        print("--------------")
                         vect = np.array(event_list[i].get_value())
                         vect = vect.astype(np.float64)
                         # function name: calculate_feature()

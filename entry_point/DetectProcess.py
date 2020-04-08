@@ -194,7 +194,7 @@ class DetectProcess(multiprocessing.Process):
         acc_flag = False
         brake_flag = False
         fault_num = int(1 * self.sampling_rate / 5)  # fault tolerance
-        min_event_length = int(self.sampling_rate * 0.4)  # minimum length for event
+        min_event_length = int(12)  # minimum length for event
 
         self.std_x_queue.put(data)
 
@@ -286,7 +286,7 @@ class DetectProcess(multiprocessing.Process):
         std_y_array = []
         raw_y_array = []
         flag = False
-        min_length = int(self.sampling_rate * 0.6)
+        min_length = int(12)
         max_length = int(self.sampling_rate * 14)
         fault_num = int(2 * self.sampling_rate / 10)
         self.std_y_queue.put(data)
@@ -311,7 +311,7 @@ class DetectProcess(multiprocessing.Process):
             if self.y_positive:
                 # print(acc_y)
                 if acc_y > 0.12 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
-                    print("Left start")
+                    print("Left turn start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 2)
                     for i in range(start_index, len(std_y_array)):
@@ -344,7 +344,7 @@ class DetectProcess(multiprocessing.Process):
 
             if self.y_negative:
                 if acc_y < -0.12 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
-                    print("right trun start")
+                    print("right turn start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 3)
                     for i in range(start_index, len(std_y_array)):
