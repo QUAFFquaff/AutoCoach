@@ -191,6 +191,20 @@ class Ui_Dialog(object):
     def boundingRect(self):
         return QtCore.QRectF(self.picture.boundingRect())
 
+    def mousePressEvent(self,event):
+        if event.button() == QtCore.Qt.LeftButton:
+            self.mPos = event.pos()
+        event.accept()
+
+    def mouseReleaseEvent(self, event):
+        self.mPos = None
+        event.accept()
+
+    def mouseMoveEvent(self,event):
+        if event.buttons() == QtCore.Qt.LeftButton and self.mPos:
+            self.windowMoved.emit(self.mapToGlobal(event.pos() - self.mPos))
+        event.accept()
+
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
