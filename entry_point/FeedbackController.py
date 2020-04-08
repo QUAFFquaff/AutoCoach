@@ -47,13 +47,9 @@ class FeedbackController(threading.Thread, QThread):
                 print(event_high_dict)
                 avg_score = sum_score / len(feedback_queue)
                 if personlaity == 3:
-                    print(avg_score)
-                    print(threshold[personlaity][0])
-                    print(threshold[personlaity][1])
-                    if avg_score in range(threshold[personlaity][0], threshold[personlaity][1]):  # need feedback
+                    if threshold[personlaity][0] <= avg_score <= threshold[personlaity][1]:  # need feedback
                         max_high = max(event_high_dict, key=event_high_dict.get)
                         max_mid = max(event_mid_dict, key=event_mid_dict.get)
-                        print("dapzhelema")
                         if event_high_dict[max_high] != 0:
                             self.feedback_signal.emit(2, self.transfer(max_high))
                         elif event_mid_dict[max_mid] != 0:
