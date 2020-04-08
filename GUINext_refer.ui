@@ -95,36 +95,6 @@
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="QWidget" name="badge1" native="true">
-             <property name="geometry">
-              <rect>
-               <x>410</x>
-               <y>60</y>
-               <width>71</width>
-               <height>61</height>
-              </rect>
-             </property>
-            </widget>
-            <widget class="QWidget" name="badge2" native="true">
-             <property name="geometry">
-              <rect>
-               <x>510</x>
-               <y>60</y>
-               <width>71</width>
-               <height>61</height>
-              </rect>
-             </property>
-            </widget>
-            <widget class="QWidget" name="widget_3" native="true">
-             <property name="geometry">
-              <rect>
-               <x>600</x>
-               <y>60</y>
-               <width>71</width>
-               <height>61</height>
-              </rect>
-             </property>
-            </widget>
             <widget class="QLabel" name="CurrentScore_3">
              <property name="geometry">
               <rect>
@@ -166,6 +136,45 @@
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+            <widget class="QLabel" name="badge1">
+             <property name="geometry">
+              <rect>
+               <x>420</x>
+               <y>40</y>
+               <width>61</width>
+               <height>51</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+            <widget class="QLabel" name="badge2">
+             <property name="geometry">
+              <rect>
+               <x>520</x>
+               <y>40</y>
+               <width>61</width>
+               <height>51</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+            <widget class="QLabel" name="badge3">
+             <property name="geometry">
+              <rect>
+               <x>610</x>
+               <y>40</y>
+               <width>61</width>
+               <height>51</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string/>
              </property>
             </widget>
            </widget>

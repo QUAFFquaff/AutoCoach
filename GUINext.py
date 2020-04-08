@@ -63,22 +63,21 @@ class Ui_Dialog(object):
         self.CurrentScore.setAlignment(QtCore.Qt.AlignCenter)
         self.CurrentScore.setObjectName("CurrentScore")
 
-        self.gridLayout_up = QtWidgets.QGridLayout(self.pie_widget)
-        self.gridLayout_up.setContentsMargins(-1, 0, -1, 0)
-        self.gridLayout_up.setHorizontalSpacing(0)
-        self.gridLayout_up.setVerticalSpacing(20)
-        self.gridLayout_up.setObjectName("gridLayout_up")
-        self.badge1 = QtWidgets.QWidget(self.pie_widget)
-        # self.badge1.setMaximumSize(QtCore.QSize(20, 35))
+        self.badge1 = QtWidgets.QLabel(self.graph_widget)
+        self.badge1.setGeometry(QtCore.QRect(420, 60, 51, 51))
+        self.badge1.setText("")
         self.badge1.setObjectName("badge1")
-        self.gridLayout_up.addWidget(self.badge1, 2, 0, 1, 1)
 
-        self.badge2 = QtWidgets.QWidget(self.pie_widget)
-        self.badge2.setGeometry(QtCore.QRect(510, 60, 71, 61))
+        self.badge2 = QtWidgets.QLabel(self.graph_widget)
+        self.badge2.setGeometry(QtCore.QRect(510, 60, 51, 51))
+        self.badge2.setText("")
         self.badge2.setObjectName("badge2")
-        self.widget_3 = QtWidgets.QWidget(self.pie_widget)
-        self.widget_3.setGeometry(QtCore.QRect(600, 60, 71, 61))
-        self.widget_3.setObjectName("widget_3")
+        self.badge3 = QtWidgets.QLabel(self.graph_widget)
+        self.badge3.setGeometry(QtCore.QRect(590, 60, 51, 51))
+        self.badge3.setText("")
+        self.badge3.setObjectName("badge3")
+
+
         self.CurrentScore_3 = QtWidgets.QLabel(self.pie_widget)
         self.CurrentScore_3.setGeometry(QtCore.QRect(20, 0, 300, 61))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
@@ -104,12 +103,20 @@ class Ui_Dialog(object):
 
 
         self._badge1 = QtGui.QPixmap('icons/Badges/png/001-first-place.png')
+        self._badge2 = QtGui.QPixmap('icons/Badges/png/002-silver-medal.png')
+        self._badge3 = QtGui.QPixmap('icons/Badges/png/003-bronze-medal.png')
 
-        self.acc_pic_coin = QtWidgets.QLabel(self.badge1)
-        self.acc_pic_coin.setMargin(5)
-        self.acc_pic_coin.setPixmap(self._badge1)
-        self.acc_pic_coin.setScaledContents(True)
-        self.acc_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+        self.badge1.setPixmap(self._badge1)
+        self.badge1.setScaledContents(True)
+        self.badge1.setMaximumSize(QtCore.QSize(80, 31))
+
+        self.badge2.setPixmap(self._badge2)
+        self.badge2.setScaledContents(True)
+        self.badge2.setMaximumSize(QtCore.QSize(80, 31))
+
+        self.badge3.setPixmap(self._badge3)
+        self.badge3.setScaledContents(True)
+        self.badge3.setMaximumSize(QtCore.QSize(80, 31))
 
         spacerItem = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
