@@ -214,7 +214,7 @@ class DetectProcess(multiprocessing.Process):
             acc_x = data[10]
             timestamp = data[0]
 
-            if acc_x > 0.08 and max(std_x_array) > 0.02 and self.acc_threshold_num == 0:  # if detect a new event
+            if acc_x > 0.07 and max(std_x_array) > 0.02 and self.acc_threshold_num == 0:  # if detect a new event
                 print("acc event start")
                 self.acc_threshold_num += 1
                 self.acc_event = Event(raw_x_array[start_index][0], 0)
@@ -309,8 +309,8 @@ class DetectProcess(multiprocessing.Process):
             timestamp = data[0]
 
             if self.y_positive:
-                print(acc_y)
-                if acc_y > 0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
+                # print(acc_y)
+                if acc_y > 0.12 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
                     print("Left start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 2)
@@ -343,7 +343,7 @@ class DetectProcess(multiprocessing.Process):
                         self.change_event_num(-1)
 
             if self.y_negative:
-                if acc_y < -0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
+                if acc_y < -0.12 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
                     print("right trun start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 3)
