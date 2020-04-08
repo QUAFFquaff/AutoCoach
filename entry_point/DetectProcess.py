@@ -305,7 +305,7 @@ class DetectProcess(multiprocessing.Process):
             start_index = std_y_array.index(min(std_y_array))
 
             std_y = std_y_array[-1]
-            acc_y = data[8]
+            acc_y = data[9]
             timestamp = data[0]
 
             if self.y_positive:
