@@ -3,7 +3,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 from queue import Queue
 
 personlaity = 3
-threshold = {0: [40, 60], 1:[40, 70], 2:[50, 70], 3:[50, 85]}  #threshold for feedback
+threshold = {0: [40, 60], 1:[40, 70], 2:[50, 70], 3:[40, 85]}  #threshold for feedback
 
 class FeedbackController(threading.Thread, QThread):
 
@@ -50,6 +50,7 @@ class FeedbackController(threading.Thread, QThread):
                     if avg_score in range(threshold[personlaity][0], threshold[personlaity][1]):  # need feedback
                         max_high = max(event_high_dict, key=event_high_dict.get)
                         max_mid = max(event_mid_dict, key=event_mid_dict.get)
+                        print("dapzhelema")
                         if event_high_dict[max_high] != 0:
                             self.feedback_signal.emit(2, self.transfer(max_high))
                         elif event_mid_dict[max_mid] != 0:
