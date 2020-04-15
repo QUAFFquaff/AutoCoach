@@ -55,7 +55,7 @@ class Ui_Dialog(object):
         self.CurrentScore.setMaximumSize(QtCore.QSize(300, 120))
         font = QtGui.QFont()
         font.setFamily("Brush Script Std")
-        font.setPointSize(50)
+        font.setPointSize(20)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -161,7 +161,7 @@ class Ui_Dialog(object):
         # self.plot_widget = PlotWidget(self.canvas)
         self.plot_widget.setObjectName("plot_widget")
         hour = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        score1 = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
+        score1 = [20, 21, 22, 19, 66, 65, 59, 89, 91, 90]
 
 
         bonder = [20,50,50,20,20]
@@ -174,15 +174,52 @@ class Ui_Dialog(object):
         self.plot.addItem(self.label)
 
         self.plot.showGrid(x=True, y=True, alpha=0.5)
-        self.plot.plot(x=hour, y=score1, pen='r', name='score', symbolBrush=(255, 0, 0), )
-        self.plot.plot(x=b_hour_g, y=bonder, pen='g', name='score',  )
+        # self.plot.plot(x=hour[:4], y=score1[:4], pen='r', name='score', symbolBrush=(255, 0, 0), )
+        # self.plot.plot(x=hour[4:], y=score1[4:], pen='g', name='score', symbolBrush=(255, 0, 0), )
+
+        self.plot_graph(hour,score1)
+        # self.plot.plot(x=b_hour_g, y=bonder, pen='g', name='score',  )
+        # self.plot.setLabel(axis='left', text='score')
+        # self.plot.setLabel(axis='bottom', text='date')
+        # self.vLine = pg.InfiniteLine(angle=90, movable=False, )
+        # self.hLine = pg.InfiniteLine(angle=0, movable=False, )
+        # self.plot.addItem(self.vLine, ignoreBounds=True)
+        # self.plot.addItem(self.hLine, ignoreBounds=True)
+        # self.vb = self.plot.vb
+        # self.plot_graph(hour,score1)
+
+        self.set_average(score1)
+    def set_average(self,scores):
+        self.CurrentScore.setText(str(round(np.mean(scores),1)))
+
+    def plot_graph(self,time,score):
+        threshold = 15
+        start = 0
+        for i in range(len(score)):
+            mu = np.mean(score[start:i+1])
+            sigma = np.var(score[start:i+1])/(i-start)
+            if i == len(score)-1 or sigma>threshold:
+                color = self.set_pen_color(mu)
+                print('hey')
+                print('sigma: ',sigma,'threshold:',threshold,'color',color)
+                self.plot.plot(x=time[start:i+1], y=score[start:i+1], pen=color, name='score', symbolBrush=(0,255,0), )
+                start = i
+
         self.plot.setLabel(axis='left', text='score')
-        self.plot.setLabel(axis='bottom', text='date')
-        self.vLine = pg.InfiniteLine(angle=90, movable=False, )
-        self.hLine = pg.InfiniteLine(angle=0, movable=False, )
-        self.plot.addItem(self.vLine, ignoreBounds=True)
-        self.plot.addItem(self.hLine, ignoreBounds=True)
+        self.plot.setLabel(axis='bottom', text='time')
         self.vb = self.plot.vb
+
+    def set_pen_color(self,mu):
+        print(mu)
+        threshold_low = 60
+        threshold_high = 80
+        if mu<=threshold_low:
+            return 'r'
+        if threshold_low<mu<threshold_high:
+            return 'y'
+        if threshold_high<= mu:
+            return 'g'
+
 
 
     def paint(self, p, *args):
