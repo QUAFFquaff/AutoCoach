@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
 
 
 
-        self.grey_bar = QtGui.QPixmap('icons/bars/lightgrey_bar.png')
+        self.grey_bar = QtGui.QPixmap('icons/bars/grey_wide.png')
         self.top_bar = QtGui.QPixmap('icons/bars/red_wide.png')
         self.medium_bar = QtGui.QPixmap('icons/bars/yellow_wide.png')
         self.bottom_bar = QtGui.QPixmap('icons/bars/green_wide.png')
