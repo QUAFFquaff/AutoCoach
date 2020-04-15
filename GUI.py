@@ -141,9 +141,9 @@ class Ui_MainWindow(object):
         self.current_score.setMaximumSize(QtCore.QSize(300, 120))
         font = QtGui.QFont()
         font.setFamily("Brush Script Std")
-        font.setPointSize(50)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(30)
+        # font.setBold(True)
+        font.setWeight(5)
         self.current_score.setFont(font)
         self.current_score.setAlignment(QtCore.Qt.AlignCenter)
         self.current_score.setObjectName("CurrentScore")
@@ -159,7 +159,7 @@ class Ui_MainWindow(object):
         font.setPointSize(15)
         font.setKerning(True)
         font.setBold(True)
-        font.setFamily("Brush Script Std")
+        # font.setFamily("Brush Script Std")
         self.total_score.setStyleSheet('QPushButton {background-color: #17191A; color: white;}')
         self.total_score.setFont(font)
         self.total_score.setLayoutDirection(QtCore.Qt.RightToLeft)
@@ -453,11 +453,11 @@ class Ui_MainWindow(object):
 
     # set current score and update
     def setCurrentScore(self, score):
-        self.current_score.setText(str(score))
+        self.current_score.setText("current score:\n" + str(score))
 
     # set Total score for trip
     def setTotalScore(self, score):
-        self.total_score.setText(str(score) + ' points')
+        self.total_score.setText("trip score:\n"+str(score))
 
     def setFeedBack(self, level: int, type: str):
         if level == 0:
@@ -678,8 +678,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.current_score.setText(_translate("MainWindow", "0"))
-        self.total_score.setText(_translate("MainWindow", "0 points"))
+        self.current_score.setText(_translate("MainWindow", "current score:\n0"))
+        self.total_score.setText(_translate("MainWindow", "Trip Score"))
         self.next_page.setText(_translate("MainWindow", "Next Page>>"))
 
 
