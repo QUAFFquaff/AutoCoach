@@ -678,8 +678,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.current_score.setText(_translate("MainWindow", "86"))
-        self.total_score.setText(_translate("MainWindow", "1240 points"))
+        self.current_score.setText(_translate("MainWindow", "0"))
+        self.total_score.setText(_translate("MainWindow", "0 points"))
         self.next_page.setText(_translate("MainWindow", "Next Page>>"))
 
 
