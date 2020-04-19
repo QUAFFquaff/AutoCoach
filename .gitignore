@@ -2,3 +2,4 @@
 /dist/
 /entry_point/__pycache__/
 /__pycache__/
+*.pyc

@@ -147,7 +147,7 @@ def main():
     tests = ['a', 'h', 'ahhva', 'vvhha', 'oahooa',
              'b', 'abbw', 'ipi', 'bboi', 'paa',
              'p', 'ccw', 'jw', 'jiw', 'wwpwi',
-             'c', 'jxxbx', 'qcxxqx', 'cqcqxqq', 'xcc']
+             'c', 'jxxbx', 'qcxxqx', 'cqcqxqq', ' c ']
 
     for test in tests:
         result = ldamodel.LDATest( test)

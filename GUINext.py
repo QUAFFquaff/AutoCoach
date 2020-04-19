@@ -11,17 +11,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 # from PyQt5.QtChart import *
 import pyqtgraph as pg
 import numpy as np
+from PyQt5.QtGui import QIcon, QPalette, QBrush, QPixmap
 from pyqtgraph import PlotWidget
 
 import pyqtgraph as pg
-
-# data里面必须有以下字段: 时间, 开盘价, 收盘价, 最低价, 最高价
 
 data = [[0, 10, 20, 9, 30], [1, 50, 20, 9, 60], [2, 10, 20, 9, 23], [3, 10, 30, -10, 50] ,[4, 50, 20, 9, 55],[5, 35, 10, 5, 40],
         [6, 50, 20, 9, 55], [7, 2, 20, -20, 55], [8, 50, 20, 9, 55], [9, 40, 30, 9, 70]]
 class Ui_Dialog(object):
     windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
-
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -43,11 +41,154 @@ class Ui_Dialog(object):
         self.graph_widget.setObjectName("graph_widget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.graph_widget)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.pie_widget = QtWidgets.QWidget(self.graph_widget)
+        self.pie_widget.setMinimumSize(QtCore.QSize(300, 200))
+        self.pie_widget.setObjectName("pie_widget")
+        self.trip_average_score = QtWidgets.QLabel(self.pie_widget)
+        self.trip_average_score.setGeometry(QtCore.QRect(230, 0, 81, 51))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.trip_average_score.sizePolicy().hasHeightForWidth())
+        self.trip_average_score.setSizePolicy(sizePolicy)
+        self.trip_average_score.setMinimumSize(QtCore.QSize(20, 20))
+        self.trip_average_score.setMaximumSize(QtCore.QSize(300, 120))
+        font = QtGui.QFont()
+        font.setFamily("Brush Script Std")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.trip_average_score.setFont(font)
+        self.trip_average_score.setAlignment(QtCore.Qt.AlignCenter)
+        self.trip_average_score.setObjectName("CurrentScore")
+        self.trip_average_score_text = QtWidgets.QLabel(self.pie_widget)
+        self.trip_average_score_text.setGeometry(QtCore.QRect(20, 0, 201, 61))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.trip_average_score_text.sizePolicy().hasHeightForWidth())
+        self.trip_average_score_text.setSizePolicy(sizePolicy)
+        self.trip_average_score_text.setMinimumSize(QtCore.QSize(20, 20))
+        self.trip_average_score_text.setMaximumSize(QtCore.QSize(300, 120))
+        font = QtGui.QFont()
+        font.setFamily("Brush Script Std")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.trip_average_score_text.setFont(font)
+        self.trip_average_score_text.setAlignment(QtCore.Qt.AlignCenter)
+        self.trip_average_score_text.setObjectName("CurrentScore_3")
+
+        self.badge1 = QtWidgets.QLabel(self.graph_widget)
+        self.badge1.setGeometry(QtCore.QRect(420, 60, 51, 51))
+        self.badge1.setText("")
+        self.badge1.setObjectName("badge1")
+
+        self.badge2 = QtWidgets.QLabel(self.graph_widget)
+        self.badge2.setGeometry(QtCore.QRect(510, 60, 51, 51))
+        self.badge2.setText("")
+        self.badge2.setObjectName("badge2")
+        self.badge3 = QtWidgets.QLabel(self.graph_widget)
+        self.badge3.setGeometry(QtCore.QRect(590, 60, 51, 51))
+        self.badge3.setText("")
+        self.badge3.setObjectName("badge3")
+
+        self.trip_points_text = QtWidgets.QLabel(self.pie_widget)
+        self.trip_points_text.setGeometry(QtCore.QRect(20, 60, 201, 61))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.trip_points_text.sizePolicy().hasHeightForWidth())
+        self.trip_points_text.setSizePolicy(sizePolicy)
+        self.trip_points_text.setMinimumSize(QtCore.QSize(20, 20))
+        self.trip_points_text.setMaximumSize(QtCore.QSize(300, 120))
+        font = QtGui.QFont()
+        font.setFamily("Brush Script Std")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.trip_points_text.setFont(font)
+        self.trip_points_text.setAlignment(QtCore.Qt.AlignCenter)
+        self.trip_points_text.setObjectName("trip_points_text")
+        self.trip_points_score = QtWidgets.QLabel(self.pie_widget)
+        self.trip_points_score.setGeometry(QtCore.QRect(230, 70, 81, 51))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.trip_points_score.sizePolicy().hasHeightForWidth())
+        self.trip_points_score.setSizePolicy(sizePolicy)
+        self.trip_points_score.setMinimumSize(QtCore.QSize(20, 20))
+        self.trip_points_score.setMaximumSize(QtCore.QSize(300, 120))
+        font = QtGui.QFont()
+        font.setFamily("Brush Script Std")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.trip_points_score.setFont(font)
+        self.trip_points_score.setAlignment(QtCore.Qt.AlignCenter)
+        self.trip_points_score.setObjectName("trip_points_score")
+        self.total_points_text = QtWidgets.QLabel(self.pie_widget)
+        self.total_points_text.setGeometry(QtCore.QRect(20, 130, 201, 61))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.total_points_text.sizePolicy().hasHeightForWidth())
+        self.total_points_text.setSizePolicy(sizePolicy)
+        self.total_points_text.setMinimumSize(QtCore.QSize(20, 20))
+        self.total_points_text.setMaximumSize(QtCore.QSize(300, 120))
+        font = QtGui.QFont()
+        font.setFamily("Brush Script Std")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.total_points_text.setFont(font)
+        self.total_points_text.setAlignment(QtCore.Qt.AlignCenter)
+        self.total_points_text.setObjectName("total_points_text")
+        self.total_points_score = QtWidgets.QLabel(self.pie_widget)
+        self.total_points_score.setGeometry(QtCore.QRect(230, 140, 81, 51))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.total_points_score.sizePolicy().hasHeightForWidth())
+        self.total_points_score.setSizePolicy(sizePolicy)
+        self.total_points_score.setMinimumSize(QtCore.QSize(20, 20))
+        self.total_points_score.setMaximumSize(QtCore.QSize(300, 120))
+        font = QtGui.QFont()
+        font.setFamily("Brush Script Std")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.total_points_score.setFont(font)
+        self.total_points_score.setAlignment(QtCore.Qt.AlignCenter)
+        self.total_points_score.setObjectName("total_points_score")
+
+        self.horizontalLayout_2.addWidget(self.pie_widget)
+        self.verticalLayout.addWidget(self.graph_widget)
 
         pg.setConfigOption('background', '#17191A')
-        self.k_widget = QtWidgets.QWidget(self.graph_widget)
-        self.k_widget.setMinimumSize(QtCore.QSize(500, 200))
 
+
+        self._badge1 = QtGui.QPixmap('icons/Badges/png/001-first-place.png')
+        self._badge2 = QtGui.QPixmap('icons/Badges/png/002-silver-medal.png')
+        self._badge3 = QtGui.QPixmap('icons/Badges/png/003-bronze-medal.png')
+
+        self.badge1.setPixmap(self._badge1)
+        self.badge1.setScaledContents(True)
+        self.badge1.setMaximumSize(QtCore.QSize(80, 31))
+
+        self.badge2.setPixmap(self._badge2)
+        self.badge2.setScaledContents(True)
+        self.badge2.setMaximumSize(QtCore.QSize(80, 31))
+
+        self.badge3.setPixmap(self._badge3)
+        self.badge3.setScaledContents(True)
+        self.badge3.setMaximumSize(QtCore.QSize(80, 31))
 
         spacerItem = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
@@ -77,20 +218,6 @@ class Ui_Dialog(object):
         # self.graph_widget = QtWidgets.QWidget(self.canvas)
         self.graph_widget.setObjectName("graph_widget")
 
-        self.pie_widget =  QtWidgets.QWidget(self.graph_widget)
-        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.pie_widget.sizePolicy().hasHeightForWidth())
-        # self.pie_widget.setSizePolicy(sizePolicy)
-        self.pie_widget.setMinimumSize(QtCore.QSize(0, 50))
-        # # self.pie_widget.setMaximumSize(QtCore.QSize(16777215, 50))
-        # self.k_widget.setObjectName("pie_widget")
-        # self.pie_widget.setStyleSheet("#pie_widget{background-color: yellow}")
-        # beautify window
-        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
-        # self.setWindowOpacity(0.98)
-        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
 
         # window move
         self.windowMoved.connect(self.move)  # move window
@@ -106,57 +233,65 @@ class Ui_Dialog(object):
         # self.plot_widget = PlotWidget(self.canvas)
         self.plot_widget.setObjectName("plot_widget")
         hour = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        score1 = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
-        score2 = [50,35,44,22,38,32,27,38,32,44]
-        hour1 = [1, 2, 3, 4, 5]
-        score21 = [50, 35, 44, 22, 38]
-        hour2 = [5, 6, 7]
-        score22 = [38,41,27]
-        hour3 = [7, 8, 9, 10]
-        score23 = [27,38,32,44]
+        score1 = [20, 21, 22, 19, 66, 65, 59, 89, 91, 90]
+
 
         bonder = [20,50,50,20,20]
         b_hour_g = [5,5,7,7,5]
         b_hour_r = [1,1,5,5,1]
-        # self.plot_widget.showGrid(x = True)
-        # self.plot_widget.setXRange(0, 10, padding=0)
-        # self.plot_widget.setYRange(20, 55, padding=0)
-        #
-        # self.plot_widget.plot(hour, score1, 'r')
-        #
-        # pg.setConfigOption('background', 'k')
-        # pen = pg.mkPen(color=(255, 0, 0))
-        # pg.setConfigOption('foreground', 'w')
-        # pen2 = pg.mkPen(color=(0, 255, 0))
-        pen_b = pg.mkPen(color=(0, 255, 0),width=5)
-        # pen_r = pg.mkPen(color=(255, 0, 0),width=5)
-        # self.plot_widget.plot(hour1, score21, name="Sensor 1",  pen=pen)
-        # self.plot_widget.plot(hour3, score23, name="Sensor 1",  pen=pen)
-        # self.plot_widget.plot(hour2, score22, name="Sensor 2",  pen=pen2)
-        # self.plot_widget.plot(b_hour_g,bonder, name="Sensor 2",  pen=pen_b)
-        # self.plot_widget.plot(b_hour_r,bonder, name="Sensor 2",  pen=pen_r)
 
-        # data = ts.get_hist_data('sh', start='2017-10-01', end='2017-12-01').sort_index()
-        # xdict = dict(enumerate(data.index))
-        # axis_1 = [(i, list(data.index)[i]) for i in range(0, len(data.index), 5)]
-        # stringaxis = pg.AxisItem(orientation='bottom')
-        # stringaxis.setTicks([axis_1, xdict.items()])
-        # self.plot_widget = pg.GraphicsWindow(title='plot gragh')
         self.plot = self.plot_widget.addPlot()
 
         self.label = pg.TextItem()
         self.plot.addItem(self.label)
 
         self.plot.showGrid(x=True, y=True, alpha=0.5)
-        self.plot.plot(x=hour, y=score1, pen='r', name='score', symbolBrush=(255, 0, 0), )
-        self.plot.plot(x=b_hour_g, y=bonder, pen='g', name='score',  )
+        # self.plot.plot(x=hour[:4], y=score1[:4], pen='r', name='score', symbolBrush=(255, 0, 0), )
+        # self.plot.plot(x=hour[4:], y=score1[4:], pen='g', name='score', symbolBrush=(255, 0, 0), )
+
+        self.plot_graph(hour,score1)
+        # self.plot.plot(x=b_hour_g, y=bonder, pen='g', name='score',  )
+        # self.plot.setLabel(axis='left', text='score')
+        # self.plot.setLabel(axis='bottom', text='date')
+        # self.vLine = pg.InfiniteLine(angle=90, movable=False, )
+        # self.hLine = pg.InfiniteLine(angle=0, movable=False, )
+        # self.plot.addItem(self.vLine, ignoreBounds=True)
+        # self.plot.addItem(self.hLine, ignoreBounds=True)
+        # self.vb = self.plot.vb
+        # self.plot_graph(hour,score1)
+
+        self.set_average(score1)
+    def set_average(self,scores):
+        self.trip_average_score.setText(str(round(np.mean(scores), 1)))
+
+    def plot_graph(self,time,score):
+        threshold = 15
+        start = 0
+        for i in range(len(score)):
+            mu = np.mean(score[start:i+1])
+            sigma = np.var(score[start:i+1])/(i-start)
+            if i == len(score)-1 or sigma>threshold:
+                color = self.set_pen_color(mu)
+                print('hey')
+                print('sigma: ',sigma,'threshold:',threshold,'color',color)
+                self.plot.plot(x=time[start:i+1], y=score[start:i+1], pen=color, name='score', symbolBrush=(0,255,0), )
+                start = i
+
         self.plot.setLabel(axis='left', text='score')
-        self.plot.setLabel(axis='bottom', text='date')
-        self.vLine = pg.InfiniteLine(angle=90, movable=False, )
-        self.hLine = pg.InfiniteLine(angle=0, movable=False, )
-        self.plot.addItem(self.vLine, ignoreBounds=True)
-        self.plot.addItem(self.hLine, ignoreBounds=True)
+        self.plot.setLabel(axis='bottom', text='time')
         self.vb = self.plot.vb
+
+    def set_pen_color(self,mu):
+        print(mu)
+        threshold_low = 60
+        threshold_high = 80
+        if mu<=threshold_low:
+            return 'r'
+        if threshold_low<mu<threshold_high:
+            return 'y'
+        if threshold_high<= mu:
+            return 'g'
+
 
 
     def paint(self, p, *args):
@@ -165,11 +300,29 @@ class Ui_Dialog(object):
     def boundingRect(self):
         return QtCore.QRectF(self.picture.boundingRect())
 
+    def mousePressEvent(self,event):
+        if event.button() == QtCore.Qt.LeftButton:
+            self.mPos = event.pos()
+        event.accept()
+
+    def mouseReleaseEvent(self, event):
+        self.mPos = None
+        event.accept()
+
+    def mouseMoveEvent(self,event):
+        if event.buttons() == QtCore.Qt.LeftButton and self.mPos:
+            self.windowMoved.emit(self.mapToGlobal(event.pos() - self.mPos))
+        event.accept()
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.trip_average_score.setText(_translate("Dialog", "86"))
+        self.trip_average_score_text.setText(_translate("Dialog", "Average Score:"))
+        self.trip_points_text.setText(_translate("Dialog", "trip points"))
+        self.trip_points_score.setText(_translate("Dialog", "86"))
+        self.total_points_text.setText(_translate("Dialog", "total points"))
+        self.total_points_score.setText(_translate("Dialog", "86"))
         self.backBtn.setText(_translate("Dialog", "back"))
 
-
-
+from pyqtgraph import PlotWidget

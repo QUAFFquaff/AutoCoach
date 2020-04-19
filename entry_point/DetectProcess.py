@@ -17,18 +17,17 @@ from entry_point.Event import Event
 
 # process for event detection
 class DetectProcess(multiprocessing.Process):
-    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, speed: Value, SVM_flag: Value, LDA_flag: Value):
+    def __init__(self, eventQueue: multiprocessing.Queue, processLock: Lock, SVM_flag: Value, LDA_flag: Value):
         multiprocessing.Process.__init__(self)
         print('init event detection')
         self.eventQueue = eventQueue
         self.processLock = processLock
-        self.speed = speed
         self.SVM_flag = SVM_flag
         self.LDA_flag = LDA_flag
         # oriantation matrix
-        self.matrix = np.array([[-0.22220486, 0.00E+00, 0.975],
-                  [0.974561151, -0.03, 0.222104846],
-                  [0.02925, 0.999549899, 0.006666146]])
+        self.matrix = np.array([[-0.14106736, 0.00E+00, -0.99],
+                  [-0.987571521, 0.07, 0.14072132],
+                  [0.0693, 0.997546991, -0.009874715]])
         # initial sampling rate and window for standard deviation calculation
         self.sampling_rate = 0
         self.std_window = 0
@@ -56,7 +55,7 @@ class DetectProcess(multiprocessing.Process):
         self.bt_serial = self.getSerial()
         obd_data = ''.encode('utf-8')
 
-        #initial sampling rate
+        # initial sampling rate and queue to contain data( used to calculate standard deviation)
         self.sampling_rate = self.getSamplingRate(obd_data)
         self.std_window = int(self.sampling_rate + 0.5)
         self.std_x_queue = Queue(maxsize=(2 * self.std_window - 1))
@@ -75,7 +74,7 @@ class DetectProcess(multiprocessing.Process):
             if row != "":
                 timestamp = int(round(time.time()*1000))
                 device_id = row[0]
-                self.speed.value = row[1]
+                speed = row[1]
                 acc_y = row[2]
                 acc_x = row[3]
                 acc_z = row[4]
@@ -90,31 +89,31 @@ class DetectProcess(multiprocessing.Process):
                 lowpass_queue.put(acc_list)
                 if data_buffer.full():
                     data_buffer.get()
-                data_buffer.put(np.array([timestamp, self.speed.value, acc_y, acc_x, acc_z, gyo_x, gyo_y, gyo_z]))
+                data_buffer.put(np.array([timestamp, speed, acc_y, acc_x, acc_z, gyo_x, gyo_y, gyo_z]))
                 if lowpass_queue.qsize() > 59:
                     acc_x_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'x'))
                     acc_y_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'y'))
                     acc_z_filtered = signal.filtfilt(b, a, self.get_lowpass(lowpass_queue, 'z'))
                     event_data = data_buffer.get()
 
-                    # detect event
-                    event_x = self.detect_x_event([event_data[0], event_data[1].value, event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 0, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
-                    event_y = self.detect_y_event([event_data[0], event_data[1].value, event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 1, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
+                    # detect event from x and y
+                    event_x = self.detect_x_event([event_data[0], event_data[1], event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 0, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
+                    event_y = self.detect_y_event([event_data[0], event_data[1], event_data[2], event_data[3], event_data[4], event_data[5], event_data[6], event_data[7], 1, acc_y_filtered[-6], acc_x_filtered[-6], acc_z_filtered[-6]])
 
                     if event_x is not None:
                         print("there is a event from x axis")
                         event_x.filter(b, a)
                         self.processLock.acquire()  # get the lock
-                        self.eventQueue.put(event_x)
                         self.SVM_flag.value -= 1
+                        self.eventQueue.put(event_x)
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
                     if event_y is not None:
                         print("there is a event from yaxis")
                         event_y.filter(b, a)
                         self.processLock.acquire()  # get the lock
-                        self.eventQueue.put(event_y)
                         self.SVM_flag.value -= 1
+                        self.eventQueue.put(event_y)
                         self.processLock.release()  # release the process lock
                         print("put turn into svm")
 
@@ -193,7 +192,7 @@ class DetectProcess(multiprocessing.Process):
         acc_flag = False
         brake_flag = False
         fault_num = int(1 * self.sampling_rate / 5)  # fault tolerance
-        min_event_length = int(self.sampling_rate * 0.4)  # minimum length for event
+        min_event_length = int(12)  # minimum length for event
 
         self.std_x_queue.put(data)
 
@@ -213,7 +212,7 @@ class DetectProcess(multiprocessing.Process):
             acc_x = data[10]
             timestamp = data[0]
 
-            if acc_x > 0.08 and max(std_x_array) > 0.02 and self.acc_threshold_num == 0:  # if detect a new event
+            if acc_x > 0.07 and max(std_x_array) > 0.02 and self.acc_threshold_num == 0:  # if detect a new event
                 print("acc event start")
                 self.acc_threshold_num += 1
                 self.acc_event = Event(raw_x_array[start_index][0], 0)
@@ -285,9 +284,9 @@ class DetectProcess(multiprocessing.Process):
         std_y_array = []
         raw_y_array = []
         flag = False
-        min_length = int(self.sampling_rate * 1.5)
+        min_length = int(12)
         max_length = int(self.sampling_rate * 14)
-        fault_num = int(5 * self.sampling_rate / 10)
+        fault_num = int(2 * self.sampling_rate / 10)
         self.std_y_queue.put(data)
 
         if self.std_y_queue.full():
@@ -296,25 +295,28 @@ class DetectProcess(multiprocessing.Process):
                 temp = self.std_y_queue.get()
                 std_container.append(temp[9])
                 if i >= self.std_window - 1:
+                    # store the standard deviation
                     std_y_array.append(np.std(std_container[i - self.std_window + 1:i + 1], ddof=1))
                     raw_y_array.append(temp[0:9])
                 self.std_y_queue.put(temp)
-            self.std_y_queue.get()  # delete current node
+            self.std_y_queue.get()  # delete the first node
             start_index = std_y_array.index(min(std_y_array))
 
             std_y = std_y_array[-1]
-            acc_y = data[8]
+            acc_y = data[9]
             timestamp = data[0]
 
             if self.y_positive:
-                if acc_y > 0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
-                    #print("left start")
+                # print(acc_y)
+                if acc_y > 0.12 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
+                    print("Left turn start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 2)
                     for i in range(start_index, len(std_y_array)):
                         self.turn_event.add_value(raw_y_array[i])
                     #  acquire process lock to add SVM_flag
                     self.change_event_num(1)  # add 1 current event num
+                    self.y_negative = False
                 elif acc_y > 0.06 and self.turn_threshold_num > 0:
                     self.turn_threshold_num += 1
                     self.turn_fault = fault_num
@@ -334,19 +336,20 @@ class DetectProcess(multiprocessing.Process):
                         self.turn_threshold_num = 0
                         return self.turn_event
                     else:
-                        #print("left turn cancel")
+                        print("left turn cancel")
                         self.turn_threshold_num = 0
                         self.change_event_num(-1)
 
             if self.y_negative:
-                if acc_y < -0.15 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
-                    #print("right trun start")
+                if acc_y < -0.12 and max(std_y_array) > 0.015 and self.turn_threshold_num == 0:
+                    print("right turn start")
                     self.turn_threshold_num += 1
                     self.turn_event = Event(raw_y_array[start_index][0], 3)
                     for i in range(start_index, len(std_y_array)):
                         self.turn_event.add_value(raw_y_array[i])
                     #  acquire process lock to add SVM_flag
                     self.change_event_num(1)  # add 1 current event num
+                    self.y_positive = False
                 elif acc_y < -0.06 and self.turn_threshold_num > 0:
                     self.turn_threshold_num += 1
                     self.turn_fault = fault_num
@@ -366,7 +369,7 @@ class DetectProcess(multiprocessing.Process):
                         self.turn_threshold_num = 0
                         return self.turn_event
                     else:
-                        #print("right cancel")
+                        print("right cancel")
                         self.turn_threshold_num = 0
                         self.change_event_num(-1)
 

@@ -1,45 +1,9 @@
 
-from asyncio import sleep
-from datetime import time
-import time
-from PyQt5.QtCore import QThread
-import copy
-data = []
-
-
-
-class Test1(QThread):
-    def __init__(self, data1):
-        super().__init__()
-        self.dat =data1
-
-    def run(self):
-        while True:
-            pattern = copy.deepcopy(self.dat)
-            print(pattern)
-            time.sleep(1)
-            # while len(self.dat)>0:
-            self.dat.remove(self.dat[-1])
-
-
-class Test2(QThread):
-    def __init__(self, data2):
-        super().__init__()
-        self.data = data2
-
-    def run(self):
-        while True:
-            self.data.append('b')
-            time.sleep(1)
-
-test1 = Test1(data)
-test2 = Test2(data)
-test1.start()
-test2.start()
-while True:
-    pass
-
-
-
-
-
+import numpy as np
+score = [20, 21, 22, 19, 45, 50, 49, 89, 91, 90]
+# mu = np.mean(data[0:2])
+# # sigma = np.var(data)
+# print(mu)
+for i in range(len(score)):
+    mu = np.mean(data[start:i+1])
+    sigma = np.var(data[start:i+1])/(i-start)

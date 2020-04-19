@@ -141,9 +141,9 @@ class Ui_MainWindow(object):
         self.current_score.setMaximumSize(QtCore.QSize(300, 120))
         font = QtGui.QFont()
         font.setFamily("Brush Script Std")
-        font.setPointSize(50)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(30)
+        # font.setBold(True)
+        font.setWeight(5)
         self.current_score.setFont(font)
         self.current_score.setAlignment(QtCore.Qt.AlignCenter)
         self.current_score.setObjectName("CurrentScore")
@@ -159,7 +159,7 @@ class Ui_MainWindow(object):
         font.setPointSize(15)
         font.setKerning(True)
         font.setBold(True)
-        font.setFamily("Brush Script Std")
+        # font.setFamily("Brush Script Std")
         self.total_score.setStyleSheet('QPushButton {background-color: #17191A; color: white;}')
         self.total_score.setFont(font)
         self.total_score.setLayoutDirection(QtCore.Qt.RightToLeft)
@@ -295,16 +295,10 @@ class Ui_MainWindow(object):
         self.swerve_level.setObjectName("swerve_level")
         self.gridLayout_up.addWidget(self.swerve_level, 2, 6, 1, 1)
         self.acc_bar = QtWidgets.QWidget(self.up)
-#<<<<<<< HEAD
-        # self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
-        # self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
-        self.acc_bar.setMinimumSize(QtCore.QSize(80, 220))
-        self.acc_bar.setMaximumSize(QtCore.QSize(80, 250))
-# #>>>>>>> 836a373ef04e0f8fe4f1a0d2b8447015201fdd47
-# =======
+
         self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
         self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
-# >>>>>>> ead530635418d7021d6e366e0f44ad129f29d7a2
+
         self.acc_bar.setObjectName("acc_bar")
         self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.acc_bar)
         self.verticalLayout_acc.setContentsMargins(15, 0, 15, 0)
@@ -459,11 +453,11 @@ class Ui_MainWindow(object):
 
     # set current score and update
     def setCurrentScore(self, score):
-        self.current_score.setText(str(score))
+        self.current_score.setText("current score:\n" + str(score))
 
     # set Total score for trip
     def setTotalScore(self, score):
-        self.total_score.setText(str(score) + ' points')
+        self.total_score.setText("trip score:\n"+str(score))
 
     def setFeedBack(self, level: int, type: str):
         if level == 0:
@@ -492,6 +486,8 @@ class Ui_MainWindow(object):
             self.feedback.setPixmap(self.swerve_icon_png)
             self.feedback.setScaledContents(True)
             self.feedback.setMaximumSize(QtCore.QSize(100, 150))
+        else:
+            self.feedback.clear()
 
     def change_icons(self, level: int, type: str):
         if type == 'acc':
@@ -682,8 +678,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.current_score.setText(_translate("MainWindow", "86"))
-        self.total_score.setText(_translate("MainWindow", "1240 points"))
+        self.current_score.setText(_translate("MainWindow", "current score:\n0"))
+        self.total_score.setText(_translate("MainWindow", "Trip Score"))
         self.next_page.setText(_translate("MainWindow", "Next Page>>"))
 
 
