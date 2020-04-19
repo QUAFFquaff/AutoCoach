@@ -107,7 +107,7 @@ def run():
     myWin.initalface('turn')
     myWin.initalface('swerve')
     myWin.initalface('brake')
-    # myWin.setBar(2,'acc')
+    myWin.setBar(2,'acc')
     # myWin.setBar(2,'brake')
     # myWin.setBar(1,'turn')
     # myWin.setBar(0,'swerve')

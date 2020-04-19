@@ -683,3 +683,4 @@ class Ui_MainWindow(object):
         self.next_page.setText(_translate("MainWindow", "Next Page>>"))
 
 
+   # def runningave(self,):
