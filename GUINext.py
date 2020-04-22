@@ -266,7 +266,7 @@ class Ui_Dialog(object):
 
     def plot_graph(self,time,score):
         threshold = 15
-        start = 0
+        start = 0 # []
         for i in range(len(score)):
             mu = np.mean(score[start:i+1])
             sigma = np.var(score[start:i+1])/(i-start)
