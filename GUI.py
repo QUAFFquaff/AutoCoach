@@ -35,10 +35,10 @@ class Ui_MainWindow(object):
         self.orange_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Orange-Glow.png'))
         self.yellow_glow = pg.QtGui.QGraphicsPixmapItem(pg.QtGui.QPixmap('icons/glow/Yellow-Glow.png'))
 
-        self.acc_icon_png = QtGui.QPixmap('icons/bars/acc_icon.png')
-        self.brake_icon_png = QtGui.QPixmap('icons/bars/brake_icon.png')
-        self.turn_icon_png = QtGui.QPixmap('icons/bars/turn_icon.png')
-        self.swerve_icon_png = QtGui.QPixmap('icons/bars/swerve_icon.png')
+        self.acc_icon_png = QtGui.QPixmap('icons/bars/acc_icon_g.png')
+        self.brake_icon_png = QtGui.QPixmap('icons/bars/brake_icon_g.png')
+        self.turn_icon_png = QtGui.QPixmap('icons/bars/turn_icon_g.png')
+        self.swerve_icon_png = QtGui.QPixmap('icons/bars/swerve_icon_g.png')
         pass
     windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
 
@@ -115,6 +115,7 @@ class Ui_MainWindow(object):
         self.down.setMinimumSize(QtCore.QSize(0, 130))
         self.down.setMaximumSize(QtCore.QSize(16777215, 130))
         self.down.setObjectName("down")
+        self.down.setStyleSheet('QWidget {background-color: #111111; color: blue;}')
         self.gridLayout_down = QtWidgets.QGridLayout(self.down)
         self.gridLayout_down.setHorizontalSpacing(5)
         self.gridLayout_down.setObjectName("gridLayout_down")
@@ -176,6 +177,8 @@ class Ui_MainWindow(object):
         self.up.setMinimumSize(QtCore.QSize(0, 320))
         self.up.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.up.setObjectName("up")
+
+        self.up.setStyleSheet('QWidget {background-color: #17191a; color: blue;}')
         self.gridLayout_up = QtWidgets.QGridLayout(self.up)
         self.gridLayout_up.setContentsMargins(-1, 0, -1, 0)
         self.gridLayout_up.setHorizontalSpacing(0)
@@ -293,41 +296,37 @@ class Ui_MainWindow(object):
         self.swerve_level.setMaximumSize(QtCore.QSize(80, 35))
         self.swerve_level.setObjectName("swerve_level")
         self.gridLayout_up.addWidget(self.swerve_level, 2, 6, 1, 1)
+
         self.acc_bar = QtWidgets.QWidget(self.up)
-
-        self.acc_bar.setMinimumSize(QtCore.QSize(50, 200))
-        self.acc_bar.setMaximumSize(QtCore.QSize(80, 220))
-
+        self.acc_bar.setMinimumSize(QtCore.QSize(80, 220))
+        self.acc_bar.setMaximumSize(QtCore.QSize(80, 250))
         self.acc_bar.setObjectName("acc_bar")
         self.verticalLayout_acc = QtWidgets.QVBoxLayout(self.acc_bar)
         self.verticalLayout_acc.setContentsMargins(15, 0, 15, 0)
         self.verticalLayout_acc.setSpacing(0)
         self.verticalLayout_acc.setObjectName("verticalLayout_acc")
-        self.acc_bar1 = QtWidgets.QLabel(self.acc_bar)
-        self.acc_bar1.setMinimumSize(QtCore.QSize(40, 47))
-        self.acc_bar1.setText("")
-        self.acc_bar1.setObjectName("acc_bar1")
-        self.verticalLayout_acc.addWidget(self.acc_bar1, 0, QtCore.Qt.AlignHCenter)
-        self.acc_bar2 = QtWidgets.QLabel(self.acc_bar)
-        self.acc_bar2.setMinimumSize(QtCore.QSize(40, 47))
-        self.acc_bar2.setText("")
-        self.acc_bar2.setObjectName("acc_bar2")
-        self.verticalLayout_acc.addWidget(self.acc_bar2, 0, QtCore.Qt.AlignHCenter)
-        self.acc_bar3 = QtWidgets.QLabel(self.acc_bar)
-        self.acc_bar3.setMinimumSize(QtCore.QSize(40, 47))
-        self.acc_bar3.setText("")
-        self.acc_bar3.setObjectName("acc_bar3")
-        self.verticalLayout_acc.addWidget(self.acc_bar3, 0, QtCore.Qt.AlignHCenter)
         self.acc_icon = QtWidgets.QLabel(self.acc_bar)
-        self.acc_icon.setMinimumSize(QtCore.QSize(25, 35))
-        self.acc_icon.setMaximumSize(QtCore.QSize(25, 35))
+        self.acc_icon.setMinimumSize(QtCore.QSize(20, 30))
+        self.acc_icon.setMaximumSize(QtCore.QSize(20, 40))
         self.acc_icon.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.acc_icon.setAutoFillBackground(False)
         self.acc_icon.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.acc_icon.setText("")
-        self.acc_icon.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
+        self.acc_icon.setAlignment(QtCore.Qt.AlignJustify | QtCore.Qt.AlignVCenter)
         self.acc_icon.setObjectName("acc_icon")
-        self.verticalLayout_acc.addWidget(self.acc_icon, 0, QtCore.Qt.AlignHCenter)
+        self.verticalLayout_acc.addWidget(self.acc_icon)
+        self.acc_bar1 = QtWidgets.QLabel(self.acc_bar)
+        self.acc_bar1.setText("")
+        self.acc_bar1.setObjectName("acc_bar1")
+        self.verticalLayout_acc.addWidget(self.acc_bar1)
+        self.acc_bar2 = QtWidgets.QLabel(self.acc_bar)
+        self.acc_bar2.setText("")
+        self.acc_bar2.setObjectName("acc_bar2")
+        self.verticalLayout_acc.addWidget(self.acc_bar2)
+        self.acc_bar3 = QtWidgets.QLabel(self.acc_bar)
+        self.acc_bar3.setText("")
+        self.acc_bar3.setObjectName("acc_bar3")
+        self.verticalLayout_acc.addWidget(self.acc_bar3)
         self.gridLayout_up.addWidget(self.acc_bar, 1, 0, 1, 1)
 
 
@@ -342,6 +341,7 @@ class Ui_MainWindow(object):
         self.backCircleLayout = QtWidgets.QGridLayout(self.backCircle)
         self.backCircleLayout.setContentsMargins(58, 50, 60, 50)
         self.backCircleLayout.setObjectName("backCircleLayout")
+        self.backCircle.setStyleSheet('QWidget {background-color: #17191a; color: blue;}')
 
         self.feedback = QtWidgets.QLabel(self.backCircle)
         self.feedback.setMinimumSize(QtCore.QSize(50, 50))
@@ -381,31 +381,31 @@ class Ui_MainWindow(object):
         self.windowMoved.connect(self.move)  # move window
 
 
-        self.acc_pic_coin = QtWidgets.QLabel(self.acc_level)
-        self.acc_pic_coin.setMargin(5)
-        self.acc_pic_coin.setPixmap(self._gold_coin)
-        self.acc_pic_coin.setScaledContents(True)
-        self.acc_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
-
-        self.brake_pic_coin = QtWidgets.QLabel(self.brake_level)
-        self.brake_pic_coin.setMargin(5)
-        self.brake_pic_coin.setPixmap(self._grey_coin)
-        self.brake_pic_coin.setScaledContents(True)
-        self.brake_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
-
-
-        self.turn_pic_coin = QtWidgets.QLabel(self.turn_level)
-        self.turn_pic_coin.setMargin(5)
-        self.turn_pic_coin.setPixmap(self._grey_coin)
-        self.turn_pic_coin.setScaledContents(True)
-        self.turn_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
-
-
-        self.swerve_pic_coin = QtWidgets.QLabel(self.swerve_level)
-        self.swerve_pic_coin.setMargin(5)
-        self.swerve_pic_coin.setPixmap(self._gold_coin)
-        self.swerve_pic_coin.setScaledContents(True)
-        self.swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+        # self.acc_pic_coin = QtWidgets.QLabel(self.acc_level)
+        # self.acc_pic_coin.setMargin(5)
+        # self.acc_pic_coin.setPixmap(self._gold_coin)
+        # self.acc_pic_coin.setScaledContents(True)
+        # self.acc_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+        #
+        # self.brake_pic_coin = QtWidgets.QLabel(self.brake_level)
+        # self.brake_pic_coin.setMargin(5)
+        # self.brake_pic_coin.setPixmap(self._grey_coin)
+        # self.brake_pic_coin.setScaledContents(True)
+        # self.brake_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+        #
+        #
+        # self.turn_pic_coin = QtWidgets.QLabel(self.turn_level)
+        # self.turn_pic_coin.setMargin(5)
+        # self.turn_pic_coin.setPixmap(self._grey_coin)
+        # self.turn_pic_coin.setScaledContents(True)
+        # self.turn_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
+        #
+        #
+        # self.swerve_pic_coin = QtWidgets.QLabel(self.swerve_level)
+        # self.swerve_pic_coin.setMargin(5)
+        # self.swerve_pic_coin.setPixmap(self._gold_coin)
+        # self.swerve_pic_coin.setScaledContents(True)
+        # self.swerve_pic_coin.setMaximumSize(QtCore.QSize(80, 31))
 
 
         # draw graph of lines
@@ -421,7 +421,7 @@ class Ui_MainWindow(object):
         #draw acc icon
         self.acc_icon.setPixmap(self.acc_icon_png)
         self.acc_icon.setScaledContents(True)
-        self.acc_icon.setMaximumSize(QtCore.QSize(20, 20))
+        self.acc_icon.setMaximumSize(QtCore.QSize(30, 40))
         self.turn_icon.setPixmap(self.turn_icon_png)
         self.turn_icon.setScaledContents(True)
         self.turn_icon.setMaximumSize(QtCore.QSize(20, 20))

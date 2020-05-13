@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>750</width>
-    <height>529</height>
+    <height>533</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -520,26 +520,6 @@
            </layout>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QWidget" name="brake_level" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>35</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="5">
-          <widget class="QWidget" name="turn_level" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>35</height>
-            </size>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="5">
           <widget class="QWidget" name="turn_bar" native="true">
            <property name="minimumSize">
@@ -613,26 +593,6 @@
            </layout>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QWidget" name="acc_level" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>35</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="6">
-          <widget class="QWidget" name="swerve_level" native="true">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>35</height>
-            </size>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="0">
           <widget class="QWidget" name="acc_bar" native="true">
            <property name="minimumSize">
@@ -664,27 +624,6 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QLabel" name="acc_bar1">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="acc_bar2">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="acc_bar3">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item alignment="Qt::AlignHCenter">
              <widget class="QLabel" name="acc_icon">
               <property name="minimumSize">
                <size>
@@ -715,7 +654,58 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QLabel" name="acc_bar1">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="acc_bar2">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="acc_bar3">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
            </layout>
+          </widget>
+         </item>
+         <item row="2" column="6">
+          <widget class="QWidget" name="swerve_level" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>35</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="5">
+          <widget class="QWidget" name="turn_level" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>35</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QWidget" name="brake_level" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>35</height>
+            </size>
+           </property>
           </widget>
          </item>
         </layout>
@@ -744,7 +734,7 @@
      <x>0</x>
      <y>0</y>
      <width>750</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
