@@ -99,7 +99,6 @@ def run():
 
 
 
-    myWin.setFeedBack(0,'acc')
 
 
     myWin.initalface('acc')
@@ -110,8 +109,7 @@ def run():
     # myWin.setBar(2,'brake')
     # myWin.setBar(1,'turn')
     # myWin.setBar(0,'swerve')
-# # =======
-# >>>>>>> ead530635418d7021d6e366e0f44ad129f29d7a2
+    myWin.setFeedBack(0,'acc')
 
 
     sys.exit(app.exec_())
